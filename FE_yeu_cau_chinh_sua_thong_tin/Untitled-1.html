@@ -1,0 +1,1715 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/img/icon.png" />
+    
+    <style>
+        .btn-top {
+            background: #fff;
+            border: 1px solid #d4d4d4;
+            bottom: 20px;
+            cursor: pointer;
+            display: none;
+            outline: medium none;
+            padding: 10px 15px;
+            position: fixed;
+            right: 20px;
+            z-index: 4;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+        }
+
+            .btn-top i {
+                display: block;
+            }
+    </style>
+    <link href="http://dangkynoitru.css.vnu.edu.vn/css/normalize.css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://dangkynoitru.css.vnu.edu.vn/lib/bootstrap/css/bootstrap.min.css" />
+
+    <link href="http://dangkynoitru.css.vnu.edu.vn/lib/fontawesome/css/all.min.css" rel="stylesheet" />
+
+        <style>
+        .header-right .hotline {
+            background: url(http://dangkynoitru.css.vnu.edu.vn/img/mobile.png) no-repeat;
+        }
+
+        .header-right .email {
+            background: url(http://dangkynoitru.css.vnu.edu.vn/img/email.png) no-repeat;
+        }
+        footer {
+            background: url(http://dangkynoitru.css.vnu.edu.vn/img/bg-logo-footer.png) no-repeat #03539D;
+        }
+        .van-ban-content {
+            background: url(http://dangkynoitru.css.vnu.edu.vn/img/pencel.png) no-repeat 10px 14px;
+        }
+        .thoitiet-main{ background: url(http://dangkynoitru.css.vnu.edu.vn/img/thoitiet.png) no-repeat;}
+        .video .wrapper .playpause {
+            background-image: url(http://dangkynoitru.css.vnu.edu.vn/img/icon_logo/video_play_button.png);
+
+        }
+
+        .zone-10-title {
+            background: url(http://dangkynoitru.css.vnu.edu.vn/img/zone10_icon.png) no-repeat 0 3px;
+        }
+        .gallery-main {
+            background: url(http://dangkynoitru.css.vnu.edu.vn/img/bg_gallery.png) top right no-repeat #07659E;
+        }
+        .hoc-tap-title {
+            background: url( http://dangkynoitru.css.vnu.edu.vn/img/icon-book.png) #fff no-repeat  19px 0;
+
+        }
+        .ykien-content {
+            background: url(http://dangkynoitru.css.vnu.edu.vn/img/pencel.png) no-repeat;
+        }
+
+
+        @font-face {
+            font-family: 'BeVietnamPro-Medium';
+            src: url('http://dangkynoitru.css.vnu.edu.vn/fonts/BeVietnamPro-Medium.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'BeVietnamPro-Regular';
+            src: url('http://dangkynoitru.css.vnu.edu.vn/fonts/BeVietnamPro-Regular.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'BeVietnamPro-Bold';
+            src: url('http://dangkynoitru.css.vnu.edu.vn/fonts/BeVietnamPro-Bold.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'BeVietnamPro-Italic';
+            src: url('http://dangkynoitru.css.vnu.edu.vn/fonts/BeVietnamPro-Italic.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'BeVietnamPro-LightItalic';
+            src: url('http://dangkynoitru.css.vnu.edu.vn/fonts/BeVietnamPro-LightItalic.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'BeVietnamPro-Light';
+            src: url('http://dangkynoitru.css.vnu.edu.vn/fonts/BeVietnamPro-Light.ttf') format('truetype');
+        }
+    </style>
+
+
+    <link href="http://dangkynoitru.css.vnu.edu.vn/css/common.css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://dangkynoitru.css.vnu.edu.vn/css/custom.css" />
+
+    <!--load all styles -->
+    <script src="http://dangkynoitru.css.vnu.edu.vn/lib/popper/js/popper.min.js"></script>
+    <script src="http://dangkynoitru.css.vnu.edu.vn/lib/jquery/dist/jquery.min.js"></script>
+    <script src="http://dangkynoitru.css.vnu.edu.vn/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!--Select2-->
+    <link href="http://dangkynoitru.css.vnu.edu.vn/lib/select2/css/select2.css" rel="stylesheet" />
+    <link href="http://dangkynoitru.css.vnu.edu.vn/lib/select2/css/select2-bootstrap-5-theme.min.css" rel="stylesheet" />
+    <script src="http://dangkynoitru.css.vnu.edu.vn/lib/select2/js/select2.js"></script>
+
+    <!--toastr-->
+    <link href="http://dangkynoitru.css.vnu.edu.vn/lib/toastr/css/toastr.min.css" rel="stylesheet" />
+    <script src="http://dangkynoitru.css.vnu.edu.vn/lib/toastr/js/toastr.min.js"></script>
+
+    <!--Datetime picker-->
+    <link href="http://dangkynoitru.css.vnu.edu.vn/lib/datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <script src="http://dangkynoitru.css.vnu.edu.vn/lib/datetimepicker/js/moment.min.js"></script>
+    <script src="http://dangkynoitru.css.vnu.edu.vn/lib/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+
+    <!--datatable-->
+    <link href="http://dangkynoitru.css.vnu.edu.vn/lib/datatable/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="http://dangkynoitru.css.vnu.edu.vn/lib/datatable/js/jquery.dataTables.min.js"></script>
+
+    <link href="http://dangkynoitru.css.vnu.edu.vn/lib/fancy-box/css/jquery.fancybox.min.css" rel="stylesheet" />
+    <script src="http://dangkynoitru.css.vnu.edu.vn/lib/fancy-box/js/jquery.fancybox.min.js"></script>
+
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113292499-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-113292499-1');
+
+        BASE_URL = 'http://dangkynoitru.css.vnu.edu.vn';
+    </script>
+    <script src="http://dangkynoitru.css.vnu.edu.vn/js/axios.min.js"></script>
+    <script src="http://dangkynoitru.css.vnu.edu.vn/js/common.js"></script>
+    
+</head>
+<body>
+    <div id="loadingOverlay" class="position-fixed d-flex d-none flex-column  align-items-center justify-content-center" style="z-index: 100000; background: var(--VNU_transparent); bottom: 0; left: 0; right: 0; top: 0;">
+        <span><i class="fas fa-fan fa-spin color-VNU-green fa-6x"></i></span>
+        <div class="color-VNU-White">Đang tải...</div>
+    </div>
+
+    
+
+<div class="container-fluid ">
+    <div class="row align-items-center py-2 mx-3">
+        <div class="col-3">
+            
+        </div>
+        <div class="col-6 text-center">
+            <h1 class="text_22_bold color-VNU-green">HỆ THỐNG QUẢN LÝ KÝ TÚC XÁ</h1>
+        </div>
+        
+    </div>
+</div>
+
+
+
+    <main role="main">
+        
+
+<div class="bg-color-VNU-green">
+    <div class="p-2 text-end">
+        <a class="dashboard-link me-2" href="http://dangkynoitru.css.vnu.edu.vn/DashboardPage"><i class="fas fa-compass"></i>Trang điều kiển</a>
+        <button class="btn dropdown-toggle dashboard-link" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user"></i> Tài khoản
+        </button>
+        <div class="dropdown-menu" style="z-index: 10001">
+            <a class="dropdown-item" href="http://dangkynoitru.css.vnu.edu.vn/studentUser/Logout"><i class="fas fa-sign-out-alt"></i>Đăng xuất</a>
+            <a class="dropdown-item" href="http://dangkynoitru.css.vnu.edu.vn/studentUser/ChangePassword"><i class="fas fa-key"></i>Đổi mật khẩu</a>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+
+
+
+    <div class="position-sticky bg-color-VNU-White" style="top:0; z-index: 10000">
+        <h2 class="color-VNU-green text-center text_22_bold p-2">Y&#xEA;u c&#x1EA7;u b&#x1ED5; sung th&#xF4;ng tin sinh vi&#xEA;n</h2>
+    </div>
+
+
+
+
+
+
+    <form id="myForm" method="post" onsubmit="return submitForm(this,event);" action="/StudentUpdateInfoRequirement">
+        
+
+        <input type="hidden" data-val="true" data-val-required="The Id field is required." id="Id" name="Id" value="0" />
+        <input type="hidden" id="FileAttachs" name="FileAttachs" value="" />
+        <input type="hidden" id="PersonalFileAttachs" name="PersonalFileAttachs" value="" />
+        <input type="hidden" data-val="true" data-val-required="The RequirementTypeId field is required." id="RequirementTypeId" name="RequirementTypeId" value="2" />
+        <input type="hidden" data-val="true" data-val-range="Ch&#x1B0;a ch&#x1ECD;n &#x1EA2;nh &#x111;&#x1EA1;i di&#x1EC7;n" data-val-range-max="2147483647" data-val-range-min="1" data-val-required="The &#x1EA2;nh &#x111;&#x1EA1;i di&#x1EC7;n field is required." id="PhotoId" name="PhotoId" value="54294" />
+        <input type="hidden" data-val="true" data-val-required="The RequirementStatusId field is required." id="RequirementStatusId" name="RequirementStatusId" value="0" />
+        <input type="hidden" data-val="true" data-val-required="The StudentId field is required." id="StudentId" name="StudentId" value="468265" />
+        <input type="hidden" data-val="true" data-val-required="The UserId field is required." id="UserId" name="UserId" value="7767" />
+        <input type="hidden" id="Subject" name="Subject" value="" />
+
+        <input type="hidden" data-val="true" data-val-range="Ch&#x1B0;a ch&#x1ECD;n Trung t&#xE2;m l&#x1B0;u tr&#xFA;" data-val-range-max="2147483647" data-val-range-min="1" data-val-required="Trung t&#xE2;m l&#x1B0;u tr&#xFA; kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng" id="BoardingFaculityId" name="BoardingFaculityId" value="2" />
+        <div class="tab-content">
+
+            <div class="tab-pane fade show active" id="document" role="tabpanel" aria-labelledby="document-tab">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="my-2">
+                            <div class="border-bottom mb-2"><strong>Thông tin cá nhân</strong></div>
+                            <div class="row">
+                                <div class="col-md-2 ">
+                                    <div class="my-2">
+                                        <input type="file" accept="image/*" class="form-control d-none"
+                                               id="profile-Image-button" placeholder=" ">
+                                    </div>
+                                    <div class="my-2 position-relative">
+                                            <img class="img w-100 img-thumbnail" src="https://th.bing.com/th/id/OIP.TDlUDCmqpFTR7IWolz-YWQAAAA?w=350&h=350&rs=1&pid=ImgDetMain" style="aspect-ratio: 3/4; object-fit: contain;"
+                                                 id="profile-Image-Placeholder">
+                                        <button id="profile-Image-Placeholder-button" type="button" class="position-absolute btn btn-sm form-section-button thumb-nail-edit-button"><i class="fas fa-pen"></i></button>
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+
+
+
+                                    <!-- Thông tin ngày sinh -->
+                                    <div class="row">
+
+                                        <div class="col-md-4 my-2">
+                                            <div>
+                                                <label for="FullName">H&#x1ECD; v&#xE0; t&#xEA;n</label><span class="text-danger">*</span>
+                                                <div class="input-group">
+                                                    <input class="form-control" type="text" placeholder=" " data-val="true" data-val-required="H&#x1ECD; v&#xE0; t&#xEA;n kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng!" id="FullName" name="FullName" value="" />
+                                                </div>
+                                                <span class="text-danger field-validation-valid" data-valmsg-for="FullName" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 my-2">
+                                            <div>
+                                                <label for="DateOfBirth">Ng&#xE0;y sinh</label><span class="text-danger">*</span>
+                                                <div class="input-group">
+                                                    <input class="form-control datePicker" type="text" placeholder=" " data-val="true" data-val-required="Ng&#xE0;y sinh kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng!" id="DateOfBirth" name="DateOfBirth" value="" />
+                                                </div>
+                                                <span class="text-danger field-validation-valid" data-valmsg-for="DateOfBirth" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 my-2">
+                                            <div>
+                                                <label for="Sex">Gi&#x1EDB;i t&#xED;nh</label><span class="text-danger">*</span>
+                                                <div class="input-group">
+                                                    <select class="form-select" data-val="true" data-val-range="Vui l&#xF2;ng ch&#x1ECD;n!" data-val-range-max="2147483647" data-val-range-min="0" data-val-required="Gi&#x1EDB;i t&#xED;nh kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng!" id="Sex" name="Sex"><option value="-1"> .: L&#x1EF1;a ch&#x1ECD;n :. </option>
+<option value="0">Nam</option>
+<option selected="selected" value="1"></option>
+</select>
+                                                </div>
+                                                <span class="text-danger field-validation-valid" data-valmsg-for="Sex" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <!-- thông tin về dân tộc quốc tịch dân tộc -->
+                                    <div class="row">
+
+                                        <div class="col-md-4 my-2">
+                                            <div>
+                                                <label for="EthnicGroupId">D&#xE2;n t&#x1ED9;c</label><span class="text-danger">*</span>
+                                                <div class="input-group">
+                                                    <select class="form-select" data-val="true" data-val-range="Vui l&#xF2;ng ch&#x1ECD;n!" data-val-range-max="2147483647" data-val-range-min="1" data-val-required="D&#xE2;n t&#x1ED9;c kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng!" id="EthnicGroupId" name="EthnicGroupId"><option value="-1"> .: L&#x1EF1;a ch&#x1ECD;n :. </option>
+<option selected="selected" value="1"></option>
+<option value="2">T&#xE0;y</option>
+<option value="3">Th&#xE1;i</option>
+<option value="4">Hoa</option>
+<option value="5">Kh&#x1A1;-me</option>
+<option value="6">M&#x1B0;&#x1EDD;ng</option>
+<option value="7">N&#xF9;ng</option>
+<option value="8">Hm&#xF4;ng</option>
+<option value="9">Dao</option>
+<option value="10">Gia-rai</option>
+<option value="11">Ng&#xE1;i</option>
+<option value="12">&#xCA;-&#x111;&#xEA;</option>
+<option value="13">Ba-na</option>
+<option value="14">X&#x1A1;-&#x111;&#x103;ng</option>
+<option value="15">S&#xE1;n Chay</option>
+<option value="16">C&#x1A1;-ho</option>
+<option value="17">Ch&#x103;m</option>
+<option value="18">S&#xE1;n D&#xEC;u</option>
+<option value="19">Hr&#xEA;</option>
+<option value="20">Mn&#xF4;ng</option>
+<option value="21">Ra-glai</option>
+<option value="22">Xti&#xEA;ng</option>
+<option value="23">Bru-V&#xE2;n Ki&#x1EC1;u</option>
+<option value="24">Th&#x1ED5;</option>
+<option value="25">Gi&#xE1;y</option>
+<option value="26">C&#x1A1;-tu</option>
+<option value="27">Gi&#xE9;-Tri&#xEA;ng</option>
+<option value="28">M&#x1EA1;</option>
+<option value="29">Kh&#x1A1;-m&#xFA;</option>
+<option value="30">Co</option>
+<option value="31">Ta-&#xF4;i</option>
+<option value="32">Ch&#x1A1;-ro</option>
+<option value="33">Kh&#xE1;ng</option>
+<option value="34">Xinh-mun</option>
+<option value="35">H&#xE0; Nh&#xEC;</option>
+<option value="36">Chu-ru</option>
+<option value="37">L&#xE0;o</option>
+<option value="38">La Chi</option>
+<option value="39">La Ha</option>
+<option value="40">Ph&#xF9; L&#xE1;</option>
+<option value="41">La H&#x1EE7;</option>
+<option value="42">L&#x1EF1;</option>
+<option value="43">L&#xF4; L&#xF4;</option>
+<option value="44">Ch&#x1EE9;t</option>
+<option value="45">M&#x1EA3;ng</option>
+<option value="46">P&#xE0; Th&#x1EBB;n</option>
+<option value="47">C&#x1A1; Lao</option>
+<option value="48">C&#x1ED1;ng</option>
+<option value="49">B&#x1ED1; Y</option>
+<option value="50">Si La</option>
+<option value="51">Pu P&#xE9;o</option>
+<option value="52">Br&#xE2;u</option>
+<option value="53">&#x1A0; &#x110;u</option>
+<option value="54">R&#x1A1;-m&#x103;m</option>
+<option value="103">S&#xE1;n ch&#x1EC9;</option>
+<option value="-1">     </option>
+<option value="102">KinhTEST</option>
+</select>
+                                                </div>
+                                                <span class="text-danger field-validation-valid" data-valmsg-for="EthnicGroupId" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 my-2">
+                                            <div>
+                                                <label for="ReligionId">T&#xF4;n gi&#xE1;o</label><span class="text-danger">*</span>
+                                                <div class="input-group">
+                                                    <select class="form-select" data-val="true" data-val-range="Vui l&#xF2;ng ch&#x1ECD;n!" data-val-range-max="2147483647" data-val-range-min="1" data-val-required="T&#xF4;n gi&#xE1;o kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng!" id="ReligionId" name="ReligionId"><option value="-1"> .: L&#x1EF1;a ch&#x1ECD;n :. </option>
+<option selected="selected" value="1"></option>
+<option value="2">C&#xF4;ng gi&#xE1;o</option>
+<option value="3">Ph&#x1EAD;t gi&#xE1;o</option>
+<option value="4">Thi&#xEA;n ch&#xFA;a gi&#xE1;o</option>
+<option value="5">Cao &#x110;&#xE0;i</option>
+<option value="6">Ho&#xE0; H&#x1EA3;o</option>
+<option value="7">H&#x1ED3;i Gi&#xE1;o</option>
+<option value="8">Tin L&#xE0;nh</option>
+</select>
+                                                </div>
+                                                <span class="text-danger field-validation-valid" data-valmsg-for="ReligionId" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 my-2">
+                                            <div>
+                                                <label for="NationalityId">Qu&#x1ED1;c t&#x1ECB;ch</label><span class="text-danger">*</span>
+                                                <div class="input-group">
+                                                    <select class="form-select" data-val="true" data-val-range="Vui l&#xF2;ng ch&#x1ECD;n!" data-val-range-max="2147483647" data-val-range-min="1" data-val-required="Qu&#x1ED1;c t&#x1ECB;ch kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng!" id="NationalityId" name="NationalityId">><option value="-1"> .: L&#x1EF1;a ch&#x1ECD;n :. </option>
+<option selected="selected" value="1">Vi&#x1EC7;t Nam</option>
+<option value="2">L&#xE0;o</option>
+<option value="3">Cambodia</option>
+<option value="4">Trung Qu&#x1ED1;c</option>
+<option value="20">C&#x1ED9;ng h&#xF2;a Ph&#xE1;p</option>
+<option value="21">Th&#xE1;i Lan</option>
+<option value="22">Nh&#x1EAD;t B&#x1EA3;n</option>
+<option value="23">Srilanka</option>
+<option value="24">H&#xE0;n Qu&#x1ED1;c</option>
+<option value="25">M&#xF4;ng C&#x1ED5;</option>
+<option value="26">&#x110;&#xE0;i Loan</option>
+<option value="27">Indonesia</option>
+<option value="28">Burkina Faso</option>
+<option value="29">Ai C&#x1EAD;p</option>
+<option value="30">&#x1EA4;n &#x110;&#x1ED9;</option>
+<option value="31">Benin</option>
+<option value="32">Cameroon</option>
+<option value="33">Congo</option>
+<option value="34">Guinea</option>
+<option value="35">Haiti</option>
+<option value="36">Myanma</option>
+<option value="37">Philippines</option>
+<option value="38">Togo</option>
+<option value="39">Ukraine</option>
+</select>
+                                                </div>
+                                                <span class="text-danger field-validation-valid" data-valmsg-for="NationalityId" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <!-- Giấy tờ -->
+                                    <div class="row">
+                                        <div class="col-md-4 my-2">
+                                            <div>
+                                                <label for="StudentCode">M&#xE3; sinh vi&#xEA;n</label><span class="text-danger">*</span>
+                                                <div class="input-group">
+                                                    <input class="form-control" type="text" placeholder=" " data-val="true" data-val-required="M&#xE3; sinh vi&#xEA;n kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng" id="StudentCode" name="StudentCode" value="" />
+                                                </div>
+                                                <span class="text-danger field-validation-valid" data-valmsg-for="StudentCode" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 my-2">
+                                            <div>
+                                                <label for="PapersNumber">s&#x1ED1; CMND/CCCD</label><span class="text-danger">*</span>
+                                                <div class="input-group">
+                                                    <input class="form-control" type="text" placeholder=" " data-val="true" data-val-required="kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng!" id="PapersNumber" name="PapersNumber" value="" />
+                                                </div>
+                                                <span class="text-danger field-validation-valid" data-valmsg-for="PapersNumber" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 my-2">
+                                            <div>
+                                                <label for="PapersTypeId">Lo&#x1EA1;i gi&#x1EA5;y t&#x1EDD;</label><span class="text-danger">*</span>
+                                                <div class="input-group">
+                                                    <select class="form-select" data-val="true" data-val-range="Vui l&#xF2;ng ch&#x1ECD;n!" data-val-range-max="2147483647" data-val-range-min="1" data-val-required="Lo&#x1EA1;i gi&#x1EA5;y t&#x1EDD; kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng!" id="PapersTypeId" name="PapersTypeId">><option value="-1"> .: L&#x1EF1;a ch&#x1ECD;n :. </option>
+<option value="1">CMT</option>
+<option selected="selected" value="2">C&#x103;n c&#x1B0;&#x1EDB;c c&#xF4;ng d&#xE2;n</option>
+<option value="3">H&#x1ED9; chi&#x1EBF;u</option>
+<option value="21">C&#x103;n c&#x1B0;&#x1EDB;c</option>
+</select>
+                                                </div>
+                                                <span class="text-danger field-validation-valid" data-valmsg-for="PapersTypeId" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 my-2">
+                                            <div>
+                                                <label for="DateOfIssue">Ng&#xE0;y c&#x1EA5;p</label><span class="text-danger">*</span>
+                                                <div class="input-group">
+                                                    <input class="form-control datePicker" type="text" placeholder=" " data-val="true" data-val-required="Ng&#xE0;y c&#x1EA5;p kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng!" id="DateOfIssue" name="DateOfIssue" value="" />
+                                                </div>
+                                                <span class="text-danger field-validation-valid" data-valmsg-for="DateOfIssue" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 my-2">
+                                            <div>
+                                                <label for="PlaceOfIssue">N&#x1A1;i c&#x1EA5;p</label><span class="text-danger">*</span>
+                                                <div class="input-group">
+                                                    <input class="form-control" type="text" placeholder=" " data-val="true" data-val-required="N&#x1A1;i c&#x1EA5;p kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng!" id="PlaceOfIssue" name="PlaceOfIssue" value="" />
+                                                </div>
+                                                <span class="text-danger field-validation-valid" data-valmsg-for="PlaceOfIssue" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 my-2">
+                                            <div>
+                                                <label for="JoiningYouthUnionDate">Ng&#xE0;y v&#xE0;o &#x111;o&#xE0;n</label><span class="text-danger">*</span>
+                                                <div class="input-group">
+                                                    <input class="form-control datePicker" type="text" placeholder=" " id="JoiningYouthUnionDate" name="JoiningYouthUnionDate" value="" />
+
+                                                </div>
+                                                <span class="text-danger field-validation-valid" data-valmsg-for="JoiningYouthUnionDate" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Thông tin nơi sinh -->
+                        <div class="my-2">
+                            <div class="border-bottom mb-2"><strong>Địa chỉ thường trú</strong></div>
+                            <div class="row">
+                                <div class="col-md-3 my-2">
+                                    <div>
+                                        <label for="CountryId">Qu&#x1ED1;c gia</label>
+                                        <div class="input-group">
+                                            <select class="form-select" data-val="true" data-val-range="Vui l&#xF2;ng ch&#x1ECD;n!" data-val-range-max="2147483647" data-val-range-min="1" data-val-required="Qu&#x1ED1;c gia kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng!" id="CountryId" name="CountryId"><option value="-1"> .: L&#x1EF1;a ch&#x1ECD;n :. </option>
+<option value="1">Afghanistan</option>
+<option value="2">Aland Islands</option>
+<option value="3">Albania</option>
+<option value="4">Algeria</option>
+<option value="5">American Samoa</option>
+<option value="6">Andorra</option>
+<option value="7">Angola</option>
+<option value="8">Anguilla</option>
+<option value="9">Antarctica</option>
+<option value="10">Antigua And Barbuda</option>
+<option value="11">Argentina</option>
+<option value="12">Armenia</option>
+<option value="13">Aruba</option>
+<option value="14">Australia</option>
+<option value="15">Austria</option>
+<option value="16">Azerbaijan</option>
+<option value="17">Bahamas</option>
+<option value="18">Bahrain</option>
+<option value="19">Bangladesh</option>
+<option value="20">Barbados</option>
+<option value="21">Belarus</option>
+<option value="22">Belgium</option>
+<option value="23">Belize</option>
+<option value="24">Benin</option>
+<option value="25">Bermuda</option>
+<option value="26">Bhutan</option>
+<option value="27">Bolivia</option>
+<option value="28">Bosnia And Herzegovina</option>
+<option value="29">Botswana</option>
+<option value="30">Bouvet Island</option>
+<option value="31">Brazil</option>
+<option value="32">British Indian Ocean Territory</option>
+<option value="33">Brunei Darussalam</option>
+<option value="34">Bulgaria</option>
+<option value="35">Burkina Faso</option>
+<option value="36">Burundi</option>
+<option value="37">Cambodia</option>
+<option value="38">Cameroon</option>
+<option value="39">Canada</option>
+<option value="40">Cape Verde</option>
+<option value="41">Cayman Islands</option>
+<option value="42">Central African Republic</option>
+<option value="43">Chad</option>
+<option value="44">Chile</option>
+<option value="45">China</option>
+<option value="46">Christmas Island</option>
+<option value="47">Cocos (Keeling) Islands</option>
+<option value="48">Colombia</option>
+<option value="49">Comoros</option>
+<option value="50">Congo</option>
+<option value="51">Congo, The Democratic Republic Of The</option>
+<option value="52">Cook Islands</option>
+<option value="53">Costa Rica</option>
+<option value="54">C&#xF4;te D&#x27;Ivoire</option>
+<option value="55">Croatia</option>
+<option value="56">Cuba</option>
+<option value="57">Cyprus</option>
+<option value="58">Czech Republic</option>
+<option value="59">Denmark</option>
+<option value="60">Djibouti</option>
+<option value="61">Dominica</option>
+<option value="62">Dominican Republic</option>
+<option value="63">Ecuador</option>
+<option value="64">Egypt</option>
+<option value="65">El Salvador</option>
+<option value="66">Equatorial Guinea</option>
+<option value="67">Eritrea</option>
+<option value="68">Estonia</option>
+<option value="69">Ethiopia</option>
+<option value="70">Falkland Islands (Malvinas)</option>
+<option value="71">Faroe Islands</option>
+<option value="72">Fiji</option>
+<option value="73">Finland</option>
+<option value="74">France</option>
+<option value="75">French Guiana</option>
+<option value="76">French Polynesia</option>
+<option value="77">French Southern Territories</option>
+<option value="78">Gabon</option>
+<option value="79">Gambia</option>
+<option value="80">Georgia</option>
+<option value="81">Germany</option>
+<option value="82">Ghana</option>
+<option value="83">Gibraltar</option>
+<option value="84">Greece</option>
+<option value="85">Greenland</option>
+<option value="86">Grenada</option>
+<option value="87">Guadeloupe</option>
+<option value="88">Guam</option>
+<option value="89">Guatemala</option>
+<option value="90">Guinea</option>
+<option value="91">Guinea-Bissau</option>
+<option value="92">Guyana</option>
+<option value="93">Haiti</option>
+<option value="94">Heard Island And Mcdonald Islands</option>
+<option value="96">Honduras</option>
+<option value="97">Hong Kong</option>
+<option value="98">Hungary</option>
+<option value="99">Iceland</option>
+<option value="100">India</option>
+<option value="101">Indonesia</option>
+<option value="102">Iran, Islamic Republic Of</option>
+<option value="103">Iraq</option>
+<option value="104">Ireland</option>
+<option value="105">Israel</option>
+<option value="106">Italy</option>
+<option value="107">Jamaica</option>
+<option value="108">Japan</option>
+<option value="109">Jordan</option>
+<option value="110">Kazakhstan</option>
+<option value="111">Kenya</option>
+<option value="112">Kiribati</option>
+<option value="113">Korea, Democratic People&#x27;S Republic Of</option>
+<option value="114">Korea, Republic Of</option>
+<option value="115">Kuwait</option>
+<option value="116">Kyrgyzstan</option>
+<option value="117">Lao People&#x27;S Democratic Republic</option>
+<option value="118">Latvia</option>
+<option value="119">Lebanon</option>
+<option value="120">Lesotho</option>
+<option value="121">Liberia</option>
+<option value="122">Libyan Arab Jamahiriya</option>
+<option value="123">Liechtenstein</option>
+<option value="124">Lithuania</option>
+<option value="125">Luxembourg</option>
+<option value="126">Macao</option>
+<option value="127">Macedonia, The Former Yugoslav Republic Of</option>
+<option value="128">Madagascar</option>
+<option value="129">Malawi</option>
+<option value="130">Malaysia</option>
+<option value="131">Maldives</option>
+<option value="132">Mali</option>
+<option value="133">Malta</option>
+<option value="134">Marshall Islands</option>
+<option value="135">Martinique</option>
+<option value="136">Mauritania</option>
+<option value="137">Mauritius</option>
+<option value="138">Mayotte</option>
+<option value="139">Mexico</option>
+<option value="140">Micronesia, Federated States Of</option>
+<option value="141">Moldova, Republic Of</option>
+<option value="142">Monaco</option>
+<option value="143">Mongolia</option>
+<option value="144">Montserrat</option>
+<option value="145">Morocco</option>
+<option value="146">Mozambique</option>
+<option value="147">Myanmar</option>
+<option value="148">Namibia</option>
+<option value="149">Nauru</option>
+<option value="150">Nepal</option>
+<option value="151">Netherlands</option>
+<option value="152">Netherlands Antilles</option>
+<option value="153">New Caledonia</option>
+<option value="154">New Zealand</option>
+<option value="155">Nicaragua</option>
+<option value="156">Niger</option>
+<option value="157">Nigeria</option>
+<option value="158">Niue</option>
+<option value="159">Norfolk Island</option>
+<option value="160">Northern Mariana Islands</option>
+<option value="161">Norway</option>
+<option value="162">Oman</option>
+<option value="163">Pakistan</option>
+<option value="164">Palau</option>
+<option value="165">Palestinian Territory, Occupied</option>
+<option value="166">Panama</option>
+<option value="167">Papua New Guinea</option>
+<option value="168">Paraguay</option>
+<option value="169">Peru</option>
+<option value="170">Philippines</option>
+<option value="171">Pitcairn</option>
+<option value="172">Poland</option>
+<option value="173">Portugal</option>
+<option value="174">Puerto Rico</option>
+<option value="175">Qatar</option>
+<option value="176">R&#xE9;union</option>
+<option value="177">Romania</option>
+<option value="178">Russian Federation</option>
+<option value="179">Rwanda</option>
+<option value="180">Saint Helena</option>
+<option value="181">Saint Kitts And Nevis</option>
+<option value="182">Saint Lucia</option>
+<option value="183">Saint Pierre And Miquelon</option>
+<option value="184">Saint Vincent And The Grenadines</option>
+<option value="185">Samoa</option>
+<option value="186">San Marino</option>
+<option value="187">Sao Tome And Principe</option>
+<option value="188">Saudi Arabia</option>
+<option value="189">Senegal</option>
+<option value="190">Serbia And Montenegro</option>
+<option value="191">Seychelles</option>
+<option value="192">Sierra Leone</option>
+<option value="193">Singapore</option>
+<option value="194">Slovakia</option>
+<option value="195">Slovenia</option>
+<option value="196">Solomon Islands</option>
+<option value="197">Somalia</option>
+<option value="198">South Africa</option>
+<option value="199">South Georgia And The South Sandwich Islands</option>
+<option value="200">Spain</option>
+<option value="201">Sri Lanka</option>
+<option value="202">Sudan</option>
+<option value="203">Suriname</option>
+<option value="204">Svalbard And Jan Mayen</option>
+<option value="205">Swaziland</option>
+<option value="206">Sweden</option>
+<option value="207">Switzerland</option>
+<option value="208">Syrian Arab Republic</option>
+<option value="209">Taiwan, Province Of China</option>
+<option value="210">Tajikistan</option>
+<option value="211">Tanzania, United Republic Of</option>
+<option value="212">Thailand</option>
+<option value="213">Timor-Leste</option>
+<option value="214">Togo</option>
+<option value="215">Tokelau</option>
+<option value="216">Tonga</option>
+<option value="217">Trinidad And Tobago</option>
+<option value="218">Tunisia</option>
+<option value="219">Turkey</option>
+<option value="220">Turkmenistan</option>
+<option value="221">Turks And Caicos Islands</option>
+<option value="222">Tuvalu</option>
+<option value="223">Uganda</option>
+<option value="224">Ukraine</option>
+<option value="225">United Arab Emirates</option>
+<option value="226">United Kingdom</option>
+<option value="227">United States</option>
+<option value="228">United States Minor Outlying Islands</option>
+<option value="229">Uruguay</option>
+<option value="230">Uzbekistan</option>
+<option value="231">Vanuatu</option>
+<option value="232">Vatican City State See Holy See</option>
+<option value="233">Venezuela</option>
+<option selected="selected" value="234">Viet Nam</option>
+<option value="235">Virgin Islands, British</option>
+<option value="236">Virgin Islands, U.S.</option>
+<option value="237">Wallis And Futuna</option>
+<option value="238">Western Sahara</option>
+<option value="239">Yemen</option>
+<option value="240">Zambia</option>
+<option value="241">Zimbabwe</option>
+<option value="15006">Nh&#x1EAD;t B&#x1EA3;n</option>
+<option value="15008">L&#xE0;o</option>
+<option value="15012">Trung Qu&#x1ED1;c</option>
+<option value="15016">M&#xF4;ng C&#x1ED5;</option>
+<option value="15022">Srilanka</option>
+<option value="15026">H&#xE0;n Qu&#x1ED1;c</option>
+</select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 my-2">
+                                    <div>
+                                        <label for="ProvinceId">T&#x1EC9;nh/Th&#xE0;nh ph&#x1ED1;</label>
+                                        <div class="input-group">
+                                            <select class="form-select" data-val="true" data-val-range="Vui l&#xF2;ng ch&#x1ECD;n!" data-val-range-max="2147483647" data-val-range-min="1" data-val-required="T&#x1EC9;nh/Th&#xE0;nh ph&#x1ED1; kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng!" id="ProvinceId" name="ProvinceId"><option value="-1"> .: L&#x1EF1;a ch&#x1ECD;n :. </option>
+<option selected="selected" value="300"></option>
+<option value="301">T&#x1EC9;nh H&#xE0; Giang</option>
+<option value="302">T&#x1EC9;nh Cao B&#x1EB1;ng</option>
+<option value="303">T&#x1EC9;nh B&#x1EAF;c K&#x1EA1;n</option>
+<option value="304">T&#x1EC9;nh Tuy&#xEA;n Quang</option>
+<option value="305">T&#x1EC9;nh L&#xE0;o Cai</option>
+<option value="306">T&#x1EC9;nh &#x110;i&#x1EC7;n Bi&#xEA;n</option>
+<option value="307">T&#x1EC9;nh Lai Ch&#xE2;u</option>
+<option value="308">T&#x1EC9;nh S&#x1A1;n La</option>
+<option value="309">T&#x1EC9;nh Y&#xEA;n B&#xE1;i</option>
+<option value="310">T&#x1EC9;nh H&#xF2;a B&#xEC;nh</option>
+<option value="311">T&#x1EC9;nh Th&#xE1;i Nguy&#xEA;n</option>
+<option value="312">T&#x1EC9;nh L&#x1EA1;ng S&#x1A1;n</option>
+<option value="313">T&#x1EC9;nh Qu&#x1EA3;ng Ninh</option>
+<option value="314">T&#x1EC9;nh B&#x1EAF;c Giang</option>
+<option value="315">T&#x1EC9;nh Ph&#xFA; Th&#x1ECD;</option>
+<option value="316">T&#x1EC9;nh V&#x129;nh Ph&#xFA;c</option>
+<option value="317">T&#x1EC9;nh B&#x1EAF;c Ninh</option>
+<option value="318">T&#x1EC9;nh H&#x1EA3;i D&#x1B0;&#x1A1;ng</option>
+<option value="319">Th&#xE0;nh ph&#x1ED1; H&#x1EA3;i Ph&#xF2;ng</option>
+<option value="320">T&#x1EC9;nh H&#x1B0;ng Y&#xEA;n</option>
+<option value="321">T&#x1EC9;nh Th&#xE1;i B&#xEC;nh</option>
+<option value="322">T&#x1EC9;nh H&#xE0; Nam</option>
+<option value="323">T&#x1EC9;nh Nam &#x110;&#x1ECB;nh</option>
+<option value="324">T&#x1EC9;nh Ninh B&#xEC;nh</option>
+<option value="325">T&#x1EC9;nh Thanh H&#xF3;a</option>
+<option value="326">T&#x1EC9;nh Ngh&#x1EC7; An</option>
+<option value="327">T&#x1EC9;nh H&#xE0; T&#x129;nh</option>
+<option value="328">T&#x1EC9;nh Qu&#x1EA3;ng B&#xEC;nh</option>
+<option value="329">T&#x1EC9;nh Qu&#x1EA3;ng Tr&#x1ECB;</option>
+<option value="330">T&#x1EC9;nh Th&#x1EEB;a Thi&#xEA;n Hu&#x1EBF;</option>
+<option value="331">Th&#xE0;nh ph&#x1ED1; &#x110;&#xE0; N&#x1EB5;ng</option>
+<option value="332">T&#x1EC9;nh Qu&#x1EA3;ng Nam</option>
+<option value="333">T&#x1EC9;nh Qu&#x1EA3;ng Ng&#xE3;i</option>
+<option value="334">T&#x1EC9;nh B&#xEC;nh &#x110;&#x1ECB;nh</option>
+<option value="335">T&#x1EC9;nh Ph&#xFA; Y&#xEA;n</option>
+<option value="336">T&#x1EC9;nh Kh&#xE1;nh H&#xF2;a</option>
+<option value="337">T&#x1EC9;nh Ninh Thu&#x1EAD;n</option>
+<option value="338">T&#x1EC9;nh B&#xEC;nh Thu&#x1EAD;n</option>
+<option value="339">T&#x1EC9;nh Kon Tum</option>
+<option value="340">T&#x1EC9;nh Gia Lai</option>
+<option value="341">T&#x1EC9;nh &#x110;&#x1EAF;k L&#x1EAF;k</option>
+<option value="342">T&#x1EC9;nh &#x110;&#x1EAF;k N&#xF4;ng</option>
+<option value="343">T&#x1EC9;nh L&#xE2;m &#x110;&#x1ED3;ng</option>
+<option value="344">T&#x1EC9;nh B&#xEC;nh Ph&#x1B0;&#x1EDB;c</option>
+<option value="345">T&#x1EC9;nh T&#xE2;y Ninh</option>
+<option value="346">T&#x1EC9;nh B&#xEC;nh D&#x1B0;&#x1A1;ng</option>
+<option value="347">T&#x1EC9;nh &#x110;&#x1ED3;ng Nai</option>
+<option value="348">T&#x1EC9;nh B&#xE0; R&#x1ECB;a - V&#x169;ng T&#xE0;u</option>
+<option value="349">Th&#xE0;nh ph&#x1ED1; H&#x1ED3; Ch&#xED; Minh</option>
+<option value="350">T&#x1EC9;nh Long An</option>
+<option value="351">T&#x1EC9;nh Ti&#x1EC1;n Giang</option>
+<option value="352">T&#x1EC9;nh B&#x1EBF;n Tre</option>
+<option value="353">T&#x1EC9;nh Tr&#xE0; Vinh</option>
+<option value="354">T&#x1EC9;nh V&#x129;nh Long</option>
+<option value="355">T&#x1EC9;nh &#x110;&#x1ED3;ng Th&#xE1;p</option>
+<option value="356">T&#x1EC9;nh An Giang</option>
+<option value="357">T&#x1EC9;nh Ki&#xEA;n Giang</option>
+<option value="358">Th&#xE0;nh ph&#x1ED1; C&#x1EA7;n Th&#x1A1;</option>
+<option value="359">T&#x1EC9;nh H&#x1EAD;u Giang</option>
+<option value="360">T&#x1EC9;nh S&#xF3;c Tr&#x103;ng</option>
+<option value="361">T&#x1EC9;nh B&#x1EA1;c Li&#xEA;u</option>
+<option value="362">T&#x1EC9;nh C&#xE0; Mau</option>
+</select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 my-2">
+                                    <div>
+                                        <label for="DistrictId">Qu&#x1EAD;n/Huy&#x1EC7;n</label>
+                                        <div class="input-group">
+                                            <select class="form-select" data-val="true" data-val-range="Vui l&#xF2;ng ch&#x1ECD;n!" data-val-range-max="2147483647" data-val-range-min="1" data-val-required="Qu&#x1EAD;n/Huy&#x1EC7;n kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng!" id="DistrictId" name="DistrictId"><option value="-1"> .: L&#x1EF1;a ch&#x1ECD;n :. </option>
+<option value="1000">Qu&#x1EAD;n Ba &#x110;&#xEC;nh</option>
+<option value="1001">Qu&#x1EAD;n Ho&#xE0;n Ki&#x1EBF;m</option>
+<option value="1002">Qu&#x1EAD;n T&#xE2;y H&#x1ED3;</option>
+<option value="1003">Qu&#x1EAD;n Long Bi&#xEA;n</option>
+<option value="1004">Qu&#x1EAD;n C&#x1EA7;u Gi&#x1EA5;y</option>
+<option value="1005">Qu&#x1EAD;n &#x110;&#x1ED1;ng &#x110;a</option>
+<option value="1006">Qu&#x1EAD;n Hai B&#xE0; Tr&#x1B0;ng</option>
+<option value="1007">Qu&#x1EAD;n Ho&#xE0;ng Mai</option>
+<option value="1008">Qu&#x1EAD;n Thanh Xu&#xE2;n</option>
+<option value="1009">Huy&#x1EC7;n S&#xF3;c S&#x1A1;n</option>
+<option value="1010">Huy&#x1EC7;n &#x110;&#xF4;ng Anh</option>
+<option value="1011">Huy&#x1EC7;n Gia L&#xE2;m</option>
+<option value="1012">Qu&#x1EAD;n Nam T&#x1EEB; Li&#xEA;m</option>
+<option value="1013">Huy&#x1EC7;n Thanh Tr&#xEC;</option>
+<option value="1014">Qu&#x1EAD;n B&#x1EAF;c T&#x1EEB; Li&#xEA;m</option>
+<option value="1015">Huy&#x1EC7;n M&#xEA; Linh</option>
+<option value="1016">Qu&#x1EAD;n H&#xE0; &#x110;&#xF4;ng</option>
+<option value="1017">Th&#x1ECB; x&#xE3; S&#x1A1;n T&#xE2;y</option>
+<option value="1018">Huy&#x1EC7;n Ba V&#xEC;</option>
+<option value="1019">Huy&#x1EC7;n Ph&#xFA;c Th&#x1ECD;</option>
+<option value="1020">Huy&#x1EC7;n &#x110;an Ph&#x1B0;&#x1EE3;ng</option>
+<option value="1021">Huy&#x1EC7;n Ho&#xE0;i &#x110;&#x1EE9;c</option>
+<option value="1022">Huy&#x1EC7;n Qu&#x1ED1;c Oai</option>
+<option value="1023">Huy&#x1EC7;n Th&#x1EA1;ch Th&#x1EA5;t</option>
+<option value="1024">Huy&#x1EC7;n Ch&#x1B0;&#x1A1;ng M&#x1EF9;</option>
+<option value="1025">Huy&#x1EC7;n Thanh Oai</option>
+<option value="1026">Huy&#x1EC7;n Th&#x1B0;&#x1EDD;ng T&#xED;n</option>
+<option value="1027">Huy&#x1EC7;n Ph&#xFA; Xuy&#xEA;n</option>
+<option value="1028">Huy&#x1EC7;n &#x1EE8;ng H&#xF2;a</option>
+<option selected="selected" value="1029"></option>
+</select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 my-2">
+                                    <div>
+                                        <label for="WardsId">Ph&#x1B0;&#x1EDD;ng/x&#xE3;</label>
+                                        <div class="input-group">
+                                            <select class="form-select" data-val="true" data-val-range="Vui l&#xF2;ng ch&#x1ECD;n!" data-val-range-max="2147483647" data-val-range-min="1" data-val-required="Ph&#x1B0;&#x1EDD;ng/x&#xE3; kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng!" id="WardsId" name="WardsId"><option value="-1"> .: L&#x1EF1;a ch&#x1ECD;n :. </option>
+<option value="2563">Th&#x1ECB; tr&#x1EA5;n &#x110;&#x1EA1;i Ngh&#x129;a</option>
+<option value="2564">X&#xE3; &#x110;&#x1ED3;ng T&#xE2;m</option>
+<option value="2565">X&#xE3; Th&#x1B0;&#x1EE3;ng L&#xE2;m</option>
+<option value="2566">X&#xE3; Tuy Lai</option>
+<option value="2567">X&#xE3; Ph&#xFA;c L&#xE2;m</option>
+<option value="2568">X&#xE3; M&#x1EF9; Th&#xE0;nh</option>
+<option value="2569">X&#xE3; B&#x1ED9;t Xuy&#xEA;n</option>
+<option value="2570">X&#xE3; An M&#x1EF9;</option>
+<option value="2571">X&#xE3; H&#x1ED3;ng S&#x1A1;n</option>
+<option value="2572">X&#xE3; L&#xEA; Thanh</option>
+<option value="2573">X&#xE3; Xuy X&#xE1;</option>
+<option value="2574">X&#xE3; Ph&#xF9;ng X&#xE1;</option>
+<option value="2575">X&#xE3; Ph&#xF9; L&#x1B0;u T&#x1EBF;</option>
+<option value="2576">X&#xE3; &#x110;&#x1EA1;i H&#x1B0;ng</option>
+<option selected="selected" value="2577"></option>
+<option value="2578">X&#xE3; &#x110;&#x1ED1;c T&#xED;n</option>
+<option value="2579">X&#xE3; H&#x1B0;&#x1A1;ng S&#x1A1;n</option>
+<option value="2580">X&#xE3; H&#xF9;ng Ti&#x1EBF;n</option>
+<option value="2581">X&#xE3; An Ti&#x1EBF;n</option>
+<option value="2582">X&#xE3; H&#x1EE3;p Ti&#x1EBF;n</option>
+<option value="2583">X&#xE3; H&#x1EE3;p Thanh</option>
+<option value="2584">X&#xE3; An Ph&#xFA;</option>
+</select>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-md-12 my-2">
+                                    <div>
+                                        <label for="PlaceOfResidence">&#x110;&#x1ECB;a ch&#x1EC9; chi ti&#x1EBF;t</label>
+                                        <div class="input-group">
+                                            <input class="form-control" type="text" placeholder=" " id="PlaceOfResidence" name="PlaceOfResidence" value="" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="my-2">
+                            <div class="border-bottom mb-2"><strong>Danh sách đối tượng ưu tiên</strong></div>
+                            <div class="row">
+
+                                        <div class="col-md-4">
+                                            <div class="form-check">
+                                                <input id="piorityCheckBoxList_0__Name" name="piorityCheckBoxList[0].Name" type="hidden" value="Anh h&#xF9;ng l&#x1EF1;c l&#x1B0;&#x1EE3;ng v&#x169; trang nh&#xE2;n d&#xE2;n, anh h&#xF9;ng lao &#x111;&#x1ED9;ng, th&#x1B0;&#x1A1;ng binh, b&#x1EC7;nh binh, ng&#x1B0;&#x1EDD;i h&#x1B0;&#x1EDF;ng ch&#xED;nh s&#xE1;ch nh&#x1B0; th&#x1B0;&#x1A1;ng binh, HSSV khuy&#x1EBF;t t&#x1EAD;t" />
+                                                <input data-val="true" data-val-required="The Id field is required." id="piorityCheckBoxList_0__Id" name="piorityCheckBoxList[0].Id" type="hidden" value="97" />
+                                                <input class="FileId" data-val="true" data-val-required="The FileId field is required." id="piorityCheckBoxList_0__FileId" name="piorityCheckBoxList[0].FileId" type="hidden" value="0" />
+                                                <input class="form-check-input" data="0001 97" data-val="true" data-val-required="The IsSelected field is required." id="piorityCheckBoxList_0__IsSelected" name="piorityCheckBoxList[0].IsSelected" type="checkbox" value="true" />
+                                                <label class="form-check-label" for="piorityCheckBoxList_0__Name">Anh h&#xF9;ng l&#x1EF1;c l&#x1B0;&#x1EE3;ng v&#x169; trang nh&#xE2;n d&#xE2;n, anh h&#xF9;ng lao &#x111;&#x1ED9;ng, th&#x1B0;&#x1A1;ng binh, b&#x1EC7;nh binh, ng&#x1B0;&#x1EDD;i h&#x1B0;&#x1EDF;ng ch&#xED;nh s&#xE1;ch nh&#x1B0; th&#x1B0;&#x1A1;ng binh, HSSV khuy&#x1EBF;t t&#x1EAD;t(Ti&#x1EC1;n t&#x1ED1; file: 0001)</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-check">
+                                                <input id="piorityCheckBoxList_1__Name" name="piorityCheckBoxList[1].Name" type="hidden" value="Con li&#x1EC7;t s&#x1EF9;, con th&#x1B0;&#x1A1;ng binh, con b&#x1EC7;nh binh, con c&#x1EE7;a ng&#x1B0;&#x1EDD;i h&#x1B0;&#x1EDF;ng ch&#xED;nh s&#xE1;ch nh&#x1B0; th&#x1B0;&#x1A1;ng binh, con cu&#x309;a ng&#x1B0;&#x1A1;&#x300;i co&#x301; c&#xF4;ng" />
+                                                <input data-val="true" data-val-required="The Id field is required." id="piorityCheckBoxList_1__Id" name="piorityCheckBoxList[1].Id" type="hidden" value="99" />
+                                                <input class="FileId" data-val="true" data-val-required="The FileId field is required." id="piorityCheckBoxList_1__FileId" name="piorityCheckBoxList[1].FileId" type="hidden" value="0" />
+                                                <input class="form-check-input" data="0002 99" data-val="true" data-val-required="The IsSelected field is required." id="piorityCheckBoxList_1__IsSelected" name="piorityCheckBoxList[1].IsSelected" type="checkbox" value="true" />
+                                                <label class="form-check-label" for="piorityCheckBoxList_1__Name">Con li&#x1EC7;t s&#x1EF9;, con th&#x1B0;&#x1A1;ng binh, con b&#x1EC7;nh binh, con c&#x1EE7;a ng&#x1B0;&#x1EDD;i h&#x1B0;&#x1EDF;ng ch&#xED;nh s&#xE1;ch nh&#x1B0; th&#x1B0;&#x1A1;ng binh, con cu&#x309;a ng&#x1B0;&#x1A1;&#x300;i co&#x301; c&#xF4;ng(Ti&#x1EC1;n t&#x1ED1; file: 0002)</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-check">
+                                                <input id="piorityCheckBoxList_2__Name" name="piorityCheckBoxList[2].Name" type="hidden" value="HSSV c&#xF3; h&#x1ED9; kh&#x1EA9;u th&#x1B0;&#x1EDD;ng tr&#xFA; t&#x1EA1;i v&#xF9;ng cao, v&#xF9;ng c&#xF3; &#x111;i&#x1EC1;u ki&#x1EC7;n kinh t&#x1EBF; - x&#xE3; h&#x1ED9;i &#x111;&#x1EB7;c bi&#x1EC7;t kh&#xF3; kh&#x103;n" />
+                                                <input data-val="true" data-val-required="The Id field is required." id="piorityCheckBoxList_2__Id" name="piorityCheckBoxList[2].Id" type="hidden" value="100" />
+                                                <input class="FileId" data-val="true" data-val-required="The FileId field is required." id="piorityCheckBoxList_2__FileId" name="piorityCheckBoxList[2].FileId" type="hidden" value="0" />
+                                                <input class="form-check-input" data="0003 100" data-val="true" data-val-required="The IsSelected field is required." id="piorityCheckBoxList_2__IsSelected" name="piorityCheckBoxList[2].IsSelected" type="checkbox" value="true" />
+                                                <label class="form-check-label" for="piorityCheckBoxList_2__Name">HSSV c&#xF3; h&#x1ED9; kh&#x1EA9;u th&#x1B0;&#x1EDD;ng tr&#xFA; t&#x1EA1;i v&#xF9;ng cao, v&#xF9;ng c&#xF3; &#x111;i&#x1EC1;u ki&#x1EC7;n kinh t&#x1EBF; - x&#xE3; h&#x1ED9;i &#x111;&#x1EB7;c bi&#x1EC7;t kh&#xF3; kh&#x103;n(Ti&#x1EC1;n t&#x1ED1; file: 0003)</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-check">
+                                                <input id="piorityCheckBoxList_3__Name" name="piorityCheckBoxList[3].Name" type="hidden" value="L&#xE0; ng&#x1B0;&#x1EDD;i d&#xE2;n t&#x1ED9;c thi&#x1EC3;u s&#x1ED1;" />
+                                                <input data-val="true" data-val-required="The Id field is required." id="piorityCheckBoxList_3__Id" name="piorityCheckBoxList[3].Id" type="hidden" value="101" />
+                                                <input class="FileId" data-val="true" data-val-required="The FileId field is required." id="piorityCheckBoxList_3__FileId" name="piorityCheckBoxList[3].FileId" type="hidden" value="0" />
+                                                <input class="form-check-input" data="0004 101" data-val="true" data-val-required="The IsSelected field is required." id="piorityCheckBoxList_3__IsSelected" name="piorityCheckBoxList[3].IsSelected" type="checkbox" value="true" />
+                                                <label class="form-check-label" for="piorityCheckBoxList_3__Name">L&#xE0; ng&#x1B0;&#x1EDD;i d&#xE2;n t&#x1ED9;c thi&#x1EC3;u s&#x1ED1;(Ti&#x1EC1;n t&#x1ED1; file: 0004)</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-check">
+                                                <input id="piorityCheckBoxList_4__Name" name="piorityCheckBoxList[4].Name" type="hidden" value="Con m&#xF4;&#x300; c&#xF4;i ca&#x309; cha v&#xE0; me&#x323;" />
+                                                <input data-val="true" data-val-required="The Id field is required." id="piorityCheckBoxList_4__Id" name="piorityCheckBoxList[4].Id" type="hidden" value="102" />
+                                                <input class="FileId" data-val="true" data-val-required="The FileId field is required." id="piorityCheckBoxList_4__FileId" name="piorityCheckBoxList[4].FileId" type="hidden" value="0" />
+                                                <input class="form-check-input" data="0005 102" data-val="true" data-val-required="The IsSelected field is required." id="piorityCheckBoxList_4__IsSelected" name="piorityCheckBoxList[4].IsSelected" type="checkbox" value="true" />
+                                                <label class="form-check-label" for="piorityCheckBoxList_4__Name">Con m&#xF4;&#x300; c&#xF4;i ca&#x309; cha v&#xE0; me&#x323;(Ti&#x1EC1;n t&#x1ED1; file: 0005)</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-check">
+                                                <input id="piorityCheckBoxList_5__Name" name="piorityCheckBoxList[5].Name" type="hidden" value="HSSV l&#xE0; con h&#x1ED9; ngh&#xE8;o, c&#x1EAD;n ngh&#xE8;o theo quy &#x111;&#x1ECB;nh hi&#x1EC7;n h&#xE0;nh c&#x1EE7;a Nh&#xE0; n&#x1B0;&#x1EDB;c" />
+                                                <input data-val="true" data-val-required="The Id field is required." id="piorityCheckBoxList_5__Id" name="piorityCheckBoxList[5].Id" type="hidden" value="103" />
+                                                <input class="FileId" data-val="true" data-val-required="The FileId field is required." id="piorityCheckBoxList_5__FileId" name="piorityCheckBoxList[5].FileId" type="hidden" value="0" />
+                                                <input class="form-check-input" data="0006 103" data-val="true" data-val-required="The IsSelected field is required." id="piorityCheckBoxList_5__IsSelected" name="piorityCheckBoxList[5].IsSelected" type="checkbox" value="true" />
+                                                <label class="form-check-label" for="piorityCheckBoxList_5__Name">HSSV l&#xE0; con h&#x1ED9; ngh&#xE8;o, c&#x1EAD;n ngh&#xE8;o theo quy &#x111;&#x1ECB;nh hi&#x1EC7;n h&#xE0;nh c&#x1EE7;a Nh&#xE0; n&#x1B0;&#x1EDB;c(Ti&#x1EC1;n t&#x1ED1; file: 0006)</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-check">
+                                                <input id="piorityCheckBoxList_6__Name" name="piorityCheckBoxList[6].Name" type="hidden" value="HSSV n&#x1EEF;" />
+                                                <input data-val="true" data-val-required="The Id field is required." id="piorityCheckBoxList_6__Id" name="piorityCheckBoxList[6].Id" type="hidden" value="104" />
+                                                <input class="FileId" data-val="true" data-val-required="The FileId field is required." id="piorityCheckBoxList_6__FileId" name="piorityCheckBoxList[6].FileId" type="hidden" value="0" />
+                                                <input class="form-check-input" data="0007 104" data-val="true" data-val-required="The IsSelected field is required." id="piorityCheckBoxList_6__IsSelected" name="piorityCheckBoxList[6].IsSelected" type="checkbox" value="true" />
+                                                <label class="form-check-label" for="piorityCheckBoxList_6__Name">HSSV n&#x1EEF;(Ti&#x1EC1;n t&#x1ED1; file: 0007)</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-check">
+                                                <input id="piorityCheckBoxList_7__Name" name="piorityCheckBoxList[7].Name" type="hidden" value="HSSV t&#xED;ch c&#x1EF1;c tham gia c&#xE1;c ho&#x1EA1;t &#x111;&#x1ED9;ng do nh&#xE0; tr&#x1B0;&#x1EDD;ng, &#x110;o&#xE0;n TNCS H&#x1ED3; Ch&#xED; Minh, H&#x1ED9;i sinh vi&#xEA;n, khu n&#x1ED9;i tr&#xFA; ho&#x1EB7;c c&#xE1;c t&#x1ED5; ch&#x1EE9;c x&#xE3; h&#x1ED9;i t&#x1ED5; ch&#x1EE9;c" />
+                                                <input data-val="true" data-val-required="The Id field is required." id="piorityCheckBoxList_7__Id" name="piorityCheckBoxList[7].Id" type="hidden" value="105" />
+                                                <input class="FileId" data-val="true" data-val-required="The FileId field is required." id="piorityCheckBoxList_7__FileId" name="piorityCheckBoxList[7].FileId" type="hidden" value="0" />
+                                                <input class="form-check-input" data="0008 105" data-val="true" data-val-required="The IsSelected field is required." id="piorityCheckBoxList_7__IsSelected" name="piorityCheckBoxList[7].IsSelected" type="checkbox" value="true" />
+                                                <label class="form-check-label" for="piorityCheckBoxList_7__Name">HSSV t&#xED;ch c&#x1EF1;c tham gia c&#xE1;c ho&#x1EA1;t &#x111;&#x1ED9;ng do nh&#xE0; tr&#x1B0;&#x1EDD;ng, &#x110;o&#xE0;n TNCS H&#x1ED3; Ch&#xED; Minh, H&#x1ED9;i sinh vi&#xEA;n, khu n&#x1ED9;i tr&#xFA; ho&#x1EB7;c c&#xE1;c t&#x1ED5; ch&#x1EE9;c x&#xE3; h&#x1ED9;i t&#x1ED5; ch&#x1EE9;c(Ti&#x1EC1;n t&#x1ED1; file: 0008)</label>
+                                            </div>
+                                        </div>
+
+
+                            </div>
+
+                        </div>
+                        <div id="priority-file-area">
+                            <div class="my-2">
+                                <div class="border-bottom mb-2">
+                                    <strong>Tải file đối tượng ưu tiên</strong>
+                                </div>
+
+                                
+<link href="http://dangkynoitru.css.vnu.edu.vn/lib/dropzone/css/dropzone.min.css" rel="stylesheet" />
+<script src="http://dangkynoitru.css.vnu.edu.vn/lib/dropzone/js/dropzone.min.js"></script>
+
+<div id="priority-target-file-upload-area">
+    <div class="mb-2">
+        <button type="button" class="dropzone-select btn form-section-button rounded">Chọn file</button>
+        <button type="button" class="btn btn-outline-danger dropzone-remove-all" style="display:none"><i class="fas fa-trash  me-1"></i>Xóa tất cả</button>
+    </div>
+    <div class="dropzone-preview row">
+        <div class="dropzone-item col-lg-2 col-md-4 col-6">
+            <div class="position-relative my-3">
+                <img class="img w-100" data-dz-thumbnail>
+                <button class="btn btn-sm btn-danger" style="border-radius: 50%; position: absolute; bottom: 0; right: 0;transform: translate(40%,40%);" data-dz-remove><i class="fas fa-trash"></i></button>
+            </div>
+            <div class="progress">
+                <div class="progress-bar bg-color-VNU-green" role="progressbar" data-dz-uploadprogress
+                     aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <div style="word-wrap: break-word;">
+                <span data-dz-name class=""></span>
+            </div>
+
+            <div class="text-danger">
+                <span data-dz-errormessage class="err"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        let checkPrefix = 'True';
+
+        let dropzoneId = '#priority-target-file-upload-area';
+
+        Dropzone.autoDiscover = false;
+
+        let previewNode = $(dropzoneId + " .dropzone-item");
+        previewNode.id = "";
+        let previewTemplate = previewNode.parent(".dropzone-preview").html();
+        //previewNode.remove();
+        previewNode.remove();
+
+        let myDropzone = new Dropzone(dropzoneId, {
+            url: 'http://localhost:7500/Home/UploadFile',
+            parallelUploads: 1,
+            previewTemplate: previewTemplate,
+            maxFilesize: 5, // Max filesize in MB
+            maxFiles: 5,
+            acceptedFiles: 'image/*',
+            autoQueue: true,
+            previewsContainer: dropzoneId + " .dropzone-preview",
+            clickable: dropzoneId + " .dropzone-select",
+            method: 'put',
+            // autoQueue: false,
+            accept: function (file, done) {
+                let attachmentTypeId = checkStartWith(file.name, PriorityFileAttachmentTypes);
+                if (attachmentTypeId == 0 && checkPrefix === 'True') {
+                    done("Tên file không hợp lệ!");
+                }
+                else {
+
+                    let _today = new Date();
+                    let FileName = `${_today.getHours()}_${_today.getMinutes()}_${_today.getSeconds()}_${file.name}`;
+                    let TenFileMinIO = createUUID() + "." + file.name.split(".")[1];
+                    let link = `${1}/${0}/${_today.getFullYear()}/${(_today.getMonth() + 1)}/${_today.getDate()}/${1}/${TenFileMinIO}`;
+                    let PhanMoRong = "." + file.name.split(".")[1];
+                    const urlAjax = `${BASE_URL}/Common/GetUploadUrlToken`;
+                    $.ajax({
+                        url: urlAjax,
+                        type: "GET",
+                        datatype: "JSON",
+                        data: { TenHienThi: file.name, TenTapTinGoc: FileName, TenTapTinLuuTru: TenFileMinIO, PhanMoRong: PhanMoRong, KichThuoc: file.size, DuongDan: link, LoaiTapTinId: 1 },
+
+                    }).done(function (response) {
+
+                        file.uploadURL = response.uploadUrl;
+                        done();
+                        file.previewElement.setAttribute("data-file-cms-id", `${response.id}`);
+
+                        //not require prefix.
+                        if (!(checkPrefix === 'True') && attachmentTypeId == 0) 
+                            file.previewElement.setAttribute("data-file-attachment-type", `-1`); 
+                        else //require prefix.
+                            file.previewElement.setAttribute("data-file-attachment-type", `${attachmentTypeId}`); 
+
+                        file.previewElement.setAttribute("data-file-name", `${file.name}`);
+
+                    }).fail(function (err) {
+                        done("Lấy token không thành công!");
+                    });
+                }
+
+            }
+        });
+        // Hide the total progress bar when nothing's uploading anymore
+        myDropzone.on("complete", function (progress) {
+            let thisProgressBar = dropzoneId + " .dz-complete";
+            //$(thisProgressBar + " .dropzone-upload").remove();
+            // $(thisProgressBar + " .progress").remove();
+            // setTimeout(function () {
+
+            //     $(thisProgressBar + " .progress-bar, " + thisProgressBar + " .progress, " + thisProgressBar + " .dropzone-start").css("opacity", "0");
+            //     $(thisProgressBar).css("border", "none");
+            // }, 300)
+        });
+
+        myDropzone.on("addedfile", function (file) {
+            // Hookup the start button
+            //file.previewElement.querySelector(id + " .dropzone-upload").onclick = function () {
+            //    myDropzone.enqueueFile(file);
+            //};
+            // $(document).find(id + " .dropzone-item").css("display", "");
+            $(dropzoneId + " .dropzone-remove-all").css("display", "inline-block");
+
+        });
+
+        // Set signed upload URL for each file being processing
+        myDropzone.on('processing', (file) => {
+            //console.log("file url : ");
+            //console.log(file.uploadURL);
+            myDropzone.options.url = file.uploadURL
+        })
+
+        // Update the total progress bar
+        myDropzone.on("totaluploadprogress", function (progress) {
+            $(this).find(dropzoneId + " .progress-bar").css("width", progress + "%");
+        });
+
+        myDropzone.on("sending", function (file, xhr) {
+
+            // Show the total progress bar when upload starts
+            $(dropzoneId + " .progress-bar").css("opacity", "1");
+            // And disable the start button
+            //file.previewElement.querySelector(id + " .dropzone-upload").setAttribute("disabled", "disabled");
+
+            xhr.withCredentials = true;
+            xhr.setRequestHeader('cache-control', 'no-cache');
+            xhr.setRequestHeader('Content-Type', "");
+
+            let _send = xhr.send
+            xhr.send = () => {
+                _send.call(xhr, file)
+            }
+
+        });
+
+        // // Setup the buttons for all transfers
+        // document.querySelector(id + " .dropzone-upload").onclick = function () {
+        //     myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED));
+        // };
+
+        // // Setup the button for remove all files
+        document.querySelector(dropzoneId + " .dropzone-remove-all").onclick = function () {
+            //$(id + " .dropzone-remove-all").css("display", "none");
+            myDropzone.removeAllFiles(true);
+        };
+
+
+        // On all files completed upload
+        myDropzone.on("queuecomplete", function (progress) {
+            // $(id + " .dropzone-upload").css("display", "none");
+        });
+
+        // On all files removed
+        myDropzone.on("removedfile", function (file) {
+            //debugger;
+            if (myDropzone.files.length < 1) {
+                $(dropzoneId + " .dropzone-remove-all").css("display", "none");
+            }
+        });
+
+
+        function checkStartWith(str, substrs) {
+            let value = substrs.find(substr => str.startsWith(substr.prefix));
+             
+            if (value) {
+                return value.id;
+            }
+            else {
+                return 0;
+            }
+        }
+    });
+
+
+
+</script>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="my-2">
+                            <div class="border-bottom mb-2"><strong>Thông tin nhập học</strong></div>
+                            <div class="row">
+
+                                <div class="col-md-4 my-2">
+                                    <div>
+                                        <label for="UniversityId">&#x110;&#x1A1;n v&#x1ECB; &#x111;&#xE0;o t&#x1EA1;o</label><span class="text-danger">*</span>
+                                        <div class="input-group">
+                                            <select class="form-select" data-val="true" data-val-range="Vui l&#xF2;ng ch&#x1ECD;n!" data-val-range-max="2147483647" data-val-range-min="1" data-val-required="&#x110;&#x1A1;n v&#x1ECB; &#x111;&#xE0;o t&#x1EA1;o kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng!" id="UniversityId" name="UniversityId">><option value="-1"> .: L&#x1EF1;a ch&#x1ECD;n :. </option>
+<option value="1">THPT Chuy&#xEA;n KHTN</option>
+<option value="2">THPT Chuy&#xEA;n KHXH&amp;NV</option>
+<option value="3">&#x110;H Gi&#xE1;o d&#x1EE5;c</option>
+<option value="4">&#x110;H Vi&#x1EC7;t Nh&#x1EAD;t</option>
+<option value="5">&#x110;H Y D&#x1B0;&#x1EE3;c</option>
+<option value="6">&#x110;H Khoa h&#x1ECD;c T&#x1EF1; nhi&#xEA;n</option>
+<option value="7">&#x110;H KHXH &amp; Nh&#xE2;n v&#x103;n</option>
+<option value="9">&#x110;H Kinh t&#x1EBF;</option>
+<option value="10">&#x110;H Ngo&#x1EA1;i ng&#x1EEF;</option>
+<option value="12">Qu&#x1EA3;n tr&#x1ECB; Kinh doanh</option>
+<option value="28">Tr&#x1B0;&#x1EDD;ng Qu&#x1ED1;c t&#x1EBF;</option>
+<option selected="selected" value="29"></option>
+<option value="30">Tr&#x1B0;&#x1EDD;ng khoa h&#x1ECD;c li&#xEA;n ng&#xE0;nh v&#xE0; ngh&#x1EC7; thu&#x1EAD;t</option>
+<option value="39">THPT Chuy&#xEA;n Ngo&#x1EA1;i Ng&#x1EEF;</option>
+<option value="41">THPT Khoa h&#x1ECD;c Gi&#xE1;o d&#x1EE5;c</option>
+<option value="42">&#x110;H C&#xF4;ng ngh&#x1EC7;</option>
+<option value="44">Vi&#x1EC7;n c&#xF4;ng ngh&#x1EC7; th&#xF4;ng tin</option>
+<option value="45">Khoa qu&#x1ED1;c t&#x1EBF; ph&#xE1;p ng&#x1EEF;</option>
+<option value="46">Vi&#x1EC7;n Qu&#x1ED1;c T&#x1EBF; Ph&#xE1;p Ng&#x1EEF;</option>
+</select>
+                                        </div>
+                                        <span class="text-danger field-validation-valid" data-valmsg-for="UniversityId" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 my-2">
+                                    <div>
+                                        <label for="FacultyId">Khoa</label><span class="text-danger">*</span>
+                                        <div class="input-group">
+                                            <select class="form-select" data-val="true" data-val-range="Vui l&#xF2;ng ch&#x1ECD;n!" data-val-range-max="2147483647" data-val-range-min="1" data-val-required="Khoa kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng!" id="FacultyId" name="FacultyId">><option value="-1"> .: L&#x1EF1;a ch&#x1ECD;n :. </option>
+<option value="38">Lu&#x1EAD;t H&#x1ECD;c</option>
+<option selected="selected" value="39"></option>
+<option value="40">Lu&#x1EAD;t TM v&#xE0; qu&#x1ED1;c t&#x1EBF;</option>
+<option value="108">Lu&#x1EAD;t CLC</option>
+<option value="109">Lu&#x1EAD;t kinh t&#x1EBF;</option>
+</select>
+                                        </div>
+                                        <span class="text-danger field-validation-valid" data-valmsg-for="FacultyId" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-4 my-2">
+                                    <div>
+                                        <label for="MajorId">Ng&#xE0;nh</label><span class="text-danger">*</span>
+                                        <div class="input-group">
+                                            <select class="form-select" data-val="true" data-val-range="Vui l&#xF2;ng ch&#x1ECD;n!" data-val-range-max="2147483647" data-val-range-min="1" data-val-required="Ng&#xE0;nh kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng!" id="MajorId" name="MajorId"><option value="-1"> .: L&#x1EF1;a ch&#x1ECD;n :. </option>
+<option value="494">Lu&#x1EAD;t</option>
+<option selected="selected" value="495"></option>
+<option value="496">Lu&#x1EAD;t TMQT</option>
+<option value="497">Lu&#x1EAD;t ch&#x1EA5;t l&#x1B0;&#x1EE3;ng cao</option>
+</select>
+                                        </div>
+                                        <span class="text-danger field-validation-valid" data-valmsg-for="MajorId" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 my-2">
+                                    <div>
+                                        <label for="CourseId">Kh&#xF3;a</label><span class="text-danger">*</span>
+                                        <div class="input-group">
+                                            <select class="form-select" data-val="true" data-val-range="Vui l&#xF2;ng ch&#x1ECD;n!" data-val-range-max="2147483647" data-val-range-min="1" data-val-required="Kh&#xF3;a kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng!" id="CourseId" name="CourseId">><option value="-1"> .: L&#x1EF1;a ch&#x1ECD;n :. </option>
+<option value="67">QH 2021</option>
+<option value="68">QH 2020</option>
+<option value="69">QH 2019</option>
+<option selected="selected" value="94"></option>
+<option value="138">QH 2024</option>
+<option value="144">QH 2023</option>
+</select>
+                                        </div>
+                                        <span class="text-danger field-validation-valid" data-valmsg-for="CourseId" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-md-4 my-2">
+                                    <div>
+                                        <label for="ClassName">L&#x1EDB;p</label><span class="text-danger">*</span>
+                                        <div class="input-group">
+                                            <input class="form-control" type="text" placeholder=" " data-val="true" data-val-required="L&#x1EDB;p kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng!" id="ClassName" name="ClassName" value="" />
+                                        </div>
+                                        <span class="text-danger field-validation-valid" data-valmsg-for="ClassName" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 my-2">
+                                    <div>
+                                        <label for="YearBegins">N&#x103;m b&#x1EAF;t &#x111;&#x1EA7;u</label><span class="text-danger">*</span>
+                                        <div class="input-group">
+                                            <input class="form-control" type="number" placeholder=" " data-val="true" data-val-range="Vui kh&#xF4;ng &#x111;i&#x1EC1;n gi&#xE1; tr&#x1ECB; &#xE2;m!" data-val-range-max="2147483647" data-val-range-min="1" data-val-required="N&#x103;m b&#x1EAF;t &#x111;&#x1EA7;u kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng!" id="YearBegins" name="YearBegins" value="" />
+                                        </div>
+                                        <span class="text-danger field-validation-valid" data-valmsg-for="YearBegins" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 my-2">
+                                    <div>
+                                        <label for="YearEnds">N&#x103;m k&#x1EBF;t th&#xFA;c</label><span class="text-danger">*</span>
+                                        <div class="input-group">
+                                            <input class="form-control" type="number" placeholder=" " data-val="true" data-val-range="Vui kh&#xF4;ng &#x111;i&#x1EC1;n gi&#xE1; tr&#x1ECB; &#xE2;m!" data-val-range-max="2147483647" data-val-range-min="1" data-val-required="N&#x103;m k&#x1EBF;t th&#xFA;c kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng!" id="YearEnds" name="YearEnds" value="" />
+                                        </div>
+                                        <span class="text-danger field-validation-valid" data-valmsg-for="YearEnds" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="my-2">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="border-bottom mb-2"><strong>Thông tin bố</strong></div>
+                                    <div class="row">
+                                        <div class="col-md-12 my-2">
+                                            <div>
+                                                <label for="FatherFullName">H&#x1ECD; t&#xEA;n cha</label><span class="text-danger">*</span>
+                                                <div class="input-group">
+                                                    <input class="form-control" type="text" placeholder=" " data-val="true" data-val-required="H&#x1ECD; t&#xEA;n cha kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng!" id="FatherFullName" name="FatherFullName" value="" />
+
+                                                </div>
+                                                <span class="text-danger field-validation-valid" data-valmsg-for="FatherFullName" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 my-2">
+                                            <div>
+                                                <label for="FatherYearOfBirth">N&#x103;m sinh</label><span class="text-danger">*</span>
+                                                <div class="input-group">
+                                                    <input class="form-control yearPicker" type="text" placeholder=" " data-val="true" data-val-required="N&#x103;m sinh kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng!" id="FatherYearOfBirth" name="FatherYearOfBirth" value="" />
+
+                                                </div>
+                                                <span class="text-danger field-validation-valid" data-valmsg-for="FatherYearOfBirth" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 my-2">
+                                            <div>
+                                                <label for="FatherContactPhone">S&#x1ED1; &#x111;i&#x1EC7;n tho&#x1EA1;i</label><span class="text-danger">*</span>
+                                                <div class="input-group">
+                                                    <input class="form-control" type="text" placeholder=" " data-val="true" data-val-required="S&#x1ED1; &#x111;i&#x1EC7;n tho&#x1EA1;i kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng!" id="FatherContactPhone" name="FatherContactPhone" value="" />
+
+                                                </div>
+                                                <span class="text-danger field-validation-valid" data-valmsg-for="FatherContactPhone" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 my-2">
+                                            <div>
+                                                <label for="FatherOccupation">Ngh&#x1EC1; nghi&#x1EC7;p</label><span class="text-danger">*</span>
+                                                <div class="input-group">
+                                                    <input class="form-control" type="text" placeholder=" " data-val="true" data-val-required="Ngh&#x1EC1; nghi&#x1EC7;p kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng!" id="FatherOccupation" name="FatherOccupation" value="" />
+
+                                                </div>
+                                                <span class="text-danger field-validation-valid" data-valmsg-for="FatherOccupation" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 my-2">
+                                            <div>
+                                                <label for="FatherWorkplace">N&#x1A1;i l&#xE0;m vi&#x1EC7;c</label><span class="text-danger">*</span>
+                                                <div class="input-group">
+                                                    <input class="form-control" type="text" placeholder=" " data-val="true" data-val-required="N&#x1A1;i l&#xE0;m vi&#x1EC7;c kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng!" id="FatherWorkplace" name="FatherWorkplace" value="" />
+
+                                                </div>
+                                                <span class="text-danger field-validation-valid" data-valmsg-for="FatherWorkplace" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="border-bottom mb-2"></div><strong>Thông tin mẹ</strong>
+                                    <div class="row">
+                                        <div class="col-md-12 my-2">
+                                            <div>
+                                                <label for="MotherFullName">H&#x1ECD; t&#xEA;n m&#x1EB9;</label><span class="text-danger">*</span>
+                                                <div class="input-group">
+                                                    <input class="form-control" type="text" placeholder=" " data-val="true" data-val-required="H&#x1ECD; t&#xEA;n m&#x1EB9; kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng!" id="MotherFullName" name="MotherFullName" value="" />
+
+                                                </div>
+                                                <span class="text-danger field-validation-valid" data-valmsg-for="MotherFullName" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 my-2">
+                                            <div>
+                                                <label for="MotherYearOfBirth">N&#x103;m sinh</label><span class="text-danger">*</span>
+                                                <div class="input-group">
+                                                    <input class="form-control yearPicker" type="text" placeholder=" " data-val="true" data-val-required="N&#x103;m sinh h&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng!" id="MotherYearOfBirth" name="MotherYearOfBirth" value="" />
+
+                                                </div>
+                                                <span class="text-danger field-validation-valid" data-valmsg-for="MotherYearOfBirth" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 my-2">
+                                            <div>
+                                                <label for="MotherContactPhone">S&#x1ED1; &#x111;i&#x1EC7;n tho&#x1EA1;i</label><span class="text-danger">*</span>
+                                                <div class="input-group">
+                                                    <input class="form-control" type="text" placeholder=" " data-val="true" data-val-required="kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng!" id="MotherContactPhone" name="MotherContactPhone" value="" />
+
+                                                </div>
+                                                <span class="text-danger field-validation-valid" data-valmsg-for="MotherContactPhone" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-6 my-2">
+                                            <div>
+                                                <label for="MotherOccupation">Ngh&#x1EC1; nghi&#x1EC7;p</label><span class="text-danger">*</span>
+                                                <div class="input-group">
+                                                    <input class="form-control" type="text" placeholder=" " data-val="true" data-val-required="Ngh&#x1EC1; nghi&#x1EC7;p kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng!" id="MotherOccupation" name="MotherOccupation" value="" />
+
+                                                </div>
+                                                <span class="text-danger field-validation-valid" data-valmsg-for="MotherOccupation" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 my-2">
+                                            <div>
+                                                <label for="MotherWorkplace">N&#x1A1;i l&#xE0;m vi&#x1EC7;c</label><span class="text-danger">*</span>
+                                                <div class="input-group">
+                                                    <input class="form-control" type="text" placeholder=" " data-val="true" data-val-required="N&#x1A1;i l&#xE0;m vi&#x1EC7;c kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng!" id="MotherWorkplace" name="MotherWorkplace" value="" />
+                                                </div>
+                                                <span class="text-danger field-validation-valid" data-valmsg-for="MotherWorkplace" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="my-2">
+                            <div class="border-bottom mb-2"><strong>Thông tin liên hệ</strong></div>
+                            <div class="row">
+                                <div class="col-md-4 my-2">
+                                    <div>
+                                        <label for="Email">Email</label><span class="text-danger">*</span>
+                                        <div class="input-group">
+                                            <input class="form-control" type="text" placeholder=" " data-val="true" data-val-regex="Vui l&#xF2;ng &#x111;i&#x1EC1;n &#x111;&#xFA;ng &#x111;&#x1ECB;nh d&#x1EA1;ng th&#x1B0; &#x111;i&#x1EC7;n t&#x1EED;" data-val-regex-pattern="^([a-zA-Z0-9_\-\.]&#x2B;)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]&#x2B;\.)&#x2B;))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" data-val-required="Email kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng!" id="Email" name="Email" value="" />
+
+                                        </div>
+                                        <span class="text-danger field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 my-2">
+                                    <div>
+                                        <label for="PhoneNumber">S&#x1ED1; &#x111;i&#x1EC7;n tho&#x1EA1;i</label><span class="text-danger">*</span>
+                                        <div class="input-group">
+                                            <input class="form-control" type="text" placeholder=" " data-val="true" data-val-phone="Vui l&#xF2;ng &#x111;i&#x1EC1;n &#x111;&#xFA;ng &#x111;&#x1ECB;nh d&#x1EA1;ng s&#x1ED1; &#x111;i&#x1EC7;n tho&#x1EA1;i" data-val-regex="Vui l&#xF2;ng &#x111;i&#x1EC1;n &#x111;&#xFA;ng &#x111;&#x1ECB;nh d&#x1EA1;ng s&#x1ED1; &#x111;i&#x1EC7;n tho&#x1EA1;i" data-val-regex-pattern="^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$" data-val-required="S&#x1ED1; &#x111;i&#x1EC7;n tho&#x1EA1;i kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng!" id="PhoneNumber" name="PhoneNumber" value="" />
+
+                                        </div>
+                                        <span class="text-danger field-validation-valid" data-valmsg-for="PhoneNumber" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 my-2">
+                                    <div>
+                                        <label for="Address">&#x110;&#x1ECB;a ch&#x1EC9; li&#xEA;n h&#x1EC7;</label><span class="text-danger">*</span>
+                                        <div class="input-group">
+                                            <input class="form-control" type="text" placeholder=" " data-val="true" data-val-required="&#x110;&#x1ECB;a ch&#x1EC9; li&#xEA;n h&#x1EC7; kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC3; tr&#x1ED1;ng!" id="Address" name="Address" value="" />
+                                        </div>
+                                        <span class="text-danger field-validation-valid" data-valmsg-for="Address" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div id="student-file-area">
+                            <div class="my-2">
+                                <div class="border-bottom mb-2"><strong>Giấy tờ</strong></div>
+                            </div>
+
+                            <div class="my-2">
+                                <div class="border-bottom mb-2">
+                                    <strong>Tải file giấy tờ</strong>
+                                </div>
+
+                                
+<link href="http://dangkynoitru.css.vnu.edu.vn/lib/dropzone/css/dropzone.min.css" rel="stylesheet" />
+<script src="http://dangkynoitru.css.vnu.edu.vn/lib/dropzone/js/dropzone.min.js"></script>
+
+<div id="student-attachment-file-upload-area">
+    <div class="mb-2">
+        <button type="button" class="dropzone-select btn form-section-button rounded">Chọn file</button>
+        <button type="button" class="btn btn-outline-danger dropzone-remove-all" style="display:none"><i class="fas fa-trash  me-1"></i>Xóa tất cả</button>
+    </div>
+    <div class="dropzone-preview row">
+        <div class="dropzone-item col-lg-2 col-md-4 col-6">
+            <div class="position-relative my-3">
+                <img class="img w-100" data-dz-thumbnail>
+                <button class="btn btn-sm btn-danger" style="border-radius: 50%; position: absolute; bottom: 0; right: 0;transform: translate(40%,40%);" data-dz-remove><i class="fas fa-trash"></i></button>
+            </div>
+            <div class="progress">
+                <div class="progress-bar bg-color-VNU-green" role="progressbar" data-dz-uploadprogress
+                     aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <div style="word-wrap: break-word;">
+                <span data-dz-name class=""></span>
+            </div>
+
+            <div class="text-danger">
+                <span data-dz-errormessage class="err"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        let checkPrefix = 'False';
+
+        let dropzoneId = '#student-attachment-file-upload-area';
+
+        Dropzone.autoDiscover = false;
+
+        let previewNode = $(dropzoneId + " .dropzone-item");
+        previewNode.id = "";
+        let previewTemplate = previewNode.parent(".dropzone-preview").html();
+        //previewNode.remove();
+        previewNode.remove();
+
+        let myDropzone = new Dropzone(dropzoneId, {
+            url: 'http://localhost:7500/Home/UploadFile',
+            parallelUploads: 1,
+            previewTemplate: previewTemplate,
+            maxFilesize: 5, // Max filesize in MB
+            maxFiles: 5,
+            acceptedFiles: 'image/*',
+            autoQueue: true,
+            previewsContainer: dropzoneId + " .dropzone-preview",
+            clickable: dropzoneId + " .dropzone-select",
+            method: 'put',
+            // autoQueue: false,
+            accept: function (file, done) {
+                let attachmentTypeId = checkStartWith(file.name, PersonalFileAttachmentTypes);
+                if (attachmentTypeId == 0 && checkPrefix === 'True') {
+                    done("Tên file không hợp lệ!");
+                }
+                else {
+
+                    let _today = new Date();
+                    let FileName = `${_today.getHours()}_${_today.getMinutes()}_${_today.getSeconds()}_${file.name}`;
+                    let TenFileMinIO = createUUID() + "." + file.name.split(".")[1];
+                    let link = `${1}/${0}/${_today.getFullYear()}/${(_today.getMonth() + 1)}/${_today.getDate()}/${1}/${TenFileMinIO}`;
+                    let PhanMoRong = "." + file.name.split(".")[1];
+                    const urlAjax = `${BASE_URL}/Common/GetUploadUrlToken`;
+                    $.ajax({
+                        url: urlAjax,
+                        type: "GET",
+                        datatype: "JSON",
+                        data: { TenHienThi: file.name, TenTapTinGoc: FileName, TenTapTinLuuTru: TenFileMinIO, PhanMoRong: PhanMoRong, KichThuoc: file.size, DuongDan: link, LoaiTapTinId: 1 },
+
+                    }).done(function (response) {
+
+                        file.uploadURL = response.uploadUrl;
+                        done();
+                        file.previewElement.setAttribute("data-file-cms-id", `${response.id}`);
+
+                        //not require prefix.
+                        if (!(checkPrefix === 'True') && attachmentTypeId == 0) 
+                            file.previewElement.setAttribute("data-file-attachment-type", `-1`); 
+                        else //require prefix.
+                            file.previewElement.setAttribute("data-file-attachment-type", `${attachmentTypeId}`); 
+
+                        file.previewElement.setAttribute("data-file-name", `${file.name}`);
+
+                    }).fail(function (err) {
+                        done("Lấy token không thành công!");
+                    });
+                }
+
+            }
+        });
+        // Hide the total progress bar when nothing's uploading anymore
+        myDropzone.on("complete", function (progress) {
+            let thisProgressBar = dropzoneId + " .dz-complete";
+            //$(thisProgressBar + " .dropzone-upload").remove();
+            // $(thisProgressBar + " .progress").remove();
+            // setTimeout(function () {
+
+            //     $(thisProgressBar + " .progress-bar, " + thisProgressBar + " .progress, " + thisProgressBar + " .dropzone-start").css("opacity", "0");
+            //     $(thisProgressBar).css("border", "none");
+            // }, 300)
+        });
+
+        myDropzone.on("addedfile", function (file) {
+            // Hookup the start button
+            //file.previewElement.querySelector(id + " .dropzone-upload").onclick = function () {
+            //    myDropzone.enqueueFile(file);
+            //};
+            // $(document).find(id + " .dropzone-item").css("display", "");
+            $(dropzoneId + " .dropzone-remove-all").css("display", "inline-block");
+
+        });
+
+        // Set signed upload URL for each file being processing
+        myDropzone.on('processing', (file) => {
+            //console.log("file url : ");
+            //console.log(file.uploadURL);
+            myDropzone.options.url = file.uploadURL
+        })
+
+        // Update the total progress bar
+        myDropzone.on("totaluploadprogress", function (progress) {
+            $(this).find(dropzoneId + " .progress-bar").css("width", progress + "%");
+        });
+
+        myDropzone.on("sending", function (file, xhr) {
+
+            // Show the total progress bar when upload starts
+            $(dropzoneId + " .progress-bar").css("opacity", "1");
+            // And disable the start button
+            //file.previewElement.querySelector(id + " .dropzone-upload").setAttribute("disabled", "disabled");
+
+            xhr.withCredentials = true;
+            xhr.setRequestHeader('cache-control', 'no-cache');
+            xhr.setRequestHeader('Content-Type', "");
+
+            let _send = xhr.send
+            xhr.send = () => {
+                _send.call(xhr, file)
+            }
+
+        });
+
+        // // Setup the buttons for all transfers
+        // document.querySelector(id + " .dropzone-upload").onclick = function () {
+        //     myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED));
+        // };
+
+        // // Setup the button for remove all files
+        document.querySelector(dropzoneId + " .dropzone-remove-all").onclick = function () {
+            //$(id + " .dropzone-remove-all").css("display", "none");
+            myDropzone.removeAllFiles(true);
+        };
+
+
+        // On all files completed upload
+        myDropzone.on("queuecomplete", function (progress) {
+            // $(id + " .dropzone-upload").css("display", "none");
+        });
+
+        // On all files removed
+        myDropzone.on("removedfile", function (file) {
+            //debugger;
+            if (myDropzone.files.length < 1) {
+                $(dropzoneId + " .dropzone-remove-all").css("display", "none");
+            }
+        });
+
+
+        function checkStartWith(str, substrs) {
+            let value = substrs.find(substr => str.startsWith(substr.prefix));
+             
+            if (value) {
+                return value.id;
+            }
+            else {
+                return 0;
+            }
+        }
+    });
+
+
+
+</script>
+
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="card-footer">
+                        <div class="text-center">
+                            <div class="btn-group">
+                                <div class="btn-group">
+                                    <button data-loading-text="<i class='fa-solid fa-spin fa-fan'></i>" onclick="setRequirementStatus(1,event);" type="button" class="btn lockabe form-section-button"><i class="fas fa-save me-1"></i>Lưu nháp</button>
+                                    <button data-loading-text="<i class='fa-solid fa-spin fa-fan'></i>" onclick="setRequirementStatus(2,event);" type="button" class="btn lockabe form-section-button">Gửi<i class="fas fa-caret-right ms-1"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    <input name="__RequestVerificationToken" type="hidden" value="CfDJ8BemLLBkDItAgkTMSgSY1lU2uEoDafyDmX1qH1nt18g9qQvwLyfYCPEqjNm82kX9gseAsTGWqfo_uDPCog9wrKiyLVxyFuiL0I-vk0t86IqPu0Sdf6rO0dhYluwOo-UeZOThPMk382PGbKB-muyjG1s" /><input name="piorityCheckBoxList[0].IsSelected" type="hidden" value="false" /><input name="piorityCheckBoxList[1].IsSelected" type="hidden" value="false" /><input name="piorityCheckBoxList[2].IsSelected" type="hidden" value="false" /><input name="piorityCheckBoxList[3].IsSelected" type="hidden" value="false" /><input name="piorityCheckBoxList[4].IsSelected" type="hidden" value="false" /><input name="piorityCheckBoxList[5].IsSelected" type="hidden" value="false" /><input name="piorityCheckBoxList[6].IsSelected" type="hidden" value="false" /><input name="piorityCheckBoxList[7].IsSelected" type="hidden" value="false" /></form>
+</div>
+<script src="http://dangkynoitru.css.vnu.edu.vn/js/countDown.js"></script>
+<script src="http://dangkynoitru.css.vnu.edu.vn/js/requirement/updateInfoRequirement.js"></script>
+
+<script>
+            PersonalFileAttachmentTypes.push({ id : 1 ,prefix : 'CMT_MT' });
+            PersonalFileAttachmentTypes.push({ id : 2 ,prefix : 'CMT_MS' });
+            PersonalFileAttachmentTypes.push({ id : 3 ,prefix : 'CCCD_MT' });
+            PersonalFileAttachmentTypes.push({ id : 4 ,prefix : 'CCCD_MS' });
+            PersonalFileAttachmentTypes.push({ id : 5 ,prefix : 'HK' });
+</script>
+
+
+<script src="http://dangkynoitru.css.vnu.edu.vn/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="http://dangkynoitru.css.vnu.edu.vn/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    </main>
+    
+
+<footer>
+
+</footer>
+
+
+    <a class="btn-top form-section-button text-decoration-none" href="javascript:void(0);" title="Top" style="display: inline;">
+        <i class="fas fa-angle-double-up" style="font-size: 24px;"></i>
+    </a>
+
+
+    <script>
+        jQuery(document).ready(function ($) {
+            if ($(".btn-top").length > 0) {
+                $(window).scroll(function () {
+                    var e = $(window).scrollTop();
+                    if (e > 20) {
+                        $(".btn-top").show();
+                    } else {
+                        $(".btn-top").hide();
+                    }
+                });
+                $(".btn-top").click(function () {
+                    $('body,html').animate({
+                        scrollTop: 0
+                    })
+                })
+            }
+        });
+    </script>
+    
+</body>
+</html>
