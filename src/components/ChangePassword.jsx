@@ -49,8 +49,8 @@ function ChangePassword() {
             </a>
           </div>
           <div className="w-1/3 text-center">
-            <h1 className="text-2xl font-bold text-green-700">
-              HỆ THỐNG QUẢN LÝ KÝ TÚC XÁ 
+            <h1 className="text-2xl font-bold text-blue-700">
+              HỆ THỐNG QUẢN LÝ KÝ TÚC XÁ
             </h1>
           </div>
           <div className="w-1/3 text-right">
@@ -64,7 +64,7 @@ function ChangePassword() {
       </header>
 
       {/* Navigation */}
-      <nav className="bg-green-700">
+      <nav className="bg-blue-700">
         <div className="container mx-auto px-4 py-2 flex justify-end items-center text-white">
           <a href="#" className="mx-2 hover:underline">
             <FontAwesomeIcon icon={faHome} /> Trang chủ
@@ -96,7 +96,7 @@ function ChangePassword() {
         <div className="container mx-auto px-4">
           <button
             onClick={() => window.history.back()}
-            className="mb-4 text-gray-700 hover:text-green-700 focus:outline-none"
+            className="mb-4 text-gray-700 hover:text-blue-700 focus:outline-none"
           >
             <FontAwesomeIcon icon={faCaretLeft} /> Quay lại
           </button>
@@ -107,7 +107,7 @@ function ChangePassword() {
               </h2>
               <div className="my-2">
                 <div
-                  className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4"
+                  className="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4"
                   role="alert"
                 >
                   <p className="font-bold">Lưu ý</p>
@@ -127,7 +127,7 @@ function ChangePassword() {
                     name="current_password"
                     value={formData.current_password}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-green-600"
+                    className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
                     required
                   />
                 </div>
@@ -138,7 +138,7 @@ function ChangePassword() {
                     name="new_password"
                     value={formData.new_password}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-green-600"
+                    className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
                     required
                     pattern="^(?=.*[A-Z])(?=.*\\d).{6,15}$"
                     title="Mật khẩu phải có độ dài từ 6 - 15 ký tự, bao gồm ít nhất 1 chữ cái in hoa và 1 chữ số."
@@ -153,14 +153,14 @@ function ChangePassword() {
                     name="confirm_new_password"
                     value={formData.confirm_new_password}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-green-600"
+                    className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
                     required
                   />
                 </div>
                 <div className="flex">
                   <button
                     type="submit"
-                    className="w-full px-4 py-2 text-white bg-green-700 rounded-md hover:bg-green-600 focus:outline-none"
+                    className="w-full px-4 py-2 text-white bg-blue-700 rounded-md hover:bg-blue-600 focus:outline-none"
                   >
                     Cập nhật
                   </button>
@@ -172,7 +172,7 @@ function ChangePassword() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-green-700 text-white py-4">
+      <footer className="bg-blue-700 text-white py-4">
         <div className="container mx-auto px-4 text-center">
           <p>&copy; 2024 Hệ Thống Quản Lý Ký Túc Xá</p>
         </div>
