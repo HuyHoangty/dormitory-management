@@ -12,7 +12,7 @@ function ChangePassword() {
             </a>
           </div>
           <div className="w-1/3 text-center">
-            <h1 className="text-2xl font-bold text-green-700">TRUNG TÂM HỖ TRỢ SINH VIÊN</h1>
+            <h1 className="text-2xl font-bold text-green-700">HỆ THỐNG QUẢN LÝ KÝ TÚC XÁ</h1>
           </div>
           <div className="w-1/3 text-right">
             <img src="/img/icon_logo/VNU_CSS_LOGO.png" alt="VNU CSS Logo" className="w-40 inline-block" />
@@ -79,7 +79,7 @@ function ChangePassword() {
       {/* Footer */}
       <footer className="bg-green-700 text-white py-4">
         <div className="container mx-auto px-4 text-center">
-          <p>&copy; 2023 Trung Tâm Hỗ Trợ Sinh Viên</p>
+          <p>&copy; 2024 Hệ thống quản lý ký túc xá</p>
         </div>
       </footer>
     </div>
