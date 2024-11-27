@@ -35,7 +35,7 @@ function ChangePassword() {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen flex flex-col">
+    <div className="bg-gray-100 flex flex-col">
       {/* Header */}
       <header className="bg-white py-4">
         <div className="container mx-auto flex items-center justify-between px-4">
