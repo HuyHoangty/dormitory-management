@@ -45,4 +45,16 @@ function ChangeRoomRequest() {
             setRoomTypes([]);
         }
     }, [formData.roomTypeId]);
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
+    };
+    
+    const handleSubmit = (status) => (e) => {
+        e.preventDefault();
+        console.log('Form submitted:', formData, 'status:', status);
+    };
 }
