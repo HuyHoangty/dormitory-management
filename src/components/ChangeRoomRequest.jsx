@@ -32,4 +32,17 @@ function ChangeRoomRequest() {
           { id: 76, name: 'A2a' },
         ]);
       }, []);
+
+      useEffect(() => {
+        if (formData.roomTypeId) {
+            setRooms([
+                {id: 1, name: 'Tòa nhà A - Phòng 101'},
+                {id: 2, name: 'Tòa nhà A - Phòng 102'},
+                {id: 3, name: 'Tòa nhà A - Phòng 103'},
+                //...........Sẽ nhập thêm tên các phòng khác
+            ]);
+        } else {
+            setRoomTypes([]);
+        }
+    }, [formData.roomTypeId]);
 }
