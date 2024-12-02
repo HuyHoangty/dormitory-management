@@ -2,6 +2,7 @@ import React from 'react';
 import ChangePassword from './components/ChangePassword.jsx';
 import Login from './components/Login.jsx'
 import ChangeRoomRequest from './components/ChangeRoomRequest.jsx';
+import MoveOutRequest from './components/MoveOutRequest.jsx';
 import './index.css';
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
     <ChangePassword/>
     <Login/>
     <ChangeRoomRequest />
+    <MoveOutRequest/>
     </div>
   );
 }
