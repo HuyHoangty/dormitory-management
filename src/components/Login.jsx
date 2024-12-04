@@ -8,31 +8,43 @@ import {
   faCaretLeft,
 } from '@fortawesome/free-solid-svg-icons';
 
-function ChangePassword() {
-  const [formData, setFormData] = useState({
-    current_password: '',
-    new_password: '',
-    confirm_new_password: '',
+function submitForm() {
+  // Lấy giá trị từ các ô input
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+
+  // Tạo một đối tượng để chứa dữ liệu
+  const data = {
+    username: username,
+    password: password
+  };
+
+  // Chuyển đổi dữ liệu thành JSON
+  const jsonData = JSON.stringify(data);
+
+  // Gửi dữ liệu đến backend (thay thế 'your_backend_url' bằng URL thực tế của API backend)
+  fetch('your_backend_url', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: jsonData
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Dữ liệu đã được gửi:', data);
+    // Xử lý phản hồi từ backend ở đây (ví dụ: chuyển hướng đến trang khác nếu đăng nhập thành công)
+    if (data.success) {
+      window.location.href = '/trang-chu'; // Chuyển đến trang chủ
+    } else {
+      // Hiển thị thông báo lỗi
+      alert('Tên đăng nhập hoặc mật khẩu không đúng');
+    }
+  })
+  .catch(error => {
+    console.error('Lỗi khi gửi dữ liệu:', error);
   });
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Kiểm tra mật khẩu mới và xác nhận mật khẩu
-    if (formData.new_password !== formData.confirm_new_password) {
-      alert('Mật khẩu mới và xác nhận mật khẩu không khớp!');
-      return;
-    }
-
-    console.log('Form submitted:', formData);
-  };
 
   return (
     <div className="bg-gray-100 flex flex-col">
@@ -185,4 +197,4 @@ function ChangePassword() {
   );
 }
 
-export default ChangePassword;
+export default submitForm;
