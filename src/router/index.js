@@ -1,5 +1,6 @@
 import Login from "../components/Login";
 import Register from "../components/Register";
+import Home from "../components/Homepage";
 
 export const router = [
     {
@@ -11,6 +12,12 @@ export const router = [
     {
         path: "/sign-up",
         page: Register,
+        isShowHeader: true,
+        isPrivate: false,
+    },
+    {
+        path: "/",
+        page: Home,
         isShowHeader: true,
         isPrivate: false,
     },
