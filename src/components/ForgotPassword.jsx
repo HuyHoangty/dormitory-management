@@ -103,7 +103,7 @@ function ChangePassword() {
           <div className="max-w-md mx-auto bg-white shadow-md rounded-lg overflow-hidden">
             <div className="py-4 px-6">
               <h2 className="text-2xl font-semibold text-gray-800 text-center">
-              Đăng nhập
+              Quên mật khẩu
               </h2>
               {/* <div className="my-2">
                 <div
@@ -118,9 +118,9 @@ function ChangePassword() {
                 </div>
               </div> */}
               <form className="mt-6" onSubmit={handleSubmit}>
-                <div className="mb-4">
+              <div className="mb-4">
                   <label className="block text-gray-700">
-                    CMT/CCCD/MSV
+                  Họ và tên
                   </label>
                   <input
                     type="password"
@@ -132,7 +132,20 @@ function ChangePassword() {
                   />
                 </div>
                 <div className="mb-4">
-                  <label className="block text-gray-700">Mật khẩu</label>
+                  <label className="block text-gray-700">
+                  CMT/CCCD/MSV
+                  </label>
+                  <input
+                    type="password"
+                    name="current_password"
+                    value={formData.current_password}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+                    required
+                  />
+                </div>
+                <div className="mb-4">
+                  <label className="block text-gray-700">Số điện thoại</label>
                   <input
                     type="password"
                     name="new_password"
@@ -144,9 +157,9 @@ function ChangePassword() {
                     title="Mật khẩu phải có độ dài từ 6 - 15 ký tự, bao gồm ít nhất 1 chữ cái in hoa và 1 chữ số."
                   />
                 </div>
-                {/* <div className="mb-4">
+                <div className="mb-4">
                   <label className="block text-gray-700">
-                    Nhập lại mật khẩu mới
+                    Email
                   </label>
                   <input
                     type="password"
@@ -156,20 +169,16 @@ function ChangePassword() {
                     className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
                     required
                   />
-                </div> */}
+                </div>
                 <div className="flex">
                   <button
                     type="submit"
                     className="w-full px-4 py-2 text-white bg-blue-700 rounded-md hover:bg-blue-600 focus:outline-none"
                   >
-                    Đăng nhập
+                    Đăng ký
                   </button>
                 </div>
               </form>
-              <div className="flex items-center justify-center text-center">
-                              <a href="#" className="text-blue-600">Quên mật khẩu</a>
-                              <a href="#" className="text-blue-600">Đăng ký nội trú</a>
-              </div>
             </div>
           </div>
         </div>

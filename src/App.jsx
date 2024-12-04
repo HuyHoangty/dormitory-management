@@ -3,6 +3,8 @@ import ChangePassword from './components/ChangePassword.jsx';
 import Login from './components/Login.jsx'
 import ChangeRoomRequest from './components/ChangeRoomRequest.jsx';
 import MoveOutRequest from './components/MoveOutRequest.jsx';
+import Register from'./components/Register.jsx';
+import ForgotPassword from './components/ForgotPassword.jsx'
 import './index.css';
 
 function App() {
@@ -13,6 +15,8 @@ function App() {
     <Login/>
     <ChangeRoomRequest />
     <MoveOutRequest/>
+    <Register/>
+    <ForgotPassword/>
     </div>
   );
 }
