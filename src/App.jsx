@@ -8,6 +8,7 @@ import ForgotPassword from './components/ForgotPassword.jsx';
 import StudentProfile from './components/StudentProfile.jsx';
 import StudentProfile1 from './components/StudentProfile1.jsx';
 import StudentProfile2 from './components/StudentProfile2.jsx'
+import Homepage from './components/Homepage.jsx'
 import './index.css';
 
 function App() {
@@ -23,6 +24,8 @@ function App() {
     <StudentProfile/>
     <StudentProfile1/>
     <StudentProfile2/>
+    <Homepage/>
+    
     </div>
   );
 }
