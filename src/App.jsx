@@ -25,6 +25,7 @@ function App() {
     <StudentProfile1/>
     <StudentProfile2/>
     <Homepage/>
+    <EditInformationRequest/>
     
     </div>
   );
