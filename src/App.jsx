@@ -6,6 +6,8 @@ import MoveOutRequest from './components/MoveOutRequest.jsx';
 import Register from'./components/Register.jsx';
 import ForgotPassword from './components/ForgotPassword.jsx';
 import StudentProfile from './components/StudentProfile.jsx';
+import StudentProfile1 from './components/StudentProfile1.jsx';
+import StudentProfile2 from './components/StudentProfile2.jsx'
 import './index.css';
 
 function App() {
@@ -19,6 +21,8 @@ function App() {
     <Register/>
     <ForgotPassword/>
     <StudentProfile/>
+    <StudentProfile1/>
+    <StudentProfile2/>
     </div>
   );
 }
