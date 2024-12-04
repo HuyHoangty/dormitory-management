@@ -8,31 +8,35 @@ import {
   faCaretLeft,
 } from '@fortawesome/free-solid-svg-icons';
 
-function ChangePassword() {
-  const [formData, setFormData] = useState({
-    current_password: '',
-    new_password: '',
-    confirm_new_password: '',
+function submitForm() {
+  // Lấy tất cả các checkbox đã được chọn
+  const checkboxes = document.querySelectorAll('#priorityForm input[type="checkbox"]:checked');
+
+  // Tạo một mảng để lưu trữ giá trị của các checkbox đã chọn
+  const selectedPriorities = [];
+  checkboxes.forEach(checkbox => {
+      selectedPriorities.push(checkbox.value);
   });
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+  // Chuyển đổi mảng thành một chuỗi JSON
+  const data = JSON.stringify(selectedPriorities);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Kiểm tra mật khẩu mới và xác nhận mật khẩu
-    if (formData.new_password !== formData.confirm_new_password) {
-      alert('Mật khẩu mới và xác nhận mật khẩu không khớp!');
-      return;
-    }
-
-    console.log('Form submitted:', formData);
-  };
+  // Gửi dữ liệu đến backend (thay thế 'your_backend_url' bằng URL thực tế)
+  fetch('your_backend_url', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: data
+  })
+  .then(response => response.json())
+  .then(data => {
+      console.log('Dữ liệu đã được gửi:', data);
+      // Xử lý phản hồi từ backend ở đây
+  })
+  .catch(error => {
+      console.error('Lỗi khi gửi dữ liệu:', error);
+  });
 
   return (
     <div className="bg-gray-100 flex flex-col">
@@ -173,4 +177,4 @@ function ChangePassword() {
   );
 }
 
-export default ChangePassword;
+export default submitForm;
