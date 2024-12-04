@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import {
   faHome,
   faCompass,
@@ -8,31 +9,31 @@ import {
   faCaretLeft,
 } from '@fortawesome/free-solid-svg-icons';
 
-function ChangePassword() {
+function Login() {
   const [formData, setFormData] = useState({
-    current_password: '',
-    new_password: '',
-    confirm_new_password: '',
+    email: "",
+    password: "",
   });
 
+  // Hàm xử lý khi người dùng thay đổi giá trị input
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    console.log(name, value);
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
+  // Hàm xử lý khi submit form
   const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Kiểm tra mật khẩu mới và xác nhận mật khẩu
-    if (formData.new_password !== formData.confirm_new_password) {
-      alert('Mật khẩu mới và xác nhận mật khẩu không khớp!');
-      return;
-    }
-
-    console.log('Form submitted:', formData);
+    e.preventDefault(); // Ngăn chặn reload trang
+    console.log("Email:", formData);
+    // Thực hiện các hành động khác như gửi dữ liệu lên server
   };
+
+  // const mutation = useMutationHooks((data) => UserServices.loginUser(data));
+
 
   return (
     <div className="bg-gray-100 flex flex-col">
@@ -103,7 +104,7 @@ function ChangePassword() {
           <div className="max-w-md mx-auto bg-white shadow-md rounded-lg overflow-hidden">
             <div className="py-4 px-6">
               <h2 className="text-2xl font-semibold text-gray-800 text-center">
-              Đăng nhập
+                Đăng nhập
               </h2>
               {/* <div className="my-2">
                 <div
@@ -117,15 +118,15 @@ function ChangePassword() {
                   </p>
                 </div>
               </div> */}
-              <form className="mt-6" onSubmit={handleSubmit}>
+              <form className="mt-6">
                 <div className="mb-4">
                   <label className="block text-gray-700">
-                    CMT/CCCD/MSV
+                    Email
                   </label>
                   <input
-                    type="password"
-                    name="current_password"
-                    value={formData.current_password}
+                    type="email"
+                    name="email"
+                    value={formData.email}
                     onChange={handleChange}
                     className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
                     required
@@ -135,8 +136,8 @@ function ChangePassword() {
                   <label className="block text-gray-700">Mật khẩu</label>
                   <input
                     type="password"
-                    name="new_password"
-                    value={formData.new_password}
+                    name="password"
+                    value={formData.password}
                     onChange={handleChange}
                     className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
                     required
@@ -160,6 +161,7 @@ function ChangePassword() {
                 <div className="flex">
                   <button
                     type="submit"
+                    onClick={handleSubmit}
                     className="w-full px-4 py-2 text-white bg-blue-700 rounded-md hover:bg-blue-600 focus:outline-none"
                   >
                     Đăng nhập
@@ -167,8 +169,8 @@ function ChangePassword() {
                 </div>
               </form>
               <div className="flex items-center justify-center text-center">
-                              <a href="#" className="text-blue-600">Quên mật khẩu</a>
-                              <a href="#" className="text-blue-600">Đăng ký nội trú</a>
+                <a href="#" className="text-blue-600">Quên mật khẩu</a>
+                <a href="#" className="text-blue-600">Đăng ký nội trú</a>
               </div>
             </div>
           </div>
@@ -185,4 +187,4 @@ function ChangePassword() {
   );
 }
 
-export default ChangePassword;
+export default Login;
