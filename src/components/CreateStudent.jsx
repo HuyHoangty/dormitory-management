@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as UserServices from "../services/UserServices";
 import { useMutationHooks } from "../hooks/useMutationHooks";
@@ -25,7 +25,7 @@ function CreateStudent() {
   });
 
   const user = useSelector((state) => state.user.user);
-  console.log("user", user.user_id);
+  console.log("user", user.user_id, user.email);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,6 +45,15 @@ function CreateStudent() {
   const { data, isPending, isSuccess } = mutation;
 
   console.log("muta---", data, isPending, isSuccess);
+  useEffect(() => {
+    if (mutation.status === 'ERR' || mutation) {
+      alert('Đã có lỗi, vui lòng nhập lại hồ sơ!!!');
+    } else {
+      if (isSuccess) {
+        alert('Bạn đã gửi hồ sơ thành công, hãy đợi phản hồi của ban quản lý!!!');
+      }
+    }
+  }, [isSuccess]);
 
 
   return (
@@ -254,7 +263,7 @@ function CreateStudent() {
                 // name="email"
                 placeholder="Email"
                 className="border border-gray-300 p-2"
-                value={"huy@gmail.com"}
+                value={user?.email}
               // onChange={handleChange}
               />
               <input
