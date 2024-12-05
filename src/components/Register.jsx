@@ -13,7 +13,7 @@ function submitForm() {
   const fullName = document.getElementById('fullName').value;
   const studentId = document.getElementById('studentId').value;
   const phoneNumber = document.getElementById('phoneNumber').value;
-  const 1  email = document.getElementById('email').value;
+  const email = document.getElementById('email').value;
 
   // Tạo một đối tượng để chứa dữ liệu
   const data = {

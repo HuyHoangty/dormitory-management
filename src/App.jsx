@@ -1,33 +1,32 @@
-import React from 'react';
-import ChangePassword from './components/ChangePassword.jsx';
-import Login from './components/Login.jsx'
-import ChangeRoomRequest from './components/ChangeRoomRequest.jsx';
-import MoveOutRequest from './components/MoveOutRequest.jsx';
-import Register from'./components/Register.jsx';
-import ForgotPassword from './components/ForgotPassword.jsx';
-import StudentProfile from './components/StudentProfile.jsx';
-import StudentProfile1 from './components/StudentProfile1.jsx';
-import StudentProfile2 from './components/StudentProfile2.jsx'
-import Homepage from './components/Homepage.jsx'
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { router } from "./router/index";
 import './index.css';
 
-function App() {
+
+  const PrivateRoute = ({ children, isPrivate }) => {
+  const isAuthenticated = !!localStorage.getItem("token"); // Kiểm tra token đăng nhập
+  return isPrivate && !isAuthenticated ? <Navigate to="/sign-in" /> : children;
+  };
+  
+  const App = () => {
   
   return (
-    <div>
-    <ChangePassword/>
-    <Login/>
-    <ChangeRoomRequest />
-    <MoveOutRequest/>
-    <Register/>
-    <ForgotPassword/>
-    <StudentProfile/>
-    <StudentProfile1/>
-    <StudentProfile2/>
-    <Homepage/>
-    
-    </div>
+    <Router>
+      <Routes>
+        {router.map((route, index) => (
+          <Route
+            key={index}
+            path={route.path}
+            element={
+              <PrivateRoute isPrivate={route.isPrivate}>
+                <route.page />
+              </PrivateRoute>
+            }
+          />
+        ))}
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faHome,
@@ -8,42 +8,26 @@ import {
   faCaretLeft,
 } from '@fortawesome/free-solid-svg-icons';
 
-function submitForm() {
-  // Lấy giá trị từ các ô input
-  const username = document.getElementById('username').value;
-  const password = document.getElementById('password').value;
+function Login() {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
 
-  // Tạo một đối tượng để chứa dữ liệu
-  const data = {
-    username: username,
-    password: password
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    console.log(name, value);
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
-  // Chuyển đổi dữ liệu thành JSON
-  const jsonData = JSON.stringify(data);
-
-  // Gửi dữ liệu đến backend (thay thế 'your_backend_url' bằng URL thực tế của API backend)
-  fetch('your_backend_url', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: jsonData
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log('Dữ liệu đã được gửi:', data);
-    // Xử lý phản hồi từ backend ở đây (ví dụ: chuyển hướng đến trang khác nếu đăng nhập thành công)
-    if (data.success) {
-      window.location.href = '/trang-chu'; // Chuyển đến trang chủ
-    } else {
-      // Hiển thị thông báo lỗi
-      alert('Tên đăng nhập hoặc mật khẩu không đúng');
-    }
-  })
-  .catch(error => {
-    console.error('Lỗi khi gửi dữ liệu:', error);
-  });
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Ngăn chặn reload trang
+    console.log("Email:", formData);
+    // Thực hiện các hành động khác như gửi dữ liệu lên server
+  };
 
 
   return (
@@ -132,12 +116,12 @@ function submitForm() {
               <form className="mt-6" onSubmit={handleSubmit}>
                 <div className="mb-4">
                   <label className="block text-gray-700">
-                    CMT/CCCD/MSV
+                    Email
                   </label>
                   <input
-                    type="password"
-                    name="current_password"
-                    value={formData.current_password}
+                    type="email"
+                    name="email"
+                    value={formData.email}
                     onChange={handleChange}
                     className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
                     required
@@ -147,8 +131,8 @@ function submitForm() {
                   <label className="block text-gray-700">Mật khẩu</label>
                   <input
                     type="password"
-                    name="new_password"
-                    value={formData.new_password}
+                    name="password"
+                    value={formData.password}
                     onChange={handleChange}
                     className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
                     required
@@ -172,6 +156,7 @@ function submitForm() {
                 <div className="flex">
                   <button
                     type="submit"
+                    onClick={handleSubmit}
                     className="w-full px-4 py-2 text-white bg-blue-700 rounded-md hover:bg-blue-600 focus:outline-none"
                   >
                     Đăng nhập
@@ -197,4 +182,4 @@ function submitForm() {
   );
 }
 
-export default submitForm;
+export default Login;
