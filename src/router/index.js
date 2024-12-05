@@ -1,6 +1,7 @@
 import Login from "../components/Login";
 import Register from "../components/Register";
 import Home from "../components/Homepage";
+import CreateStudent from "../components/CreateStudent";
 
 export const router = [
     {
@@ -18,6 +19,12 @@ export const router = [
     {
         path: "/",
         page: Home,
+        isShowHeader: true,
+        isPrivate: false,
+    },
+    {
+        path: "/create-student",
+        page: CreateStudent,
         isShowHeader: true,
         isPrivate: false,
     },
