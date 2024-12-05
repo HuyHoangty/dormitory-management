@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as UserServices from "../services/UserServices";
 import { useMutationHooks } from "../hooks/useMutationHooks";
 import { useDispatch } from 'react-redux';
 import { setUser, clearUser } from '../redux/slice/userSlice';
 import { jwtDecode } from "jwt-decode";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faHome,
   faCompass,
@@ -13,7 +13,6 @@ import {
   faSignOutAlt,
   faCaretLeft,
 } from '@fortawesome/free-solid-svg-icons';
-
 function Login() {
   const [formData, setFormData] = useState({
     email: "",
@@ -21,7 +20,7 @@ function Login() {
   });
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  // Hàm xử lý khi người dùng thay đổi giá trị input
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -29,7 +28,7 @@ function Login() {
       [name]: value,
     }));
   };
-
+  // Hàm xử lý khi submit form
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!formData.email || !formData.password) {
@@ -45,36 +44,61 @@ function Login() {
   const mutation = useMutationHooks((data) => UserServices.signInUser(data));
   const { data, isPending, isSuccess } = mutation;
   console.log("muta", data, isPending, isSuccess);
-  useEffect(() => {
+
+  useEffect(() => { const fetchDetails = async () => {
     if (isSuccess) {
       localStorage.setItem("access_token", data?.access_token);
       if (data?.access_token) {
         const decoded = jwtDecode(data?.access_token);
         console.log(decoded);
+
         if (decoded.role === "student") {
           if (decoded?.id) {
             dispatch(setUser({ access_token: data?.access_token, user_id: decoded?.id }));
-            navigate("/");
+            try {
+              const approved = await handleGetDetailsUser(decoded?.id, data?.access_token);
+              console.log("Approved:", approved[0].approved);
+
+              if (approved[0].approved === 1) {
+                dispatch(setUser({
+                  ...approved[0], // Gộp chi tiết sinh viên vào user
+                }));
+                navigate("/");
+              } else {
+                navigate("/create-student");
+              }
+            } catch (error) {
+              console.error("Error fetching student details:", error);
+            }
           }
         }
+
         if (decoded.role === "staff") {
-          // if (decoded?.id) {
-          //   handleGetDetailsUser(decoded?.id, data?.access_token);
-          // }
+          console.log("Logged in as staff");
+          // Xử lý cho staff nếu cần
         }
+
         if (decoded.role === "admin") {
-          // if (decoded?.id) {
-          //   handleGetDetailsUser(decoded?.id, data?.access_token);
-          // }
+          console.log("Logged in as admin");
+          // Xử lý cho admin nếu cần
         }
       }
     }
-  }, [isSuccess]);
+  };
 
-  return (
-    <div className="bg-gray-100 flex flex-col">
-      {/* Header */}
-      <header className="bg-white py-4">
+  fetchDetails(); // Gọi hàm async bên trong useEffect
+}, [isSuccess]);
+
+const handleGetDetailsUser = async (id, token) => {
+  const res = await UserServices.getDetailStudent(id, token);
+  dispatch(setUser({ ...res?.data }));
+  return res.data;
+};
+
+return (
+  <div className="bg-gray-100 flex flex-col">
+    {/* Header */}
+    <header className="bg-white py-4">
         <div className="container mx-auto flex items-center justify-between px-4">
           <div className="w-1/3">
             <a href="#">
@@ -99,7 +123,6 @@ function Login() {
           </div>
         </div>
       </header>
-
       {/* Navigation */}
       <nav className="bg-blue-700">
         <div className="container mx-auto px-4 py-2 flex justify-end items-center text-white">
@@ -127,7 +150,6 @@ function Login() {
           </div>
         </div>
       </nav>
-
       {/* Main Content */}
       <main className="flex-grow flex items-center justify-center">
         <div className="container mx-auto px-4">
@@ -140,7 +162,7 @@ function Login() {
           <div className="max-w-md mx-auto bg-white shadow-md rounded-lg overflow-hidden">
             <div className="py-4 px-6">
               <h2 className="text-2xl font-semibold text-gray-800 text-center">
-              Đăng nhập
+                Đăng nhập
               </h2>
               {/* <div className="my-2">
                 <div
@@ -154,7 +176,7 @@ function Login() {
                   </p>
                 </div>
               </div> */}
-              <form className="mt-6" onSubmit={handleSubmit}>
+              <form className="mt-6">
                 <div className="mb-4">
                   <label className="block text-gray-700">
                     Email
@@ -205,14 +227,13 @@ function Login() {
                 </div>
               </form>
               <div className="flex items-center justify-center text-center">
-                              <a href="#" className="text-blue-600">Quên mật khẩu</a>
-                              <a href="#" className="text-blue-600">Đăng ký nội trú</a>
+                <a href="#" className="text-blue-600">Quên mật khẩu</a>
+                <a href="#" className="text-blue-600">Đăng ký nội trú</a>
               </div>
             </div>
           </div>
         </div>
       </main>
-
       {/* Footer */}
       <footer className="bg-blue-700 text-white py-4">
         <div className="container mx-auto px-4 text-center">
@@ -222,5 +243,4 @@ function Login() {
     </div>
   );
 }
-
 export default Login;
