@@ -12,15 +12,6 @@ const userSlice = createSlice({
             state.user = { ...state.user, ...action.payload };
         },
         clearUser: () => initialState,
-        extraReducers: (builder) => {
-            builder.addCase("persist/REHYDRATE", (state, action) => {
-                if (action.payload?.user) {
-                    state.user = action.payload.user; // Khôi phục từ storage
-                } else {
-                    state.user = null; // Xử lý khi không có dữ liệu
-                }
-            });
-        },
     },
 });
 
