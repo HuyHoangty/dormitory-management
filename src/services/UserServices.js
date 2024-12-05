@@ -13,13 +13,24 @@ export const signInUser = async (data) => {
 };
 
 export const getDetailStudent = async (id, access_token) => {
-    console.log("services", access_token, id);
     try {
         const res = await axiosJWT.get(`http://localhost:3001/api/student/get-detail-student/${id}`, {
             headers: {
                 token: `Bearer ${access_token}`,
             },
         });
+        return res.data;
+    } catch (error) {
+        console.error('Error signing in user:', error.response?.data || error.message);
+        throw error; // Ném lỗi để React Query xử lý
+    }
+};
+
+// router.post("/create-student/:id", authUserMiddleWare, studentController.createStudent);
+export const createStudent = async (id, data) => {
+    console.log("services", id);
+    try {
+        const res = await axiosJWT.post(`http://localhost:3001/api/student/create-student/${id}`, data);
         return res.data;
     } catch (error) {
         console.error('Error signing in user:', error.response?.data || error.message);

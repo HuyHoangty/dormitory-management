@@ -9,11 +9,12 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         setUser: (state, action) => {
+            console.log("action", action)
             state.user = action.payload; // Lưu thông tin người dùng
         },
         clearUser: (state) => {
             state.user = null; // Xóa thông tin người dùng
-        },
+        }
     },
 });
 
