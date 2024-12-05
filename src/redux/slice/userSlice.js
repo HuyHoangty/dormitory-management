@@ -9,12 +9,20 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         setUser: (state, action) => {
-            console.log("action", action)
-            state.user = action.payload; // Lưu thông tin người dùng
+            // console.log("action", action)
+            // state.user = action.payload; // Lưu thông tin người dùng
+            state.user = { ...state.user, ...action.payload };
         },
-        clearUser: (state) => {
-            state.user = null;
-        }
+        clearUser: () => initialState,
+        extraReducers: (builder) => {
+            builder.addCase("persist/REHYDRATE", (state, action) => {
+                if (action.payload?.user) {
+                    state.user = action.payload.user; // Khôi phục từ storage
+                } else {
+                    state.user = null; // Xử lý khi không có dữ liệu
+                }
+            });
+        },
     },
 });
 

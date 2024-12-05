@@ -83,12 +83,12 @@ function Homepage() {
               <img src="https://placehold.co/100x100" alt="Student's portrait" className="rounded-lg" />
             </div>
             <div className="md:ml-4 mt-4 md:mt-0">
-              <p>Họ và tên: {user[0].full_name}</p>
-              <p>Ngày sinh: {new Date(user[0].dob).toLocaleDateString()}</p>
-              <p>Giới tính: {user[0].gender === 'male' ? 'Nam' : 'Nữ'}</p>
-              <p>Dân tộc: {user[0].ethnicity}</p>
-              <p>Ngành: {user[0].major}</p>
-              <p>Lớp: {user[0].class}</p>
+              <p>Họ và tên: {user[0]?.full_name}</p>
+              <p>Ngày sinh: {new Date(user[0]?.dob).toLocaleDateString()}</p>
+              <p>Giới tính: {user[0]?.gender === 'male' ? 'Nam' : 'Nữ'}</p>
+              <p>Dân tộc: {user[0]?.ethnicity}</p>
+              <p>Ngành: {user[0]?.major}</p>
+              <p>Lớp: {user[0]?.class}</p>
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">

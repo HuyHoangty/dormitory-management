@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage'; // Sử dụng localStorage
-import userReducer1 from './slice/userSlice';
+import userReducer from './slice/userSlice';
 import {
     persistStore,
     persistReducer,
@@ -12,28 +12,23 @@ import {
     REGISTER,
 } from "redux-persist";
 
-// Cấu hình persist
 const persistConfig = {
-    key: 'root', // Tên khóa lưu trữ
-    version: 1,
-    storage, // Sử dụng localStorage
+    key: 'root',
+    storage,
 };
 
 const rootReducer = combineReducers({
-    // product: productReducer,
-    user: userReducer1,
-    // order: orderReducer,
+    user: userReducer, // Đảm bảo reducer đúng
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-// Cấu hình store với persistedReducer
 export const store = configureStore({
     reducer: persistedReducer,
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
             serializableCheck: {
-                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+                ignoredActions: [FLUSH, PAUSE, PERSIST, PURGE, REGISTER],
             },
         }),
 });
