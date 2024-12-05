@@ -44,61 +44,57 @@ function Login() {
   const mutation = useMutationHooks((data) => UserServices.signInUser(data));
   const { data, isPending, isSuccess } = mutation;
   console.log("muta", data, isPending, isSuccess);
+  useEffect(() => {
+    const fetchDetails = async () => {
+      if (isSuccess) {
+        localStorage.setItem("access_token", data?.access_token);
+        if (data?.access_token) {
+          const decoded = jwtDecode(data?.access_token);
+          if (decoded.role === "student") {
+            if (decoded?.id) {
+              dispatch(setUser({ access_token: data?.access_token, user_id: decoded?.id, email: formData.email }));
+              try {
+                const approved = await handleGetDetailsUser(decoded?.id, data?.access_token);
+                console.log("approve", approved)
 
-  useEffect(() => { const fetchDetails = async () => {
-    if (isSuccess) {
-      localStorage.setItem("access_token", data?.access_token);
-      if (data?.access_token) {
-        const decoded = jwtDecode(data?.access_token);
-        console.log(decoded);
-
-        if (decoded.role === "student") {
-          if (decoded?.id) {
-            dispatch(setUser({ access_token: data?.access_token, user_id: decoded?.id }));
-            try {
-              const approved = await handleGetDetailsUser(decoded?.id, data?.access_token);
-              console.log("Approved:", approved[0].approved);
-
-              if (approved[0].approved === 1) {
-                dispatch(setUser({
-                  ...approved[0], // Gộp chi tiết sinh viên vào user
-                }));
-                navigate("/");
-              } else {
-                navigate("/create-student");
+                if (approved) {
+                  navigate("/create-student");
+                }
+                if (approved[0].approved === 1) {
+                  dispatch(setUser({
+                    ...approved[0], // Gộp chi tiết sinh viên vào user
+                  }));
+                  navigate("/");
+                } else {
+                  navigate("/create-student");
+                }
+              } catch (error) {
+                console.error("Error fetching student details:", error);
               }
-            } catch (error) {
-              console.error("Error fetching student details:", error);
             }
           }
-        }
-
-        if (decoded.role === "staff") {
-          console.log("Logged in as staff");
-          // Xử lý cho staff nếu cần
-        }
-
-        if (decoded.role === "admin") {
-          console.log("Logged in as admin");
-          // Xử lý cho admin nếu cần
+          if (decoded.role === "staff") {
+            console.log("Logged in as staff");
+            // Xử lý cho staff nếu cần
+          }
+          if (decoded.role === "admin") {
+            console.log("Logged in as admin");
+            // Xử lý cho admin nếu cần
+          }
         }
       }
-    }
+    };
+    fetchDetails(); // Gọi hàm async bên trong useEffect
+  }, [isSuccess]);
+  const handleGetDetailsUser = async (id, token) => {
+    const res = await UserServices.getDetailStudent(id, token);
+    dispatch(setUser({ ...res?.data }));
+    return res.data;
   };
-
-  fetchDetails(); // Gọi hàm async bên trong useEffect
-}, [isSuccess]);
-
-const handleGetDetailsUser = async (id, token) => {
-  const res = await UserServices.getDetailStudent(id, token);
-  dispatch(setUser({ ...res?.data }));
-  return res.data;
-};
-
-return (
-  <div className="bg-gray-100 flex flex-col">
-    {/* Header */}
-    <header className="bg-white py-4">
+  return (
+    <div className="bg-gray-100 flex flex-col">
+      {/* Header */}
+      <header className="bg-white py-4">
         <div className="container mx-auto flex items-center justify-between px-4">
           <div className="w-1/3">
             <a href="#">
