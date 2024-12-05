@@ -58,14 +58,18 @@ function Login() {
         localStorage.setItem("access_token", data?.access_token);
         if (data?.access_token) {
           const decoded = jwtDecode(data?.access_token);
-          console.log(decoded);
 
           if (decoded.role === "student") {
             if (decoded?.id) {
-              dispatch(setUser({ access_token: data?.access_token, user_id: decoded?.id }));
+              dispatch(setUser({ access_token: data?.access_token, user_id: decoded?.id, email: formData.email }));
               try {
                 const approved = await handleGetDetailsUser(decoded?.id, data?.access_token);
-                console.log("Approved:", approved[0].approved);
+
+                console.log("approve", approved)
+
+                if (approved) {
+                  navigate("/create-student");
+                }
 
                 if (approved[0].approved === 1) {
                   dispatch(setUser({

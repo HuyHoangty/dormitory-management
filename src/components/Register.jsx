@@ -1,5 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import * as UserServices from "../services/UserServices";
+import { useMutationHooks } from "../hooks/useMutationHooks";
 import {
   faHome,
   faCompass,
@@ -10,10 +13,12 @@ import {
 
 function ChangePassword() {
   const [formData, setFormData] = useState({
-    current_password: '',
-    new_password: '',
-    confirm_new_password: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -25,14 +30,28 @@ function ChangePassword() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Kiểm tra mật khẩu mới và xác nhận mật khẩu
-    if (formData.new_password !== formData.confirm_new_password) {
-      alert('Mật khẩu mới và xác nhận mật khẩu không khớp!');
+    // Kiểm tra mật khẩu và xác nhận mật khẩu
+    if (formData.password !== formData.confirmPassword) {
+      alert('Mật khẩu và xác nhận mật khẩu không khớp!');
       return;
     }
 
     console.log('Form submitted:', formData);
+    // Thực hiện logic đăng ký (gửi dữ liệu đến server)
+    mutation.mutate(formData);
   };
+
+  const mutation = useMutationHooks((data) => UserServices.signUpUser(data));
+
+  const { data, isPending, isSuccess } = mutation;
+
+  console.log("muta---", data, isPending, isSuccess);
+
+  useEffect(() => {
+    if (isSuccess) {
+      navigate("/sign-in");
+    }
+  }, [isSuccess]);
 
   return (
     <div className="bg-gray-100 flex flex-col">
@@ -105,66 +124,35 @@ function ChangePassword() {
               <h2 className="text-2xl font-semibold text-gray-800 text-center">
                 Đăng ký
               </h2>
-              {/* <div className="my-2">
-                <div
-                  className="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4"
-                  role="alert"
-                >
-                  <p className="font-bold">Lưu ý</p>
-                  <p>
-                    Mật khẩu phải có độ dài từ 6 - 15 ký tự và phải bao gồm 1
-                    chữ cái in hoa và 1 chữ số.
-                  </p>
-                </div>
-              </div> */}
               <form className="mt-6" onSubmit={handleSubmit}>
                 <div className="mb-4">
-                  <label className="block text-gray-700">
-                    Họ và tên
-                  </label>
+                  <label className="block text-gray-700">Email</label>
                   <input
-                    type="password"
-                    name="current_password"
-                    value={formData.current_password}
+                    type="email"
+                    name="email"
+                    value={formData.email}
                     onChange={handleChange}
                     className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
                     required
                   />
                 </div>
                 <div className="mb-4">
-                  <label className="block text-gray-700">
-                    CMT/CCCD/MSV
-                  </label>
+                  <label className="block text-gray-700">Mật khẩu</label>
                   <input
                     type="password"
-                    name="current_password"
-                    value={formData.current_password}
+                    name="password"
+                    value={formData.password}
                     onChange={handleChange}
                     className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
                     required
                   />
                 </div>
                 <div className="mb-4">
-                  <label className="block text-gray-700">Số điện thoại</label>
+                  <label className="block text-gray-700">Xác nhận mật khẩu</label>
                   <input
                     type="password"
-                    name="new_password"
-                    value={formData.new_password}
-                    onChange={handleChange}
-                    className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
-                    required
-                    pattern="^(?=.*[A-Z])(?=.*\\d).{6,15}$"
-                    title="Mật khẩu phải có độ dài từ 6 - 15 ký tự, bao gồm ít nhất 1 chữ cái in hoa và 1 chữ số."
-                  />
-                </div>
-                <div className="mb-4">
-                  <label className="block text-gray-700">
-                    Email
-                  </label>
-                  <input
-                    type="password"
-                    name="confirm_new_password"
-                    value={formData.confirm_new_password}
+                    name="confirmPassword"
+                    value={formData.confirmPassword}
                     onChange={handleChange}
                     className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
                     required
@@ -183,6 +171,7 @@ function ChangePassword() {
           </div>
         </div>
       </main>
+
 
       {/* Footer */}
       <footer className="bg-blue-700 text-white py-4">
