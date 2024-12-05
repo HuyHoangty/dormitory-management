@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import * as UserServices from "../services/UserServices";
+import { useMutationHooks } from "../hooks/useMutationHooks";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faHome,
@@ -8,31 +11,43 @@ import {
   faCaretLeft,
 } from '@fortawesome/free-solid-svg-icons';
 
-function ChangePassword() {
+function Login() {
   const [formData, setFormData] = useState({
-    current_password: '',
-    new_password: '',
-    confirm_new_password: '',
+    email: "",
+    password: "",
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Kiểm tra mật khẩu mới và xác nhận mật khẩu
-    if (formData.new_password !== formData.confirm_new_password) {
-      alert('Mật khẩu mới và xác nhận mật khẩu không khớp!');
+    if (!formData.email || !formData.password) {
+      alert("Email và mật khẩu không được để trống!");
       return;
     }
-
-    console.log('Form submitted:', formData);
+    console.log(formData.email, formData.password)
+    mutation.mutate({
+      email: formData.email,
+      password: formData.password,
+    });
   };
+  const mutation = useMutationHooks((data) => UserServices.signInUser(data));
+  const { data, isPending, isSuccess } = mutation;
+  console.log("muta", data, isPending, isSuccess);
+  useEffect(() => {
+    if (isSuccess) {
+      navigate("/");
+      localStorage.setItem("access_token", data?.access_token);
+    }
+  }, [isSuccess]);
+
 
   return (
     <div className="bg-gray-100 flex flex-col">
@@ -120,12 +135,12 @@ function ChangePassword() {
               <form className="mt-6" onSubmit={handleSubmit}>
                 <div className="mb-4">
                   <label className="block text-gray-700">
-                    CMT/CCCD/MSV
+                    Email
                   </label>
                   <input
-                    type="password"
-                    name="current_password"
-                    value={formData.current_password}
+                    type="email"
+                    name="email"
+                    value={formData.email}
                     onChange={handleChange}
                     className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
                     required
@@ -135,8 +150,8 @@ function ChangePassword() {
                   <label className="block text-gray-700">Mật khẩu</label>
                   <input
                     type="password"
-                    name="new_password"
-                    value={formData.new_password}
+                    name="password"
+                    value={formData.password}
                     onChange={handleChange}
                     className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
                     required
@@ -160,6 +175,7 @@ function ChangePassword() {
                 <div className="flex">
                   <button
                     type="submit"
+                    onClick={handleSubmit}
                     className="w-full px-4 py-2 text-white bg-blue-700 rounded-md hover:bg-blue-600 focus:outline-none"
                   >
                     Đăng nhập
@@ -185,4 +201,4 @@ function ChangePassword() {
   );
 }
 
-export default ChangePassword;
+export default Login;
