@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as UserServices from "../services/UserServices";
 import { useMutationHooks } from "../hooks/useMutationHooks";
+import { useDispatch } from 'react-redux';
+import { setUser } from '../redux/slice/userSlice';
+import { jwtDecode } from "jwt-decode";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faHome,
@@ -17,6 +20,7 @@ function Login() {
     password: "",
   });
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,10 +47,34 @@ function Login() {
   console.log("muta", data, isPending, isSuccess);
   useEffect(() => {
     if (isSuccess) {
-      navigate("/");
       localStorage.setItem("access_token", data?.access_token);
+      if (data?.access_token) {
+        const decoded = jwtDecode(data?.access_token);
+        console.log(decoded);
+        if (decoded.role === "student") {
+          if (decoded?.id) {
+            handleGetDetailsUser(decoded?.id, data?.access_token);
+            navigate("/");
+          }
+        }
+        if (decoded.role === "staff") {
+          // if (decoded?.id) {
+          //   handleGetDetailsUser(decoded?.id, data?.access_token);
+          // }
+        }
+        if (decoded.role === "admin") {
+          // if (decoded?.id) {
+          //   handleGetDetailsUser(decoded?.id, data?.access_token);
+          // }
+        }
+      }
     }
   }, [isSuccess]);
+  const handleGetDetailsUser = async (id, token) => {
+    const res = await UserServices.getDetailStudent(id, token);
+    dispatch(setUser({ ...res?.data, access_token: token }));
+    console.log("res", res);
+  };
 
 
   return (
