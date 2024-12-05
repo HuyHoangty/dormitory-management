@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage'; // Sử dụng localStorage
-import userReducer from './slice/userSlice';
+import userReducer1 from './slice/userSlice';
 import {
     persistStore,
     persistReducer,
@@ -21,7 +21,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
     // product: productReducer,
-    user: userReducer,
+    user: userReducer1,
     // order: orderReducer,
 });
 
