@@ -1,4 +1,7 @@
-import { useState } from 'react';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import * as UserServices from "../services/UserServices";
+import { useMutationHooks } from "../hooks/useMutationHooks";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faHome,
@@ -13,10 +16,10 @@ function Login() {
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -24,10 +27,26 @@ function Login() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Ngăn chặn reload trang
-    console.log("Email:", formData);
-    // Thực hiện các hành động khác như gửi dữ liệu lên server
+    e.preventDefault();
+    if (!formData.email || !formData.password) {
+      alert("Email và mật khẩu không được để trống!");
+      return;
+    }
+    console.log(formData.email, formData.password)
+    mutation.mutate({
+      email: formData.email,
+      password: formData.password,
+    });
   };
+  const mutation = useMutationHooks((data) => UserServices.signInUser(data));
+  const { data, isPending, isSuccess } = mutation;
+  console.log("muta", data, isPending, isSuccess);
+  useEffect(() => {
+    if (isSuccess) {
+      navigate("/");
+      localStorage.setItem("access_token", data?.access_token);
+    }
+  }, [isSuccess]);
 
 
   return (

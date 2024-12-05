@@ -1,6 +1,7 @@
 import Login from "../components/Login";
 import Register from "../components/Register";
-
+import Home from "../components/Homepage";
+import Staff from "../components/Staff"
 export const router = [
     {
         path: "/sign-in",
@@ -11,6 +12,18 @@ export const router = [
     {
         path: "/sign-up",
         page: Register,
+        isShowHeader: true,
+        isPrivate: false,
+    },
+    {
+        path: "/",
+        page: Home,
+        isShowHeader: true,
+        isPrivate: false,
+    },
+    {
+        path: "/staff",
+        page: Staff,
         isShowHeader: true,
         isPrivate: false,
     },
