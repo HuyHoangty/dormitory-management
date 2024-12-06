@@ -1,7 +1,9 @@
 import Login from "../components/Login";
 import Register from "../components/Register";
 import Home from "../components/Homepage";
-import Staff from "../components/Staff"
+import RequestManagement from "../components/RequestManagement";
+import StudentManagement from "../components/StudentManagement";
+import InvoiceManagement from "../components/InvoiceManagement"
 import CreateStudent from "../components/CreateStudent";
 export const router = [
     {
@@ -29,11 +31,24 @@ export const router = [
         isPrivate: false,
     },
     {
-        path: "/staff",
-        page: Staff,
+        path: "/request-management",
+        page: RequestManagement,
         isShowHeader: true,
         isPrivate: false,
     },
+    {
+        path: "/student-management",
+        page: StudentManagement,
+        isShowHeader: true,
+        isPrivate: false,
+    },
+    {
+        path: "/invoice-management",
+        page: InvoiceManagement,
+        isShowHeader: true,
+        isPrivate: false,
+    },
+    
     // {
     //   path: "/payment",
     //   page: PaymentPage,
