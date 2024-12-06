@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import * as UserServices from "../services/UserServices";
+import { useSelector } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 import {
   faHome,
   faCompass,
@@ -9,6 +12,12 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 function ChangePassword() {
+  const user = useSelector((state) => state.user.user);
+  console.log("user", user.access_token, user.user_id, user.email)
+
+  const navigate = useNavigate();
+
+
   const [formData, setFormData] = useState({
     current_password: '',
     new_password: '',
@@ -22,7 +31,7 @@ function ChangePassword() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Kiểm tra mật khẩu mới và xác nhận mật khẩu
@@ -31,7 +40,34 @@ function ChangePassword() {
       return;
     }
 
-    console.log('Form submitted:', formData);
+    const checkPassword = await UserServices.signInUser({
+      email: user.email,
+      password: formData.current_password,
+    })
+
+    console.log('checkPassword', checkPassword);
+
+    if (checkPassword.status === "ERR") {
+      alert('Mật khẩu không đúng!');
+      setFormData({
+        current_password: '',
+        new_password: '',
+        confirm_new_password: '',
+      });
+      return;
+    }
+
+    const res = await UserServices.updateUser(user.user_id, formData.new_password, user.access_token);
+    console.log('res', res);
+    if (res?.status === "OK") {
+      alert('Cập nhật mật khẩu thành công!');
+      setFormData({
+        current_password: '',
+        new_password: '',
+        confirm_new_password: '',
+      });
+      navigate('/');  // Điều hướng về trang chủ
+    }
   };
 
   return (
@@ -105,7 +141,7 @@ function ChangePassword() {
               <h2 className="text-2xl font-semibold text-gray-800 text-center">
                 Đổi Mật Khẩu
               </h2>
-              <div className="my-2">
+              {/* <div className="my-2">
                 <div
                   className="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4"
                   role="alert"
@@ -116,7 +152,7 @@ function ChangePassword() {
                     chữ cái in hoa và 1 chữ số.
                   </p>
                 </div>
-              </div>
+              </div> */}
               <form className="mt-6" onSubmit={handleSubmit}>
                 <div className="mb-4">
                   <label className="block text-gray-700">
@@ -140,8 +176,6 @@ function ChangePassword() {
                     onChange={handleChange}
                     className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
                     required
-                    pattern="^(?=.*[A-Z])(?=.*\\d).{6,15}$"
-                    title="Mật khẩu phải có độ dài từ 6 - 15 ký tự, bao gồm ít nhất 1 chữ cái in hoa và 1 chữ số."
                   />
                 </div>
                 <div className="mb-4">

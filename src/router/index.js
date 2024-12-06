@@ -2,6 +2,7 @@ import Login from "../components/Login";
 import Register from "../components/Register";
 import Home from "../components/Homepage";
 import CreateStudent from "../components/CreateStudent";
+import ChangePassword from "../components/ChangePassword";
 
 export const router = [
     {
@@ -25,6 +26,12 @@ export const router = [
     {
         path: "/create-student",
         page: CreateStudent,
+        isShowHeader: true,
+        isPrivate: false,
+    },
+    {
+        path: "/change-password",
+        page: ChangePassword,
         isShowHeader: true,
         isPrivate: false,
     },
