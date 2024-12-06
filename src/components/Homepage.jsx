@@ -5,6 +5,8 @@ import { useMutationHooks } from "../hooks/useMutationHooks";
 import { faUser, faSignOutAlt, faKey } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { setUser, clearUser } from '../redux/slice/userSlice';
 
 import {
   faHome,
@@ -18,7 +20,7 @@ function Homepage() {
   console.log("user", user.room_id)
 
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
 
   const [data, setData] = useState(null);
 
@@ -39,7 +41,16 @@ function Homepage() {
     navigate("/change-password")
   };
 
-  const handleSignOut = () => { };
+  const handleSignOut = () => {
+    // Xoá token khỏi localStorage hoặc sessionStorage
+    localStorage.removeItem('access_token');  // Hoặc sessionStorage.removeItem('access_token') nếu bạn dùng sessionStorage
+    // localStorage.removeItem('persist:root')
+    // Đặt lại trạng thái người dùng (nếu bạn sử dụng state quản lý người dùng)
+    dispatch(clearUser());
+
+    // Điều hướng về trang chủ
+    navigate('/sign-in');
+  };
 
   return (
     <div className="bg-gray-100 flex flex-col">
