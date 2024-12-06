@@ -190,19 +190,19 @@ function submitForm() {
             <nav className="hs-accordion-group p-3 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
               <ul className="flex flex-col space-y-1">
                 <li>
-                <a className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-300" href="#">
+                <a className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-300" href="/request-management">
                   <FontAwesomeIcon icon={faTasks} className='mx-5' /> Quản lý yêu cầu
                 </a>
                 </li>
       
                 <li className="hs-accordion" id="users-accordion">
-                <a className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-300" href="#">
+                <a className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-300" href="/student-management">
                   <FontAwesomeIcon icon={faList} className='mx-5' /> Danh sách sinh viên
                 </a>
                 </li>
       
                 <li className="hs-accordion" id="account-accordion">
-                <a className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-300" href="#">
+                <a className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-300" href="/invoice-management">
                   <FontAwesomeIcon icon={faFileInvoiceDollar} className='mx-5' /> Quản lý thanh toán
                 </a>
                 </li>
