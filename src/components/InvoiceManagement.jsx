@@ -11,14 +11,14 @@ import {
 function submitForm() {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [invoices, setInvoices] = React.useState([
-        { name: 'Nguyễn Văn A', room: '101', email: 'abc@gmail.com', phone: '0123456789', month: '11/2024', total: '2000000', status: 'Đã thanh toán' },
-        { name: 'Nguyễn Văn B', room: '102', email: 'abc@gmail.com', phone: '0123456789', month: '11/2024', total: '3000000', status: 'Chưa thanh toán' },
-        { name: 'Nguyễn Văn D', room: '103', email: 'abc@gmail.com', phone: '0123456789', month: '11/2024', total: '2500000', status: 'Chưa thanh toán' },
-        { name: 'Nguyễn Văn E', room: '104', email: 'abc@gmail.com', phone: '0123456789', month: '11/2024', total: '2400000', status: 'Đã thanh toán' },
-        { name: 'Nguyễn Văn F', room: '101', email: 'abc@gmail.com', phone: '0123456789', month: '11/2024', total: '2500000', status: 'Đã thanh toán' },
-        { name: 'Nguyễn Văn G', room: '101', email: 'abc@gmail.com', phone: '0123456789', month: '11/2024', total: '2200000', status: 'Đã thanh toán' },
-        { name: 'Nguyễn Văn H', room: '103', email: 'abc@gmail.com', phone: '0123456789', month: '11/2024', total: '2100000', status: 'Đã thanh toán' },
-        { name: 'Nguyễn Văn I', room: '102', email: 'abc@gmail.com', phone: '0123456789', month: '11/2024', total: '2600000', status: 'Chưa thanh toán' },
+        { building: 'Tòa A', room: '101', electricity_fee: '50000', water_fee: '50000',ktx_fee: '50000', month: '11/2024', total: '2000000', status: 'Đã thanh toán' },
+        { building: 'Tòa B', room: '102', electricity_fee: '50000', water_fee: '50000',ktx_fee: '50000', month: '11/2024', total: '3000000', status: 'Chưa thanh toán' },
+        { building: 'Tòa D', room: '103', electricity_fee: '70000', water_fee: '60000',ktx_fee: '50000', month: '11/2024', total: '2500000', status: 'Chưa thanh toán' },
+        { building: 'Tòa E', room: '104', electricity_fee: '50000', water_fee: '50000',ktx_fee: '50000', month: '11/2024', total: '2400000', status: 'Đã thanh toán' },
+        { building: 'Tòa F', room: '101', electricity_fee: '10000', water_fee: '80000',ktx_fee: '50000', month: '11/2024', total: '2500000', status: 'Đã thanh toán' },
+        { building: 'Tòa G', room: '101', electricity_fee: '60000', water_fee: '50000',ktx_fee: '50000', month: '11/2024', total: '2200000', status: 'Đã thanh toán' },
+        { building: 'Tòa H', room: '103', electricity_fee: '80000', water_fee: '50000',ktx_fee: '50000', month: '11/2024', total: '2100000', status: 'Đã thanh toán' },
+        { building: 'Tòa I', room: '102', electricity_fee: '60000', water_fee: '50000',ktx_fee: '50000', month: '11/2024', total: '2600000', status: 'Chưa thanh toán' },
     ]);
 
     const [activeTab, setActiveTab] = React.useState('Tất cả');
@@ -248,10 +248,11 @@ function submitForm() {
                         <table className="w-full">
                             <thead>
                                 <tr className="text-left text-gray-500">
-                                    <th className="py-2 px-4">Tên sinh viên</th>
+                                    <th className="py-2 px-4">Tòa nhà</th>
                                     <th className="py-2 px-4">Phòng</th>
-                                    <th className="py-2 px-4">Email</th>
-                                    <th className="py-2 px-4">Số điện thoại</th>
+                                    <th className="py-2 px-4">Tiền điện</th>
+                                    <th className="py-2 px-4">Tiền nước</th>
+                                    <th className="py-2 px-4">Tiền phòng</th>
                                     <th className="py-2 px-4">Tháng</th>
                                     <th className="py-2 px-4">Tổng tiền</th>
                                     <th className="py-2 px-4">Trạng thái</th>
@@ -261,13 +262,14 @@ function submitForm() {
                                 {invoices.map((item, index) => (
                                     <tr key={index} className="border-t">
                                         <td className="py-8 px-4">
-                                            <button onClick={() => handleStudentClick(item.name)} className="text-blue-500 hover:underline">
-                                                {item.name}
+                                            <button onClick={() => handleStudentClick(item.building)} className="text-blue-500 hover:underline">
+                                                {item.building}
                                             </button>
                                         </td>
                                         <td className="py-8 px-4">{item.room}</td>
-                                        <td className="py-8 px-4">{item.email}</td>
-                                        <td className="py-8 px-4">{item.phone}</td>
+                                        <td className="py-8 px-4">{item.electricity_fee}</td>
+                                        <td className="py-8 px-4">{item.water_fee}</td>
+                                        <td className="py-8 px-4">{item.ktx_fee}</td>
                                         <td className="py-8 px-4">{item.month}</td>
                                         <td className="py-8 px-4">{item.total}</td>
                                         <td className="py-8 px-4">
