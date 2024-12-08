@@ -23,11 +23,19 @@ function Homepage() {
   const dispatch = useDispatch();
 
   const [data, setData] = useState(null);
+  const [dataRequest, setDataRequest] = useState(null);
 
   const fetchData = async () => {
     const res = await UserServices.getDetailRoom(user.room_id);
     if (res?.status === "OK") {
       setData(res?.data);
+      console.log('Fetching data', data)
+    }
+
+    const dataRequest_ = await UserServices.getAllRequestsStudent(user.user_id);
+    if (dataRequest_?.status === "OK") {
+      setDataRequest(dataRequest_.data);
+      console.log('Fetching dataRequest', dataRequest)
     }
   };
 
@@ -35,11 +43,13 @@ function Homepage() {
     fetchData();
   }, []);
 
-  console.log('Fetching data', data)
-
   const handleChangePassword = () => {
     navigate("/change-password")
   };
+
+  const handleCreateRequest = () => {
+    navigate("/request")
+  }
 
   const handleSignOut = () => {
     // Xoá token khỏi localStorage hoặc sessionStorage
@@ -113,10 +123,6 @@ function Homepage() {
                 </div>
               </div>
             </div>
-
-
-
-
           </div>
         </div>
       </nav>
@@ -199,30 +205,56 @@ function Homepage() {
             {/* Nội dung thông báo có thể thêm vào */}
           </div>
           <div className="md:col-span-2 bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-lg font-bold">Danh sách yêu cầu</h2>
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-lg font-bold">Danh sách yêu cầu</h2>
+              <button
+                onClick={handleCreateRequest}
+                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+              >
+                Tạo yêu cầu
+              </button>
+            </div>
+
             <table className="min-w-full mt-4 border-collapse">
               <thead>
                 <tr className="bg-blue-600 text-white">
-                  <th className="border px-4 py-2">Yêu cầu</th>
                   <th className="border px-4 py-2">Loại yêu cầu</th>
                   <th className="border px-4 py-2">Ngày yêu cầu</th>
                   <th className="border px-4 py-2">Trạng thái</th>
-                  <th className="border px-4 py-2">Tác vụ</th>
                 </tr>
               </thead>
               <tbody>
-                {["Đăng ký nội trú đợt 1", "Yêu cầu sửa chữa phòng", "Yêu cầu đổi phòng", "Đăng ký nội trú đợt 2"].map((request, index) => (
-                  <tr key={index} className="hover:bg-gray-100">
-                    <td className="border px-4 py-2">{request}</td>
-                    <td className="border px-4 py-2">Cấp phát thông tin</td>
-                    <td className="border px-4 py-2">{new Date().toLocaleDateString()}</td>
-                    <td className="border px-4 py-2 text-center">
-                      <button className="bg-blue-500 text-white px-2 py-1 rounded">Hoàn thành</button>
+                {dataRequest && dataRequest.length > 0 ? (
+                  dataRequest.map((request, index) => (
+                    <tr key={index} className="hover:bg-gray-100">
+                      <td className="border px-4 py-2">{request?.request_type}</td>
+                      <td className="border px-4 py-2">{request?.created_at.split('T')[0]}</td>
+                      <td className="border px-4 py-2 text-center">
+                        <button
+                          className={`px-2 py-1 rounded ${request.status === "Từ chối"
+                            ? "bg-red-500 text-white"
+                            : request.status === "Đã xử lý"
+                              ? "bg-green-500 text-white"
+                              : request.status === "Chờ xử lý"
+                                ? "bg-yellow-500 text-black"
+                                : "bg-gray-500 text-white"
+                            }`}
+                        >
+                          {request.status}
+                        </button>
+                      </td>
+
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="3" className="border px-4 py-2 text-center">
+                      No data available.
                     </td>
-                    <td className="border px-4 py-2 text-center"><i className="fas fa-cog"></i></td>
                   </tr>
-                ))}
+                )}
               </tbody>
+
             </table>
           </div>
         </div>

@@ -3,13 +3,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as UserServices from "../services/UserServices";
 import { useMutationHooks } from "../hooks/useMutationHooks";
 import { useSelector } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 
 import {
   faHome,
   faCompass,
   faUser,
   faSignOutAlt,
-  faCaretLeft,
 } from '@fortawesome/free-solid-svg-icons';
 
 function CreateStudent() {
@@ -24,6 +24,8 @@ function CreateStudent() {
     phone: "",
   });
 
+  const navigate = useNavigate();
+
   const user = useSelector((state) => state.user.user);
   console.log("user", user.user_id, user.email);
 
@@ -35,8 +37,23 @@ function CreateStudent() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const isEmptyField = Object.values(formData).some((value) => value === "");
+    if (isEmptyField) {
+      alert("Vui lòng điền đầy đủ thông tin vào tất cả các trường.");
+    }
+
+    // Gửi dữ liệu đến API
+    const res = await UserServices.createRequest(user.user_id, {
+      request_type: "Duyệt vào ký túc xá",
+      description: "Duyệt vào ký túc xá"
+    });
+    console.log("resCreateReq", res);
+    if (res?.status === "OK") {
+      console.log("gui thanh cong")
+    }
+
     mutation.mutate(formData);
   };
 
@@ -47,14 +64,11 @@ function CreateStudent() {
   console.log("muta---", data, isPending, isSuccess);
 
   useEffect(() => {
-    if (mutation.status === 'ERR' || mutation) {
-      alert('Đã có lỗi, vui lòng nhập lại hồ sơ!!!');
-    } else {
-      if (isSuccess) {
-        alert('Bạn đã gửi hồ sơ thành công, hãy đợi phản hồi của ban quản lý!!!');
-      }
+    if (data?.status === "OK") {
+      alert('Bạn đã gửi hồ sơ thành công, hãy đợi phản hồi của ban quản lý!!!\nVui lòng đăng nhập lại sau vài ngày');
+      navigate("/sign-in")
     }
-  }, [isSuccess]);
+  }, [data?.status]);
 
 
   return (
