@@ -94,3 +94,13 @@ export const getAllRequestsStudent = async (id) => {
         throw error; // Ném lỗi để React Query xử lý
     }
 }
+
+export const getAllFeesRoom = async (id) => {
+    try {
+        const res = await axios.get(`http://localhost:3001/api/fees/get-all-fees-room/${id}`);
+        return res.data;
+    } catch (error) {
+        console.error('Error signing in user:', error.response?.data || error.message);
+        throw error; // Ném lỗi để React Query xử lý
+    }
+}
