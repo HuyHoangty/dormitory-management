@@ -43,7 +43,6 @@ export const createStudent = async (id, data) => {
     }
 };
 
-// router.get("/get-detail-room/:id", roomController.getDetailRoom); // lấy cả các sinh viên trong phòng
 export const getDetailRoom = async (id) => {
     try {
         const res = await axios.get(`http://localhost:3001/api/room/get-detail-room/${id}`);
@@ -53,3 +52,20 @@ export const getDetailRoom = async (id) => {
         throw error; // Ném lỗi để React Query xử lý
     }
 }
+// router.put("/update-user/:id", authUserMiddleWare, userController.updateUser);
+export const updateUser = async (id, data, access_token) => {
+    try {
+        const newData = {
+            "password": data,
+        }
+        const res = await axiosJWT.put(`http://localhost:3001/api/user/update-user/${id}`, newData, {
+            headers: {
+                token: `Bearer ${access_token}`,
+            }
+        });
+        return res.data;
+    } catch (error) {
+        console.error('Error signing in user:', error.response?.data || error.message);
+        throw error; // Ném lỗi để React Query xử lý
+    }
+};
