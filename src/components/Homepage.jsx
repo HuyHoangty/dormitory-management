@@ -1,25 +1,24 @@
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as UserServices from "../services/UserServices";
-import { useMutationHooks } from "../hooks/useMutationHooks";
 import { faUser, faSignOutAlt, faKey } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { setUser, clearUser } from '../redux/slice/userSlice';
+import { clearUser } from '../redux/slice/userSlice';
 import {
   faHome,
   faCompass,
-  faCaretLeft,
 } from '@fortawesome/free-solid-svg-icons';
 
 function Homepage() {
   const user = useSelector((state) => state.user.user);
-  console.log("user", user.room_id)
+  console.log("user", user)
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [data, setData] = useState(null);
   const [dataRequest, setDataRequest] = useState(null);
+  const [dataFees, setDataFees] = useState(null);
 
   const fetchData = async () => {
     const res = await UserServices.getDetailRoom(user.room_id);
@@ -32,8 +31,13 @@ function Homepage() {
       setDataRequest(dataRequest_.data);
       console.log('Fetching dataRequest', dataRequest)
     }
+    const dataFees_ = await UserServices.getAllFeesRoom(user.room_id);
+    if (dataFees_?.status === "OK") {
+      setDataFees(dataFees_.data);
+      console.log('Fetching dataFees', dataFees)
+    }
   };
-
+  console.log('Fetching dataFees', dataFees)
   useEffect(() => {
     fetchData();
   }, []);
@@ -252,29 +256,46 @@ function Homepage() {
           <table className="min-w-full mt-4 border-collapse">
             <thead>
               <tr className="bg-blue-600 text-white">
-                <th className="border px-4 py-2">Mã biên lai</th>
-                <th className="border px-4 py-2">Loại phòng</th>
-                <th className="border px-4 py-2">Ngày hiệu lực</th>
-                <th className="border px-4 py-2">Ngày hết hiệu lực</th>
-                <th className="border px-4 py-2">Số tiền</th>
+              <th className="border px-4 py-2">Tháng</th>
+                <th className="border px-4 py-2">Tiền ktx</th>
+                <th className="border px-4 py-2">Tiền điện</th>
+                <th className="border px-4 py-2">Tiền nước</th>
+                <th className="border px-4 py-2">Tổng số tiền</th>
                 <th className="border px-4 py-2">Trạng thái</th>
-                <th className="border px-4 py-2">Tác vụ</th>
               </tr>
             </thead>
             <tbody>
-              {["DNK20200001", "DNK20200002", "DNK20200003"].map((receipt, index) => (
-                <tr key={index} className="hover:bg-gray-100">
-                  <td className="border px-4 py-2">{receipt}</td>
-                  <td className="border px-4 py-2">A2</td>
-                  <td className="border px-4 py-2">{new Date().toLocaleDateString()}</td>
-                  <td className="border px-4 py-2">{new Date().toLocaleDateString()}</td>
-                  <td className="border px-4 py-2">5,000,000 VND</td>
-                  <td className="border px-4 py-2 text-center">
-                    <button className="bg-blue-500 text-white px-2 py-1 rounded">Đã thanh toán</button>
+            {dataFees && dataFees.length > 0 ? (
+                dataFees.map((receipt, index) => (
+                  <tr key={index} className="hover:bg-gray-100">
+                    <td className="border px-4 py-2">{receipt?.created_at.split('-')[1]}</td>
+                    <td className="border px-4 py-2">{receipt?.ktx_fee}</td>
+                    <td className="border px-4 py-2">{receipt?.electricity_fee}</td>
+                    <td className="border px-4 py-2">{receipt?.water_fee}</td>
+                    <td className="border px-4 py-2">{receipt?.total_fee}</td>
+                    <td className="border px-4 py-2 text-center">
+                      <button
+                        className={`px-2 py-1 rounded ${receipt?.status === "Chưa đóng"
+                          ? "bg-yellow-500 text-black"
+                          : receipt?.status === "Đã đóng"
+                            ? "bg-green-500 text-white"
+                            : receipt?.status === "Quá hạn"
+                              ? "bg-red-500 text-white"
+                              : "bg-gray-500 text-white"
+                          }`}
+                      >
+                        {receipt?.status}
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="6" className="border px-4 py-2 text-center">
+                    No data available.
                   </td>
-                  <td className="border px-4 py-2 text-center"><i className="fas fa-eye"></i></td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>
