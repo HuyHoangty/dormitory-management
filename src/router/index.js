@@ -6,6 +6,7 @@ import StudentManagement from "../components/StudentManagement";
 import InvoiceManagement from "../components/InvoiceManagement"
 import CreateStudent from "../components/CreateStudent";
 import ChangePassword from "../components/ChangePassword";
+import Request from "../components/StudentRequest";
 export const router = [
     {
         path: "/sign-in",
@@ -52,6 +53,12 @@ export const router = [
     {
         path: "/change-password",
         page: ChangePassword,
+        isShowHeader: true,
+        isPrivate: false,
+    },
+    {
+        path: "/request",
+        page: Request,
         isShowHeader: true,
         isPrivate: false,
     },
