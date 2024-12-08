@@ -118,3 +118,13 @@ export const getDetailStaff = async (id, access_token) => {
         throw error; // Ném lỗi để React Query xử lý
     }
 };
+
+export const getAllRequests = async () => {
+    try {
+        const res = await axios.get(`http://localhost:3001/api/student-request/get-all-requests`);
+        return res.data;
+    } catch (error) {
+        console.error('Error signing in user:', error.response?.data || error.message);
+        throw error; // Ném lỗi để React Query xử lý
+    }
+}
