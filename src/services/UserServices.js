@@ -52,7 +52,6 @@ export const getDetailRoom = async (id) => {
         throw error; // Ném lỗi để React Query xử lý
     }
 }
-// router.put("/update-user/:id", authUserMiddleWare, userController.updateUser);
 export const updateUser = async (id, data, access_token) => {
     try {
         const newData = {
@@ -69,3 +68,23 @@ export const updateUser = async (id, data, access_token) => {
         throw error; // Ném lỗi để React Query xử lý
     }
 };
+// router.post("/create-request/:id", studentRequestsController.createRequest);
+export const createRequest = async (id, data) => {
+    try {
+        const res = await axios.post(`http://localhost:3001/api/student-request/create-request/${id}`, data);
+        return res.data;
+    } catch (error) {
+        console.error('Error signing in user:', error.response?.data || error.message);
+        throw error; // Ném lỗi để React Query xử lý
+    }
+};
+// router.get("/get-all-requests-student/:id", studentRequestsController.getAllRequestsStudent);
+export const getAllRequestsStudent = async (id) => {
+    try {
+        const res = await axios.get(`http://localhost:3001/api/student-request/get-all-requests-student/${id}`);
+        return res.data;
+    } catch (error) {
+        console.error('Error signing in user:', error.response?.data || error.message);
+        throw error; // Ném lỗi để React Query xử lý
+    }
+}
