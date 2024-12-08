@@ -104,3 +104,17 @@ export const getAllFeesRoom = async (id) => {
         throw error; // Ném lỗi để React Query xử lý
     }
 }
+
+export const getDetailStaff = async (id, access_token) => {
+    try {
+        const res = await axiosJWT.get(`http://localhost:3001/api/staff/get-detail-staff/${id}`, {
+            headers: {
+                token: `Bearer ${access_token}`,
+            },
+        });
+        return res.data;
+    } catch (error) {
+        console.error('Error signing in user:', error.response?.data || error.message);
+        throw error; // Ném lỗi để React Query xử lý
+    }
+};

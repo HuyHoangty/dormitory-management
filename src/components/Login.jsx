@@ -63,7 +63,7 @@ function Login() {
             if (decoded?.id) {
               dispatch(setUser({ access_token: data?.access_token, user_id: decoded?.id, email: formData.email }));
               try {
-                const approved = await handleGetDetailsUser(decoded?.id, data?.access_token);
+                const approved = await handleGetDetailsStudent(decoded?.id, data?.access_token);
 
                 console.log("approve", approved)
 
@@ -86,8 +86,17 @@ function Login() {
           }
 
           if (decoded.role === "staff") {
-            console.log("Logged in as staff");
             // Xử lý cho staff nếu cần
+            if (decoded?.id) {
+              dispatch(setUser({ access_token: data?.access_token, user_id: decoded?.id, email: formData.email }));
+              try {
+                const dataStaff = await handleGetDetailsStaff(decoded?.id, data?.access_token);
+                console.log("dataStaff", dataStaff)
+                navigate("/staff");
+              } catch (error) {
+                console.error("Error fetching student details:", error);
+              }
+            }
           }
 
           if (decoded.role === "admin") {
@@ -101,8 +110,15 @@ function Login() {
     fetchDetails(); // Gọi hàm async bên trong useEffect
   }, [isSuccess]);
 
-  const handleGetDetailsUser = async (id, token) => {
+  const handleGetDetailsStudent = async (id, token) => {
     const res = await UserServices.getDetailStudent(id, token);
+    dispatch(setUser({ ...res?.data }));
+    return res.data;
+  };
+
+  const handleGetDetailsStaff = async (id, token) => {
+    const res = await UserServices.getDetailStaff(id, token);
+    console.log("Staff", res);
     dispatch(setUser({ ...res?.data }));
     return res.data;
   };
