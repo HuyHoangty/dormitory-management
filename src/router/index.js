@@ -7,6 +7,10 @@ import InvoiceManagement from "../components/InvoiceManagement"
 import CreateStudent from "../components/CreateStudent";
 import ChangePassword from "../components/ChangePassword";
 import Request from "../components/StudentRequest";
+import RequestDetail_Changeroom from "../components/RequestDetail_Changeroom";
+import RequestDetail_Moveout from "../components/RequestDetail_Moveout";
+import RequestDetail_Movein from "../components/RequestDetail_Movein";
+
 export const router = [
     {
         path: "/sign-in",
@@ -59,6 +63,24 @@ export const router = [
     {
         path: "/request",
         page: Request,
+        isShowHeader: true,
+        isPrivate: false,
+    },
+    {
+        path: "/student-details",
+        page: RequestDetail_Changeroom,
+        isShowHeader: true,
+        isPrivate: false,
+    },
+    {
+        path: "/student-details",
+        page: RequestDetail_Moveout,
+        isShowHeader: true,
+        isPrivate: false,
+    },
+    {
+        path: "/student-details",
+        page: RequestDetail_Movein,
         isShowHeader: true,
         isPrivate: false,
     },
