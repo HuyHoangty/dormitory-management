@@ -5,6 +5,7 @@ import CreateStudent from "../components/CreateStudent";
 import ChangePassword from "../components/ChangePassword";
 import Request from "../components/StudentRequest";
 import HomeStaff from "../components/HomeStaff"
+import DetailRequest from "../components/StudentDetailRequest";
 
 export const router = [
     {
@@ -46,6 +47,12 @@ export const router = [
     {
         path: "/staff",
         page: HomeStaff,
+        isShowHeader: true,
+        isPrivate: false,
+    },
+    {
+        path: "/staff/detail-request",
+        page: DetailRequest,
         isShowHeader: true,
         isPrivate: false,
     },

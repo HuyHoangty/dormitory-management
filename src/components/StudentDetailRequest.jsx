@@ -1,15 +1,19 @@
-import { useEffect, useState } from "react";
 import { useSelector } from 'react-redux';
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { clearUser } from '../redux/slice/userSlice';
+import { useLocation } from "react-router-dom";
 import * as UserServices from "../services/UserServices";
 function HomeStaff() {
     const user = useSelector((state) => state.user.user);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const location = useLocation() || {};
+    const item = location.state;
 
+    const [requestsStudent, setRequestsStudent] = useState(item);
 
 
     console.log("user: ", user)
@@ -26,25 +30,6 @@ function HomeStaff() {
         navigate('/sign-in');
     };
 
-    const [requests, setRequests] = useState(null);
-
-    const fetchData = async () => {
-        const res = await UserServices.getAllRequests();
-        console.log('Fetching data', res)
-        if (res?.status === "OK") {
-            setRequests(res?.data);
-            console.log('Fetching data11', requests)
-        }
-    };
-
-    useEffect(() => {
-        fetchData();
-    }, []);
-
-
-    const handleStudentClick = (item) => {
-        navigate("/staff/detail-request", { state: item });
-    };
 
     return (
         <div className="bg-gray-100 flex flex-col">
@@ -128,65 +113,59 @@ function HomeStaff() {
                 </aside>
                 <main className="w-4/5 p-6">
                     <h1 className="text-2xl font-bold mb-6">Quản lý yêu cầu</h1>
-                    <div className="flex mb-4">
-                        <input type="text" placeholder="Tìm kiếm" className="border p-2 rounded mr-4 w-1/2" />
-                        <select className="border p-2 rounded w-1/2">
-                            <option>Sắp xếp theo : Tên sinh viên</option>
-                        </select>
-                    </div>
-                    <div className="bg-white rounded-lg shadow p-4">
-                        <table className="w-full">
-                            <thead>
-                                <tr className="text-left text-gray-500">
-                                    <th className="py-2 px-4">Tên sinh viên</th>
-                                    <th className="py-2 px-4">Loại yêu cầu</th>
-                                    <th className="py-2 px-4">Lớp</th>
-                                    <th className="py-2 px-4">Thời gian tạo</th>
-                                    <th className="py-2 px-4">Trạng thái</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {requests && requests.length > 0 ? (
-                                    requests.map((item, index) => (
-                                        <tr key={index} className="border-t">
-                                            <td className="py-8 px-4">
-                                                <button onClick={() => handleStudentClick(item)} className="text-blue-500 hover:underline">
-                                                    {item?.full_name}
-                                                </button>
-                                            </td>
-                                            <td className="py-8 px-4">{item?.request_type}</td>
-                                            <td className="py-8 px-4">{item?.class}</td>
-                                            <td className="py-8 px-4">{item?.created_at.split('T')[0]}</td>
-                                            <td className="py-8 px-4">
-                                                <button
-                                                    className={`px-2 py-1 rounded ${item?.status === 'Đã xử lý'
-                                                        ? 'bg-green-100 text-green-700'
-                                                        : item?.status === 'Đang chờ xử lý'
-                                                            ? 'bg-yellow-100 text-yellow-700'
-                                                            : item?.status === 'Từ chối'
-                                                                ? 'bg-red-100 text-red-700'
-                                                                : 'bg-gray-100 text-gray-700'
-                                                        }`}
-                                                >
-                                                    {item?.status}
-                                                </button>
-                                            </td>
 
-                                        </tr>
-                                    ))
-                                ) : (
-                                    <tr>
-                                        <td colSpan="5" className="text-center py-8 text-gray-500">
-                                            Không có dữ liệu
-                                        </td>
-                                    </tr>
-                                )}
-                            </tbody>
-                        </table>
+                    <div className="mb-4">
+                        <a className="text-black-500 pb-2">{requestsStudent?.description}</a>
                     </div>
-                    <button className="fixed bottom-6 right-6 bg-blue-500 text-white px-4 py-2 rounded-full shadow-lg">Tạo yêu cầu</button>
+
+                    <div className="bg-gray-200 p-6 rounded-lg shadow-md">
+                        <p><strong>Họ và tên:</strong> {requestsStudent?.full_name}</p>
+                        <p><strong>Số điện thoại:</strong> {requestsStudent?.phone}</p>
+                        <p><strong>Lớp:</strong> {requestsStudent?.class}</p>
+                        <p><strong>Lý do:</strong></p>
+                        <p>{requestsStudent?.description}</p>
+                        <p>
+                            <strong>Trạng thái:</strong>{" "}
+                            <span
+                                className={
+                                    requestsStudent?.status === "Từ chối"
+                                        ? "text-red-500"
+                                        : "text-black"
+                                }
+                            >
+                                {requestsStudent?.status}
+                            </span>
+                        </p>
+                        {requestsStudent?.status === "Chờ xử lý" ? (
+                            <div className="flex justify-end mt-4">
+                                <button className="bg-blue-500 text-white px-4 py-2 rounded mr-2">Đồng ý</button>
+                                <button className="bg-red-500 text-white px-4 py-2 rounded">Từ chối</button>
+                            </div>
+                        )
+                            // : requestsStudent?.status === "Từ chối" ? (
+                            //     <div className="flex justify-end mt-4">
+                            //         <button
+                            //             className="bg-red-500 text-white px-4 py-2 rounded cursor-not-allowed"
+                            //             disabled
+                            //         >
+                            //             Từ chối
+                            //         </button>
+                            //     </div>
+                            // ) 
+                            : (
+                                <div className="flex justify-end mt-4">
+                                    <button
+                                        className="bg-gray-400 text-white px-4 py-2 rounded cursor-not-allowed"
+                                        disabled
+                                    >
+                                        Đã xử lý
+                                    </button>
+                                </div>
+                            )}
+                    </div>
                 </main>
             </div>
+
             {/* Footer */}
             <footer className="bg-blue-700 text-white py-4">
                 <div className="container mx-auto px-4 text-center">
