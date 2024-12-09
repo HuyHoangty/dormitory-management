@@ -3,7 +3,8 @@ import Register from "../components/Register";
 import Home from "../components/Homepage";
 import RequestManagement from "../components/RequestManagement";
 import StudentManagement from "../components/StudentManagement";
-import InvoiceManagement from "../components/InvoiceManagement"
+import InvoiceManagement from "../components/InvoiceManagement";
+import ManagerProfile from "../components/ManagerProfile";
 import CreateStudent from "../components/CreateStudent";
 import ChangePassword from "../components/ChangePassword";
 import Request from "../components/StudentRequest";
@@ -51,6 +52,12 @@ export const router = [
     {
         path: "/invoice-management",
         page: InvoiceManagement,
+        isShowHeader: true,
+        isPrivate: false,
+    },
+    {
+        path: "/manager-profile",
+        page: ManagerProfile,
         isShowHeader: true,
         isPrivate: false,
     },
