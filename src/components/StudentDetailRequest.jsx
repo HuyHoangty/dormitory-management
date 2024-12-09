@@ -14,10 +14,37 @@ function HomeStaff() {
     const item = location.state;
 
     const [requestsStudent, setRequestsStudent] = useState(item);
+    const [rooms, setRooms] = useState(null);
+    const [selectedRoom, setSelectedRoom] = useState("");
+    const [roomDetails, setRoomDetails] = useState(null);
+    const [roomId, setRoomId] = useState(null);
+
+    const [num, setNum] = useState(0);
+
+    console.log("roomId", roomId)
+
+    console.log("requestsStudent", requestsStudent)
 
 
     console.log("user: ", user)
     console.log("user[0]", user[0])
+
+    const fetchData = async () => {
+        const res = await UserServices.getAllRoom({
+            "gender": requestsStudent?.gender
+        });
+        console.log('Fetching data', res)
+        if (res?.status === "OK") {
+            setRooms(res?.data);
+        }
+    };
+
+    console.log('Fetching data11', rooms)
+
+
+    useEffect(() => {
+        fetchData();
+    }, []);
 
     const handleSignOut = () => {
         // Xoá token khỏi localStorage hoặc sessionStorage
@@ -30,6 +57,41 @@ function HomeStaff() {
         navigate('/sign-in');
     };
 
+    const handleApprove = async () => {
+        const res = await UserServices.updateRequestByStaff(requestsStudent?.request_id, {
+            status: "Đã xử lý",
+            staff_id: user[0]?.staff_id
+        })
+        if (res?.status === "OK") {
+            alert("Cập nhật yêu cầu thành công");
+            setRequestsStudent((prev) => ({
+                ...prev, // Sao chép toàn bộ các thuộc tính hiện tại
+                status: "Đã xử lý", // Ghi đè thuộc tính status
+            }));
+
+            const updataStudent = await UserServices.updateStudent(requestsStudent?.student_id, {
+                "approved": 1,
+                "room_id": roomId,
+            })
+
+            if (updataStudent?.status == "OK") {
+                alert("Cập nhật sinh viên thành công");
+            }
+
+            // / cập nhập số lượng sinh viên rooms
+            const updateRoom = await UserServices.updateRoom(roomId, {
+                "current_occupancy": Math.floor(num + 1)
+            });
+            if (updateRoom?.status == "OK") {
+                alert("Cập nhật số lương sinh viên thành công");
+            }
+
+        } else {
+            alert("Đã xảy ra lỗi, vui lòng thử lại");
+        }
+    }
+
+    const handleReject = () => { }
 
     return (
         <div className="bg-gray-100 flex flex-col">
@@ -124,6 +186,56 @@ function HomeStaff() {
                         <p><strong>Lớp:</strong> {requestsStudent?.class}</p>
                         <p><strong>Lý do:</strong></p>
                         <p>{requestsStudent?.description}</p>
+                        <p><strong>Phòng:</strong></p>
+                        {/* {rooms && rooms.length > 0 ? (
+                            <select
+                                value={selectedRoom}
+                                onChange={(e) => setSelectedRoom(e.target.value)}
+                                className="border rounded px-4 py-2"
+                            >
+                                <option value="" disabled>Chọn phòng</option>
+                                {rooms.map((room) => (
+                                    <option key={room.room_id} value={room.room_number}>
+                                        {room.room_number}
+                                    </option>
+                                ))}
+                            </select>
+                        ) : (
+                            <p className="text-gray-500">Không có phòng nào khả dụng.</p>
+                        )} */}
+                        {rooms && rooms.length > 0 ? (
+                            <>
+                                <select
+                                    value={selectedRoom}
+                                    onChange={(e) => {
+                                        const selected = rooms.find(
+                                            (room) => room.room_number === e.target.value
+                                        );
+                                        setSelectedRoom(selected.room_number);
+                                        setNum(selected.current_occupancy);
+                                        setRoomId(selected.room_id);
+                                        setRoomDetails(selected); // Cập nhật thông tin chi tiết phòng
+                                    }}
+                                    className="border rounded px-4 py-2"
+                                >
+                                    <option value="" disabled>Chọn phòng</option>
+                                    {rooms.map((room) => (
+                                        <option key={room.room_id} value={room.room_number}>
+                                            {room.room_number}
+                                        </option>
+                                    ))}
+                                </select>
+                                {roomDetails && (
+                                    <p className="mt-4">
+                                        <strong>Số lượng sinh viên: </strong>
+                                        {roomDetails.current_occupancy}/{roomDetails.capacity}
+                                    </p>
+                                )}
+                            </>
+                        ) : (
+                            <p className="text-gray-500">Không có phòng nào khả dụng.</p>
+                        )}
+
                         <p>
                             <strong>Trạng thái:</strong>{" "}
                             <span
@@ -138,20 +250,20 @@ function HomeStaff() {
                         </p>
                         {requestsStudent?.status === "Chờ xử lý" ? (
                             <div className="flex justify-end mt-4">
-                                <button className="bg-blue-500 text-white px-4 py-2 rounded mr-2">Đồng ý</button>
-                                <button className="bg-red-500 text-white px-4 py-2 rounded">Từ chối</button>
+                                <button
+                                    className="bg-blue-500 text-white px-4 py-2 rounded mr-2"
+                                    onClick={handleApprove}
+                                >
+                                    Đồng ý
+                                </button>
+                                <button
+                                    className="bg-red-500 text-white px-4 py-2 rounded"
+                                    onClick={handleReject}
+                                >
+                                    Từ chối
+                                </button>
                             </div>
                         )
-                            // : requestsStudent?.status === "Từ chối" ? (
-                            //     <div className="flex justify-end mt-4">
-                            //         <button
-                            //             className="bg-red-500 text-white px-4 py-2 rounded cursor-not-allowed"
-                            //             disabled
-                            //         >
-                            //             Từ chối
-                            //         </button>
-                            //     </div>
-                            // ) 
                             : (
                                 <div className="flex justify-end mt-4">
                                     <button

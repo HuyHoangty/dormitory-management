@@ -128,3 +128,52 @@ export const getAllRequests = async () => {
         throw error; // Ném lỗi để React Query xử lý
     }
 }
+
+// router.put("/update-request-by-staff/:id", studentRequestsController.updateRequestByStaff);  //phê duyệt bởi quản lý
+export const updateRequestByStaff = async (id, data) => {
+    try {
+        const res = await axios.put(`http://localhost:3001/api/student-request/update-request-by-staff/${id}`, data);
+        return res.data;
+    } catch (error) {
+        console.error('Error signing in user:', error.response?.data || error.message);
+        throw error; // Ném lỗi để React Query xử lý
+    }
+};
+
+// router.get("/get-all-room", roomController.getAllRoom); // body:gender=male
+export const getAllRoom = async (data) => {
+    try {
+        console.log("services", data);
+        const res = await axios.get(`http://localhost:3001/api/room/get-all-room`, {
+            params: {
+                gender: data?.gender, // Thêm tham số cần gửi
+            },
+        });
+        return res.data;
+    } catch (error) {
+        console.error('Error signing in user:', error.response?.data || error.message);
+        throw error; // Ném lỗi để React Query xử lý
+    }
+}
+
+// router.put("/update-student/:id", authUserMiddleWare, studentController.updateStudent);
+export const updateStudent = async (id, data) => {
+    try {
+        const res = await axios.put(`http://localhost:3001/api/student/update-student/${id}`, data);
+        return res.data;
+    } catch (error) {
+        console.error('Error signing in user:', error.response?.data || error.message);
+        throw error; // Ném lỗi để React Query xử lý
+    }
+};
+
+// router.put("/update-room/:id", roomController.updateRoom);
+export const updateRoom = async (id, data) => {
+    try {
+        const res = await axios.put(`http://localhost:3001/api/room/update-room/${id}`, data);
+        return res.data;
+    } catch (error) {
+        console.error('Error signing in user:', error.response?.data || error.message);
+        throw error; // Ném lỗi để React Query xử lý
+    }
+};
