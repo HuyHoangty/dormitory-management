@@ -10,8 +10,6 @@ function HomeStaff() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-
-
     console.log("user: ", user)
     console.log("user[0]", user[0])
 
@@ -43,7 +41,16 @@ function HomeStaff() {
 
 
     const handleStudentClick = (item) => {
-        navigate("/staff/detail-request", { state: item });
+        console.log('item', item);
+        if (item?.request_type === "Duyệt vào ký túc xá") {
+            navigate("/staff/detail-request", { state: item });
+        } else if (item?.request_type === "Đổi phòng") {
+            navigate("/staff/room-change-request", { state: item })
+        } else if (item?.request_type === "Ra khỏi ký túc xá") {
+            navigate("/staff/move-out-request", { state: item })
+        } else {
+            navigate("/staff/other-request", { state: item })
+        }
     };
 
     return (

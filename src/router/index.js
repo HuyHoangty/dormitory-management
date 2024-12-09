@@ -6,6 +6,11 @@ import ChangePassword from "../components/ChangePassword";
 import Request from "../components/StudentRequest";
 import HomeStaff from "../components/HomeStaff"
 import DetailRequest from "../components/StudentDetailRequest";
+import RoomChangeRequest from "../components/RoomChangeRequest";
+import MoveOutRequest from "../components/MoveOutRequest";
+import OtherRequest from "../components/OtherRequest";
+
+
 
 export const router = [
     {
@@ -53,6 +58,24 @@ export const router = [
     {
         path: "/staff/detail-request",
         page: DetailRequest,
+        isShowHeader: true,
+        isPrivate: false,
+    },
+    {
+        path: "/staff/room-change-request",
+        page: RoomChangeRequest,
+        isShowHeader: true,
+        isPrivate: false,
+    },
+    {
+        path: "/staff/move-out-request",
+        page: MoveOutRequest,
+        isShowHeader: true,
+        isPrivate: false,
+    },
+    {
+        path: "/staff/other-request",
+        page: OtherRequest,
         isShowHeader: true,
         isPrivate: false,
     },
