@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { clearUser } from '../redux/slice/userSlice';
 import { useLocation } from "react-router-dom";
 import * as UserServices from "../services/UserServices";
-function HomeStaff() {
+function MoveOutRequest() {
     const user = useSelector((state) => state.user.user);
 
     const dispatch = useDispatch();
@@ -229,4 +229,4 @@ function HomeStaff() {
         </div>
     );
 }
-export default HomeStaff;
+export default MoveOutRequest;

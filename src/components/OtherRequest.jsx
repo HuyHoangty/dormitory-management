@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { clearUser } from '../redux/slice/userSlice';
 import { useLocation } from "react-router-dom";
 import * as UserServices from "../services/UserServices";
-function HomeStaff() {
+function OtherRequest() {
     const user = useSelector((state) => state.user.user);
 
     const dispatch = useDispatch();
@@ -15,31 +15,21 @@ function HomeStaff() {
 
     const [requestsStudent, setRequestsStudent] = useState(item);
     const [rooms, setRooms] = useState(null);
-    const [selectedRoom, setSelectedRoom] = useState("");
-    const [roomDetails, setRoomDetails] = useState(null);
-    const [roomId, setRoomId] = useState(null);
-
-    const [num, setNum] = useState(0);
-
-    console.log("roomId", roomId)
 
     console.log("requestsStudent", requestsStudent)
-
 
     console.log("user: ", user)
     console.log("user[0]", user[0])
 
     const fetchData = async () => {
-        const res = await UserServices.getAllRoom({
-            "gender": requestsStudent?.gender
-        });
-        console.log('Fetching data', res)
+        const res = await UserServices.getDetailRoom(requestsStudent?.room_id);
         if (res?.status === "OK") {
-            setRooms(res?.data);
+            const data = res?.data
+            setRooms(data[0]);
         }
     };
 
-    console.log('Fetching data11', rooms)
+    console.log("rooms", rooms)
 
 
     useEffect(() => {
@@ -68,24 +58,6 @@ function HomeStaff() {
                 ...prev, // Sao chép toàn bộ các thuộc tính hiện tại
                 status: "Đã xử lý", // Ghi đè thuộc tính status
             }));
-
-            const updataStudent = await UserServices.updateStudent(requestsStudent?.student_id, {
-                "approved": 1,
-                "room_id": roomId,
-            })
-
-            if (updataStudent?.status == "OK") {
-                alert("Cập nhật sinh viên thành công");
-            }
-
-            // / cập nhập số lượng sinh viên rooms
-            const updateRoom = await UserServices.updateRoom(roomId, {
-                "current_occupancy": Math.floor(num + 1)
-            });
-            if (updateRoom?.status == "OK") {
-                alert("Cập nhật số lương sinh viên thành công");
-            }
-
         } else {
             alert("Đã xảy ra lỗi, vui lòng thử lại");
         }
@@ -197,56 +169,7 @@ function HomeStaff() {
                         <p><strong>Lớp:</strong> {requestsStudent?.class}</p>
                         <p><strong>Lý do:</strong></p>
                         <p>{requestsStudent?.description}</p>
-                        <p><strong>Phòng:</strong></p>
-                        {/* {rooms && rooms.length > 0 ? (
-                            <select
-                                value={selectedRoom}
-                                onChange={(e) => setSelectedRoom(e.target.value)}
-                                className="border rounded px-4 py-2"
-                            >
-                                <option value="" disabled>Chọn phòng</option>
-                                {rooms.map((room) => (
-                                    <option key={room.room_id} value={room.room_number}>
-                                        {room.room_number}
-                                    </option>
-                                ))}
-                            </select>
-                        ) : (
-                            <p className="text-gray-500">Không có phòng nào khả dụng.</p>
-                        )} */}
-                        {rooms && rooms.length > 0 ? (
-                            <>
-                                <select
-                                    value={selectedRoom}
-                                    onChange={(e) => {
-                                        const selected = rooms.find(
-                                            (room) => room.room_number === e.target.value
-                                        );
-                                        setSelectedRoom(selected.room_number);
-                                        setNum(selected.current_occupancy);
-                                        setRoomId(selected.room_id);
-                                        setRoomDetails(selected); // Cập nhật thông tin chi tiết phòng
-                                    }}
-                                    className="border rounded px-4 py-2"
-                                >
-                                    <option value="" disabled>Chọn phòng</option>
-                                    {rooms.map((room) => (
-                                        <option key={room.room_id} value={room.room_number}>
-                                            {room.room_number}
-                                        </option>
-                                    ))}
-                                </select>
-                                {roomDetails && (
-                                    <p className="mt-4">
-                                        <strong>Số lượng sinh viên: </strong>
-                                        {roomDetails.current_occupancy}/{roomDetails.capacity}
-                                    </p>
-                                )}
-                            </>
-                        ) : (
-                            <p className="text-gray-500">Không có phòng nào khả dụng.</p>
-                        )}
-
+                        <p><strong>Phòng:</strong> {rooms?.room_number}</p>
                         <p>
                             <strong>Trạng thái:</strong>{" "}
                             <span
@@ -298,4 +221,4 @@ function HomeStaff() {
         </div>
     );
 }
-export default HomeStaff;
+export default OtherRequest;

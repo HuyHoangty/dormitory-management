@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { clearUser } from '../redux/slice/userSlice';
 import { useLocation } from "react-router-dom";
 import * as UserServices from "../services/UserServices";
-function HomeStaff() {
+function RoomChangeRequest() {
     const user = useSelector((state) => state.user.user);
 
     const dispatch = useDispatch();
@@ -77,6 +77,14 @@ function HomeStaff() {
                 status: "Đã xử lý", // Ghi đè thuộc tính status
             }));
 
+            const updataStudent = await UserServices.updateStudent(requestsStudent?.student_id, {
+                "room_id": roomId,
+            })
+
+            if (updataStudent?.status == "OK") {
+                alert("Cập nhật sinh viên thành công");
+            }
+
             // cập nhập số lượng sinh viên rooms
             // tăng phòng muốn vào
             const updateRoom1 = await UserServices.updateRoom(roomId, {
@@ -94,6 +102,9 @@ function HomeStaff() {
                 alert("Cập nhật giảm số lương phòng cũ thành công");
             }
 
+            ///////////////////////////
+            /// dùng navigete để reload lại
+            ///////////////////////
 
         } else {
             alert("Đã xảy ra lỗi, vui lòng thử lại");
@@ -292,4 +303,4 @@ function HomeStaff() {
         </div>
     );
 }
-export default HomeStaff;
+export default RoomChangeRequest;
