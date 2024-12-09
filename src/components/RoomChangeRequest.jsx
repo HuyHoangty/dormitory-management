@@ -19,6 +19,8 @@ function HomeStaff() {
     const [roomDetails, setRoomDetails] = useState(null);
     const [roomId, setRoomId] = useState(null);
 
+    const [currentRoom, setCurrentRoom] = useState(null);
+
     const [num, setNum] = useState(0);
 
     console.log("roomId", roomId)
@@ -36,6 +38,12 @@ function HomeStaff() {
         console.log('Fetching data', res)
         if (res?.status === "OK") {
             setRooms(res?.data);
+        }
+
+        const resRoom = await UserServices.getDetailRoom(requestsStudent?.room_id);
+        if (resRoom?.status === "OK") {
+            const data = resRoom?.data
+            setCurrentRoom(data[0]);
         }
     };
 
@@ -69,22 +77,23 @@ function HomeStaff() {
                 status: "Đã xử lý", // Ghi đè thuộc tính status
             }));
 
-            const updataStudent = await UserServices.updateStudent(requestsStudent?.student_id, {
-                "approved": 1,
-                "room_id": roomId,
-            })
-
-            if (updataStudent?.status == "OK") {
-                alert("Cập nhật sinh viên thành công");
-            }
-
-            // / cập nhập số lượng sinh viên rooms
-            const updateRoom = await UserServices.updateRoom(roomId, {
+            // cập nhập số lượng sinh viên rooms
+            // tăng phòng muốn vào
+            const updateRoom1 = await UserServices.updateRoom(roomId, {
                 "current_occupancy": Math.floor(num + 1)
             });
-            if (updateRoom?.status == "OK") {
-                alert("Cập nhật số lương sinh viên thành công");
+            if (updateRoom1?.status == "OK") {
+                alert("Cập nhật tăng số lương phòng mới thành công");
             }
+
+            //giảm phòng hiện tại
+            const updateRoom2 = await UserServices.updateRoom(currentRoom?.room_id, {
+                "current_occupancy": Math.floor(currentRoom?.current_occupancy - 1)
+            });
+            if (updateRoom2?.status == "OK") {
+                alert("Cập nhật giảm số lương phòng cũ thành công");
+            }
+
 
         } else {
             alert("Đã xảy ra lỗi, vui lòng thử lại");
@@ -104,6 +113,7 @@ function HomeStaff() {
             }));
         }
     }
+
     return (
         <div className="bg-gray-100 flex flex-col">
             {/* Header */}
@@ -196,23 +206,8 @@ function HomeStaff() {
                         <p><strong>Lớp:</strong> {requestsStudent?.class}</p>
                         <p><strong>Lý do:</strong></p>
                         <p>{requestsStudent?.description}</p>
-                        <p><strong>Phòng:</strong></p>
-                        {/* {rooms && rooms.length > 0 ? (
-                            <select
-                                value={selectedRoom}
-                                onChange={(e) => setSelectedRoom(e.target.value)}
-                                className="border rounded px-4 py-2"
-                            >
-                                <option value="" disabled>Chọn phòng</option>
-                                {rooms.map((room) => (
-                                    <option key={room.room_id} value={room.room_number}>
-                                        {room.room_number}
-                                    </option>
-                                ))}
-                            </select>
-                        ) : (
-                            <p className="text-gray-500">Không có phòng nào khả dụng.</p>
-                        )} */}
+                        <p><strong>Phòng hiện tại:</strong> {currentRoom?.room_number}</p>
+                        <p><strong>Chọn phòng:</strong></p>
                         {rooms && rooms.length > 0 ? (
                             <>
                                 <select
