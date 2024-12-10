@@ -177,3 +177,41 @@ export const updateRoom = async (id, data) => {
         throw error; // Ném lỗi để React Query xử lý
     }
 };
+
+// router.get("/get-all-student", studentController.getAllStudent);
+export const getAllStudent = async () => {
+    try {
+        const res = await axios.get(`http://localhost:3001/api/student/get-all-student`);
+        return res.data;
+    } catch (error) {
+        console.error('Error signing in user:', error.response?.data || error.message);
+        throw error; // Ném lỗi để React Query xử lý
+    }
+}
+
+// router.get("/get-all-fees", feesController.getAllFees);
+export const getAllFees = async () => {
+    try {
+        const res = await axios.get(`http://localhost:3001/api/fees/get-all-fees`);
+        return res.data;
+    } catch (error) {
+        console.error('Error signing in user:', error.response?.data || error.message);
+        throw error; // Ném lỗi để React Query xử lý
+    }
+}
+
+// router.post("/create-fees/:id", authStaffMiddleWare, feesController.createFees);
+export const createFees = async (id, data, access_token) => {
+    try {
+        console.log(id, data, access_token);
+        const res = await axiosJWT.post(`http://localhost:3001/api/fees/create-fees/${id}`, data, {
+            headers: {
+                token: `Bearer ${access_token}`,
+            },
+        });
+        return res.data;
+    } catch (error) {
+        console.error('Error signing in user:', error.response?.data || error.message);
+        throw error; // Ném lỗi để React Query xử lý
+    }
+}

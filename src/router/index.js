@@ -9,8 +9,9 @@ import DetailRequest from "../components/StudentDetailRequest";
 import RoomChangeRequest from "../components/RoomChangeRequest";
 import MoveOutRequest from "../components/MoveOutRequest";
 import OtherRequest from "../components/OtherRequest";
-
-
+import ListStudent from "../components/ListStudent";
+import InvoiceManagement from "../components/InvoiceManagement";
+import CreateInvoice from "../components/CreateInvoice";
 
 export const router = [
     {
@@ -76,6 +77,23 @@ export const router = [
     {
         path: "/staff/other-request",
         page: OtherRequest,
+        isShowHeader: true,
+        isPrivate: false,
+    },
+    {
+        path: "/staff/list-student",
+        page: ListStudent,
+        isShowHeader: true,
+        isPrivate: false,
+    },
+    {
+        path: "/staff/invoice-management",
+        page: InvoiceManagement,
+        isShowHeader: true,
+        isPrivate: false,
+    }, {
+        path: "/staff/invoice-management/create",
+        page: CreateInvoice,
         isShowHeader: true,
         isPrivate: false,
     },

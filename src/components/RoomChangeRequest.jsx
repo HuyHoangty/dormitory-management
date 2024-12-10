@@ -102,9 +102,7 @@ function RoomChangeRequest() {
                 alert("Cập nhật giảm số lương phòng cũ thành công");
             }
 
-            ///////////////////////////
-            /// dùng navigete để reload lại
-            ///////////////////////
+            navigate("/staff")
 
         } else {
             alert("Đã xảy ra lỗi, vui lòng thử lại");
