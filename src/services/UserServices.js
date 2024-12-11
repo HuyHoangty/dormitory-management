@@ -215,3 +215,19 @@ export const createFees = async (id, data, access_token) => {
         throw error; // Ném lỗi để React Query xử lý
     }
 }
+
+// router.put("/update-staff/:id", authStaffMiddleWare, staffController.updateStaff);
+export const updateStaff = async (id, data, access_token) => {
+    try {
+        console.log(id, data, access_token);
+        const res = await axiosJWT.put(`http://localhost:3001/api/staff/update-staff/${id}`, data, {
+            headers: {
+                token: `Bearer ${access_token}`,
+            },
+        });
+        return res.data;
+    } catch (error) {
+        console.error('Error signing in user:', error.response?.data || error.message);
+        throw error; // Ném lỗi để React Query xử lý
+    }
+}

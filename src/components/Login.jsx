@@ -194,18 +194,6 @@ function Login() {
               <h2 className="text-2xl font-semibold text-gray-800 text-center">
                 Đăng nhập
               </h2>
-              {/* <div className="my-2">
-                <div
-                  className="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4"
-                  role="alert"
-                >
-                  <p className="font-bold">Lưu ý</p>
-                  <p>
-                    Mật khẩu phải có độ dài từ 6 - 15 ký tự và phải bao gồm 1
-                    chữ cái in hoa và 1 chữ số.
-                  </p>
-                </div>
-              </div> */}
               <form className="mt-6">
                 <div className="mb-4">
                   <label className="block text-gray-700">

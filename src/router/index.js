@@ -12,6 +12,7 @@ import OtherRequest from "../components/OtherRequest";
 import ListStudent from "../components/ListStudent";
 import InvoiceManagement from "../components/InvoiceManagement";
 import CreateInvoice from "../components/CreateInvoice";
+import ManagerProfile from "../components/ManagerProfile";
 
 export const router = [
     {
@@ -91,9 +92,16 @@ export const router = [
         page: InvoiceManagement,
         isShowHeader: true,
         isPrivate: false,
-    }, {
+    },
+    {
         path: "/staff/invoice-management/create",
         page: CreateInvoice,
+        isShowHeader: true,
+        isPrivate: false,
+    },
+    {
+        path: "/staff/profile",
+        page: ManagerProfile,
         isShowHeader: true,
         isPrivate: false,
     },

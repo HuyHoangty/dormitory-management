@@ -11,7 +11,6 @@ import {
     faList,
     faFileInvoiceDollar,
     faUser,
-    faCog,
     faSignOutAlt,
 } from '@fortawesome/free-solid-svg-icons';
 function StudentDetailRequest() {
@@ -78,7 +77,9 @@ function StudentDetailRequest() {
         navigate('/staff/invoice-management');
     }
 
-    const handleSetting = () => { }
+    const handleSetting = () => {
+        navigate('/staff/profile');
+    }
 
     const handleApprove = async () => {
         const res = await UserServices.updateRequestByStaff(requestsStudent?.request_id, {

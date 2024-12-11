@@ -10,7 +10,6 @@ import {
     faList,
     faFileInvoiceDollar,
     faUser,
-    faCog,
     faSignOutAlt,
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -46,7 +45,9 @@ function ListStudent() {
         navigate('/staff/invoice-management');
     }
 
-    const handleSetting = () => { }
+    const handleSetting = () => {
+        navigate('/staff/profile');
+    }
 
     const [requests, setRequests] = useState(null);
 

@@ -10,7 +10,6 @@ import {
   faList,
   faFileInvoiceDollar,
   faUser,
-  faCog,
   faSignOutAlt,
 } from '@fortawesome/free-solid-svg-icons';
 function InvoiceManagement() {
@@ -44,7 +43,13 @@ function InvoiceManagement() {
     navigate('/staff/invoice-management');
   }
 
-  const handleSetting = () => { }
+  const handleSetting = () => {
+    navigate('/staff/profile');
+  }
+
+  const handleCreateFees = () => {
+    navigate('/staff/invoice-management/create');
+  }
 
 
   const fetchData = async () => {
@@ -225,7 +230,7 @@ function InvoiceManagement() {
 
               {/* Nút tạo hóa đơn */}
               <div className="text-right mt-4">
-                <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition">
+                <button onClick={handleCreateFees} className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition">
                   + Tạo hóa đơn
                 </button>
               </div>

@@ -1,9 +1,8 @@
+import { useState } from "react";
 import { useSelector } from 'react-redux';
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { clearUser } from '../redux/slice/userSlice';
-import { useLocation } from "react-router-dom";
 import * as UserServices from "../services/UserServices";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -13,36 +12,26 @@ import {
     faUser,
     faSignOutAlt,
 } from '@fortawesome/free-solid-svg-icons';
-function OtherRequest() {
+function ManagerProfile() {
     const user = useSelector((state) => state.user.user);
+
+    const [formData, setFormData] = useState({
+        full_name: '',
+        phone: '',
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
+    };
+
+    console.log('ooo', formData);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const location = useLocation() || {};
-    const item = location.state;
-
-    const [requestsStudent, setRequestsStudent] = useState(item);
-    const [rooms, setRooms] = useState(null);
-
-    console.log("requestsStudent", requestsStudent)
-
-    console.log("user: ", user)
-    console.log("user[0]", user[0])
-
-    const fetchData = async () => {
-        const res = await UserServices.getDetailRoom(requestsStudent?.room_id);
-        if (res?.status === "OK") {
-            const data = res?.data
-            setRooms(data[0]);
-        }
-    };
-
-    console.log("rooms", rooms)
-
-
-    useEffect(() => {
-        fetchData();
-    }, []);
 
     const handleSignOut = () => {
         // Xoá token khỏi localStorage hoặc sessionStorage
@@ -71,36 +60,26 @@ function OtherRequest() {
         navigate('/staff/profile');
     }
 
-    const handleApprove = async () => {
-        const res = await UserServices.updateRequestByStaff(requestsStudent?.request_id, {
-            status: "Đã xử lý",
-            staff_id: user[0]?.staff_id
-        })
-        if (res?.status === "OK") {
-            alert("Cập nhật yêu cầu thành công");
-            setRequestsStudent((prev) => ({
-                ...prev, // Sao chép toàn bộ các thuộc tính hiện tại
-                status: "Đã xử lý", // Ghi đè thuộc tính status
-            }));
-        } else {
-            alert("Đã xảy ra lỗi, vui lòng thử lại");
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const res = await UserServices.updateStaff(
+                user[0]?.staff_id,
+                formData,
+                user?.access_token
+            );
+            if (res?.status === "OK") {
+                alert('Cập nhật thông tin staff thành công!');
+                alert('Vui lòng đăng nhập lại!');
+                handleSignOut();
+            } else {
+                alert('Cập nhật thông tin thất bại. Vui lòng thử lại!');
+            }
+        } catch (error) {
+            console.error('Lỗi khi cập nhật thông tin:', error);
+            alert('Đã xảy ra lỗi trong quá trình cập nhật. Vui lòng thử lại!');
         }
-    }
-
-    const handleReject = async () => {
-        const res = await UserServices.updateRequestByStaff(requestsStudent?.request_id, {
-            status: "Từ chối",
-            staff_id: user[0]?.staff_id
-        })
-        if (res?.status === "OK") {
-            alert("Từ chối yêu cầu thành công");
-            setRequestsStudent((prev) => ({
-                ...prev, // Sao chép toàn bộ các thuộc tính hiện tại
-                status: "Từ chối", // Ghi đè thuộc tính status
-            }));
-        }
-    }
-
+    };
     return (
         <div>
             <div className="-mt-px">
@@ -155,14 +134,9 @@ function OtherRequest() {
                     <div className="h-full overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
                         <nav className="hs-accordion-group p-3 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
                             <ul className="flex flex-col space-y-1">
-                                <li className="hs-accordion" id="account-accordion">
-                                    <a onClick={handleListRequest}
-                                        className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg bg-gray-100 text-blue-600 dark:bg-neutral-900 dark:text-blue-400"
-                                    >
-                                        <FontAwesomeIcon icon={faFileInvoiceDollar} className="mx-5" />
-                                        Quản lý yêu cầu
-                                    </a>
-                                </li>
+                                <li><a onClick={handleListRequest} className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700 dark:text-neutral-200 dark:hover:text-neutral-300" >
+                                    <FontAwesomeIcon icon={faFileInvoiceDollar} className='mx-5' /> Quản lý yêu cầu
+                                </a></li>
 
                                 <li onClick={handleListStudent} className="hs-accordion" id="users-accordion">
                                     <a className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-300" >
@@ -175,10 +149,15 @@ function OtherRequest() {
                                     </a>
                                 </li>
 
+                                <li className="hs-accordion" id="account-accordion">
+                                    <a onClick={handleSetting}
+                                        className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg bg-gray-100 text-blue-600 dark:bg-neutral-900 dark:text-blue-400"
+                                    >
+                                        <FontAwesomeIcon icon={faUser} className="mx-5" />
+                                        Tài khoản
+                                    </a>
+                                </li>
 
-                                <li><a onClick={handleSetting} className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700 dark:text-neutral-200 dark:hover:text-neutral-300" >
-                                    <FontAwesomeIcon icon={faUser} className='mx-5' /> Tài khoản
-                                </a></li>
                                 <li>
                                     <a onClick={handleSignOut} className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-300" >
                                         <FontAwesomeIcon icon={faSignOutAlt} className='mx-5' /> Đăng xuất
@@ -193,63 +172,56 @@ function OtherRequest() {
             <div className="w-full lg:ps-64">
                 <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
                     <div className="flex h-full">
-                        <main className="w-4/5 p-6">
-                            <h1 className="text-2xl font-bold mb-6">Quản lý yêu cầu</h1>
-                            <div className="mb-4">
-                                <a className="text-black-500 pb-2">{requestsStudent?.request_type}</a>
-                            </div>
+                        <main className="w-full p-6">
+                            <h1 className="text-2xl font-bold mb-6 text-center">Tài khoản</h1>
+                            <div className="grid grid-cols-1 sm:grid-cols-12 gap-6">
+                                <div className="col-span-12 sm:col-span-8 sm:col-start-3">
+                                    <form onSubmit={handleSubmit} className="bg-white shadow-xl rounded-lg p-6">
+                                        <div className="flex flex-col border-b py-4 sm:flex-row sm:items-center">
+                                            <div className="sm:w-full">
+                                                <p className="text-2xl font-medium text-center sm:text-left">Thông tin người dùng</p>
+                                            </div>
+                                        </div>
 
-                            <div className="bg-gray-200 p-6 rounded-lg shadow-md">
-                                <p><strong>Họ và tên:</strong> {requestsStudent?.full_name}</p>
-                                <p><strong>Số điện thoại:</strong> {requestsStudent?.phone}</p>
-                                <p><strong>Lớp:</strong> {requestsStudent?.class}</p>
-                                <p><strong>Lý do:</strong></p>
-                                <p>{requestsStudent?.description}</p>
-                                <p><strong>Phòng:</strong> {rooms?.room_number}</p>
-                                <p>
-                                    <strong>Trạng thái:</strong>{" "}
-                                    <span
-                                        className={
-                                            requestsStudent?.status === "Từ chối"
-                                                ? "text-red-500"
-                                                : "text-black"
-                                        }
-                                    >
-                                        {requestsStudent?.status}
-                                    </span>
-                                </p>
-                                {requestsStudent?.status === "Chờ xử lý" ? (
-                                    <div className="flex justify-end mt-4">
-                                        <button
-                                            className="bg-blue-500 text-white px-4 py-2 rounded mr-2"
-                                            onClick={handleApprove}
-                                        >
-                                            Đồng ý
-                                        </button>
-                                        <button
-                                            className="bg-red-500 text-white px-4 py-2 rounded"
-                                            onClick={handleReject}
-                                        >
-                                            Từ chối
-                                        </button>
-                                    </div>
-                                )
-                                    : (
-                                        <div className="flex justify-end mt-4">
+                                        <div className="flex flex-col gap-4 border-b py-4 sm:flex-row sm:items-center">
+                                            <p className="shrink-0 w-full sm:w-32 font-medium text-center sm:text-left">Họ tên</p>
+                                            <input
+                                                type="text"
+                                                name="full_name"
+                                                value={formData.full_name}
+                                                onChange={handleChange}
+                                                className="w-full rounded-md border bg-white px-2 py-2 outline-none ring-blue-600 focus:ring-1"
+                                            />
+                                        </div>
+
+                                        <div className="flex flex-col gap-4 border-b py-4 sm:flex-row sm:items-center">
+                                            <p className="shrink-0 w-full sm:w-32 font-medium text-center sm:text-left">Số điện thoại</p>
+                                            <input
+                                                type="tel"
+                                                name="phone"
+                                                value={formData.phone}
+                                                onChange={handleChange}
+                                                className="w-full rounded-md border bg-white px-2 py-2 outline-none ring-blue-600 focus:ring-1"
+                                            />
+                                        </div>
+
+                                        <div className="text-center mt-6">
                                             <button
-                                                className="bg-gray-400 text-white px-4 py-2 rounded cursor-not-allowed"
-                                                disabled
+                                                type="submit"
+                                                className="bg-blue-500 text-white px-8 py-2 rounded-full font-medium shadow-lg focus:outline-none focus:ring hover:bg-blue-700"
                                             >
-                                                Đã xử lý
+                                                Lưu
                                             </button>
                                         </div>
-                                    )}
+                                    </form>
+                                </div>
                             </div>
                         </main>
+
                     </div>
                 </div>
             </div>
         </div>
     );
 }
-export default OtherRequest;
+export default ManagerProfile;
