@@ -102,7 +102,7 @@ function CreateInvoice() {
               <img src="https://placehold.co/50x50" alt="User avatar" className="rounded-full w-12 h-12 mr-4" />
               <div>
                 <p className="text-gray-500">Ban quản lý</p>
-                <p className="font-bold">Quản lý A</p>
+                <p className="font-bold">{user[0]?.full_name}</p>
               </div>
             </a>
 

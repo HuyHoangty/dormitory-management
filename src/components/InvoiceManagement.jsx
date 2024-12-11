@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import * as UserServices from "../services/UserServices";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { clearUser } from '../redux/slice/userSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useSelector } from 'react-redux';
 import {
   faTasks,
   faList,
@@ -11,6 +15,37 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 function InvoiceManagement() {
   const [invoices, setInvoices] = useState(null);
+  const user = useSelector((state) => state.user.user);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+
+  const handleSignOut = () => {
+    // Xoá token khỏi localStorage hoặc sessionStorage
+    localStorage.removeItem('access_token');  // Hoặc sessionStorage.removeItem('access_token') nếu bạn dùng sessionStorage
+    // localStorage.removeItem('persist:root')
+    // Đặt lại trạng thái người dùng (nếu bạn sử dụng state quản lý người dùng)
+    dispatch(clearUser());
+
+    // Điều hướng về trang chủ
+    navigate('/sign-in');
+  };
+
+  const handleListRequest = () => {
+    navigate('/staff');
+  }
+
+  const handleListStudent = () => {
+    navigate('/staff/list-student');
+  }
+
+  const handleFees = () => {
+    navigate('/staff/invoice-management');
+  }
+
+  const handleSetting = () => { }
+
 
   const fetchData = async () => {
     const res = await UserServices.getAllFees();
@@ -55,8 +90,6 @@ function InvoiceManagement() {
         </div>
 
       </div>
-
-
       <div id="hs-application-sidebar" className="hs-overlay  [--auto-close:lg]
         hs-overlay-open:translate-x-0
         -translate-x-full transition-all duration-300 transform
@@ -69,11 +102,11 @@ function InvoiceManagement() {
         <div className="relative flex flex-col h-full max-h-full">
           <div className="px-6 pt-4">
 
-            <a className="flex" href='/request-management'>
+            <a className="flex">
               <img src="https://placehold.co/50x50" alt="User avatar" className="rounded-full w-12 h-12 mr-4" />
               <div>
                 <p className="text-gray-500">Ban quản lý</p>
-                <p className="font-bold">Quản lý A</p>
+                <p className="font-bold">{user[0]?.full_name}</p>
               </div>
             </a>
 
@@ -84,35 +117,35 @@ function InvoiceManagement() {
             <nav className="hs-accordion-group p-3 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
               <ul className="flex flex-col space-y-1">
                 <li>
-                  <a className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-300" href="/request-management">
-                    <FontAwesomeIcon icon={faTasks} className='mx-5' /> Quản lý yêu cầu
+                  <a onClick={handleListRequest} className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-300">
+                    <FontAwesomeIcon icon={faFileInvoiceDollar} className='mx-5' /> Quản lý yêu cầu
                   </a>
                 </li>
 
                 <li className="hs-accordion" id="users-accordion">
-                  <a className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-300" href="/student-management">
+                  <a onClick={handleListStudent} className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-300">
                     <FontAwesomeIcon icon={faList} className='mx-5' /> Danh sách sinh viên
                   </a>
                 </li>
 
                 <li className="hs-accordion" id="account-accordion">
                   <a
+                    onClick={handleFees}
                     className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg bg-gray-100 text-blue-600 dark:bg-neutral-900 dark:text-blue-400"
-                    href="/invoice-management"
                   >
-                    <FontAwesomeIcon icon={faFileInvoiceDollar} className="mx-5" />
+                    <FontAwesomeIcon icon={faTasks} className="mx-5" />
                     Quản lý thanh toán
                   </a>
                 </li>
 
-                <li><a className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700 dark:text-neutral-200 dark:hover:text-neutral-300" href="#">
+                <li><a onClick={handleSetting} className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700 dark:text-neutral-200 dark:hover:text-neutral-300">
                   <FontAwesomeIcon icon={faUser} className='mx-5' /> Tài khoản
                 </a></li>
-                <li><a className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-300" href="#">
+                <li><a className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-300">
                   <FontAwesomeIcon icon={faCog} className='mx-5' /> Cài đặt
                 </a></li>
                 <li>
-                  <a className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-300" href="#">
+                  <a onClick={handleSignOut} className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-300">
                     <FontAwesomeIcon icon={faSignOutAlt} className='mx-5' /> Đăng xuất
                   </a>
                 </li>
@@ -121,6 +154,7 @@ function InvoiceManagement() {
           </div>
         </div>
       </div>
+
       <div className="w-full lg:ps-64">
         <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
           <div className="flex h-full">
