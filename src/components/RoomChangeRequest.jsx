@@ -186,7 +186,7 @@ function RoomChangeRequest() {
                 <div className="relative flex flex-col h-full max-h-full">
                     <div className="px-6 pt-4">
 
-                        <a className="flex" href='/request-management'>
+                        <a className="flex">
                             <img src="https://placehold.co/50x50" alt="User avatar" className="rounded-full w-12 h-12 mr-4" />
                             <div>
                                 <p className="text-gray-500">Ban quản lý</p>

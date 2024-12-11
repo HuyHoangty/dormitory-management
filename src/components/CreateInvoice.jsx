@@ -98,7 +98,7 @@ function CreateInvoice() {
         <div className="relative flex flex-col h-full max-h-full">
           <div className="px-6 pt-4">
 
-            <a className="flex" href='/request-management'>
+            <a className="flex">
               <img src="https://placehold.co/50x50" alt="User avatar" className="rounded-full w-12 h-12 mr-4" />
               <div>
                 <p className="text-gray-500">Ban quản lý</p>
@@ -127,7 +127,6 @@ function CreateInvoice() {
                 <li className="hs-accordion" id="account-accordion">
                   <a
                     className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg bg-gray-100 text-blue-600 dark:bg-neutral-900 dark:text-blue-400"
-                    href="/invoice-management"
                   >
                     <FontAwesomeIcon icon={faFileInvoiceDollar} className="mx-5" />
                     Quản lý thanh toán
