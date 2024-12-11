@@ -154,9 +154,6 @@ function HomeStaff() {
                                 <li><a onClick={handleSetting} className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700 dark:text-neutral-200 dark:hover:text-neutral-300" >
                                     <FontAwesomeIcon icon={faUser} className='mx-5' /> Tài khoản
                                 </a></li>
-                                <li><a className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-300" >
-                                    <FontAwesomeIcon icon={faCog} className='mx-5' /> Cài đặt
-                                </a></li>
                                 <li>
                                     <a onClick={handleSignOut} className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-300" >
                                         <FontAwesomeIcon icon={faSignOutAlt} className='mx-5' /> Đăng xuất
