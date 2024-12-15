@@ -13,6 +13,10 @@ import ListStudent from "../components/ListStudent";
 import InvoiceManagement from "../components/InvoiceManagement";
 import CreateInvoice from "../components/CreateInvoice";
 import ManagerProfile from "../components/ManagerProfile";
+import HomeAdmin from "../components/HomeAdmin";
+import CreateRoom from "../components/CreateRoom";
+import ListStaff from "../components/ListStaff";
+import CreateStaff from "../components/CreateStaff";
 
 export const router = [
     {
@@ -102,6 +106,30 @@ export const router = [
     {
         path: "/staff/profile",
         page: ManagerProfile,
+        isShowHeader: true,
+        isPrivate: false,
+    },
+    {
+        path: "/admin",
+        page: HomeAdmin,
+        isShowHeader: true,
+        isPrivate: false,
+    },
+    {
+        path: "/admin/create-room",
+        page: CreateRoom,
+        isShowHeader: true,
+        isPrivate: false,
+    },
+    {
+        path: "/admin/list-staff",
+        page: ListStaff,
+        isShowHeader: true,
+        isPrivate: false,
+    },
+    {
+        path: "/admin/create-staff",
+        page: CreateStaff,
         isShowHeader: true,
         isPrivate: false,
     },

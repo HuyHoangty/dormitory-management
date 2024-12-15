@@ -231,3 +231,25 @@ export const updateStaff = async (id, data, access_token) => {
         throw error; // Ném lỗi để React Query xử lý
     }
 }
+
+// router.post("/create-room", roomController.createRoom);
+export const createRoom = async (data) => {
+    try {
+        const res = await axios.post(`http://localhost:3001/api/room/create-room`, data);
+        return res.data;
+    } catch (error) {
+        console.error('Error signing in user:', error.response?.data || error.message);
+        throw error; // Ném lỗi để React Query xử lý
+    }
+};
+
+// router.get("/get-all-staff", staffController.getAllStaff);
+export const getAllStaff = async () => {
+    try {
+        const res = await axios.get(`http://localhost:3001/api/staff/get-all-staff`);
+        return res.data;
+    } catch (error) {
+        console.error('Error signing in user:', error.response?.data || error.message);
+        throw error; // Ném lỗi để React Query xử lý
+    }
+}

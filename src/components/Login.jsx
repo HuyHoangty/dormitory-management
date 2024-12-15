@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as UserServices from "../services/UserServices";
 import { useMutationHooks } from "../hooks/useMutationHooks";
 import { useDispatch } from 'react-redux';
-import { setUser } from '../redux/slice/userSlice';
+import { setUser, clearUser } from '../redux/slice/userSlice';
 import { jwtDecode } from "jwt-decode";
 
 import {
@@ -102,6 +102,8 @@ function Login() {
           if (decoded.role === "admin") {
             console.log("Logged in as admin");
             // Xử lý cho admin nếu cần
+            dispatch(setUser({ admin: true }));
+            navigate("/admin");
           }
         }
       }
