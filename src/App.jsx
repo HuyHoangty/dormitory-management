@@ -3,8 +3,9 @@ import { router } from "./router/index";
 
 import './index.css';
 
+// eslint-disable-next-line react/prop-types
 const PrivateRoute = ({ children, isPrivate }) => {
-  const isAuthenticated = !!localStorage.getItem("token"); // Kiểm tra token đăng nhập
+  const isAuthenticated = !!localStorage.getItem("access_token"); // Kiểm tra token đăng nhập
   return isPrivate && !isAuthenticated ? <Navigate to="/sign-in" /> : children;
 };
 

@@ -11,7 +11,7 @@ import {
   faCaretLeft,
 } from '@fortawesome/free-solid-svg-icons';
 
-function ChangePassword() {
+function Register() {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -181,4 +181,4 @@ function ChangePassword() {
   );
 }
 
-export default ChangePassword;
+export default Register;

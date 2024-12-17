@@ -12,7 +12,7 @@ import {
     faSave,
     faPaperPlane,
 } from '@fortawesome/free-solid-svg-icons';
-function Request() {
+function StudentRequest() {
     const user = useSelector((state) => state.user.user);
     const navigate = useNavigate();
 
@@ -171,4 +171,4 @@ function Request() {
         </div>
     );
 }
-export default Request;
+export default StudentRequest;
