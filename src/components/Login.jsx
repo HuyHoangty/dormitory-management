@@ -55,10 +55,18 @@ function Login() {
   useEffect(() => {
     const fetchDetails = async () => {
       if (isSuccess) {
+        if (data?.message === "Email không hợp lệ") {
+          alert("Email không hợp lệ!");
+        }
+
+        if (data?.message === "Sai mật khẩu") {
+          alert("Sai mật khẩu!");
+        }
+
+
         localStorage.setItem("access_token", data?.access_token);
         if (data?.access_token) {
           const decoded = jwtDecode(data?.access_token);
-
           if (decoded.role === "student") {
             if (decoded?.id) {
               dispatch(setUser({ access_token: data?.access_token, user_id: decoded?.id, email: formData.email }));
@@ -125,13 +133,17 @@ function Login() {
     return res.data;
   };
 
+  const handleSignUp = () => {
+    navigate("/sign-up");
+  }
+
   return (
-    <div className="bg-gray-100 flex flex-col">
+    <div className="bg-gray-50 min-h-screen flex flex-col">
       {/* Header */}
-      <header className="bg-white py-4">
-        <div className="container mx-auto flex items-center justify-between px-4">
+      <header className="bg-white shadow-md">
+        <div className="container mx-auto flex items-center justify-between px-6 py-4">
           <div className="w-1/3">
-            <a>
+            <a href="#">
               <img
                 src="/src/assets/img/icon_logo/VNU_LOGO.png"
                 alt="VNU Logo"
@@ -140,116 +152,95 @@ function Login() {
             </a>
           </div>
           <div className="w-1/3 text-center">
-            <h1 className="text-2xl font-bold text-blue-700">
-              HỆ THỐNG QUẢN LÝ KÝ TÚC XÁ
+            <h1 className="text-3xl font-extrabold text-blue-700 uppercase">
+              Hệ thống quản lý ký túc xá
             </h1>
           </div>
           <div className="w-1/3 text-right">
             <img
               src="/src/assets/img/icon_logo/VNU_CSS_LOGO.png"
               alt="VNU CSS Logo"
-              className="w-40 inline-block"
+              className="w-32 inline-block"
             />
           </div>
         </div>
       </header>
 
       {/* Navigation */}
-      <nav className="bg-blue-700">
-        <div className="container mx-auto px-4 py-2 flex justify-end items-center text-white">
-          <a className="mx-2 hover:underline">
-            <FontAwesomeIcon icon={faHome} /> Trang chủ
+      <nav className="bg-blue-700 shadow-md">
+        <div className="container mx-auto flex justify-end items-center px-6 py-2">
+          <a className="text-white mx-4 hover:underline hover:text-gray-200 transition">
+            <FontAwesomeIcon icon={faHome} className="mr-1" /> Trang chủ
           </a>
-          <a className="mx-2 hover:underline">
-            <FontAwesomeIcon icon={faCompass} /> Trang điều khiển
+          <a className="text-white mx-4 hover:underline hover:text-gray-200 transition">
+            <FontAwesomeIcon icon={faCompass} className="mr-1" /> Trang điều khiển
           </a>
-          <div className="relative inline-block text-left">
-            <button className="inline-flex items-center hover:underline focus:outline-none">
-              <FontAwesomeIcon icon={faUser} /> <span>Tài khoản</span>
+          <div className="relative">
+            <button className="text-white hover:underline flex items-center">
+              <FontAwesomeIcon icon={faUser} className="mr-1" /> Tài khoản
             </button>
-            {/* Dropdown menu */}
-            <div className="hidden origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-              <div className="py-1">
-                <a
-
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                >
-                  <FontAwesomeIcon icon={faSignOutAlt} /> Đăng xuất
-                </a>
-              </div>
+            <div className="hidden absolute mt-2 w-40 bg-white shadow-lg rounded-lg">
+              <a
+                href="#"
+                className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-t-lg"
+              >
+                <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" /> Đăng xuất
+              </a>
             </div>
           </div>
         </div>
       </nav>
 
       {/* Main Content */}
-      <main className="flex-grow flex items-center justify-center">
-        <div className="container mx-auto px-4">
-          <button
-            onClick={() => window.history.back()}
-            className="mb-4 text-gray-700 hover:text-blue-700 focus:outline-none"
-          >
-            <FontAwesomeIcon icon={faCaretLeft} /> Quay lại
-          </button>
-          <div className="max-w-md mx-auto bg-white shadow-md rounded-lg overflow-hidden">
-            <div className="py-4 px-6">
-              <h2 className="text-2xl font-semibold text-gray-800 text-center">
-                Đăng nhập
-              </h2>
-              <form className="mt-6">
-                <div className="mb-4">
-                  <label className="block text-gray-700">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
-                    required
-                  />
-                </div>
-                <div className="mb-4">
-                  <label className="block text-gray-700">Mật khẩu</label>
-                  <input
-                    type="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
-                    required
-                    pattern="^(?=.*[A-Z])(?=.*\\d).{6,15}$"
-                    title="Mật khẩu phải có độ dài từ 6 - 15 ký tự, bao gồm ít nhất 1 chữ cái in hoa và 1 chữ số."
-                  />
-                </div>
-                {/* <div className="mb-4">
-                  <label className="block text-gray-700">
-                    Nhập lại mật khẩu mới
-                  </label>
-                  <input
-                    type="password"
-                    name="confirm_new_password"
-                    value={formData.confirm_new_password}
-                    onChange={handleChange}
-                    className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
-                    required
-                  />
-                </div> */}
-                <div className="flex">
-                  <button
-                    type="submit"
-                    onClick={handleSubmit}
-                    className="w-full px-4 py-2 text-white bg-blue-700 rounded-md hover:bg-blue-600 focus:outline-none"
-                  >
-                    Đăng nhập
-                  </button>
-                </div>
-              </form>
-              <div className="flex items-center justify-center text-center">
-                <a className="text-blue-600">Quên mật khẩu</a>
-                <a className="text-blue-600">Đăng ký nội trú</a>
+      <main className="flex-grow flex items-center justify-center bg-gray-100 py-8">
+        <div className="w-full max-w-md bg-white rounded-lg shadow-lg overflow-hidden">
+          <div className="py-6 px-8">
+            <h2 className="text-2xl font-semibold text-gray-800 text-center mb-4">
+              Đăng nhập
+            </h2>
+            <form>
+              <div className="mb-4">
+                <label className="block text-gray-600 font-medium">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  placeholder="Nhập email"
+                  required
+                />
               </div>
+              <div className="mb-6">
+                <label className="block text-gray-600 font-medium">Mật khẩu</label>
+                <input
+                  type="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  placeholder="Nhập mật khẩu"
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                onClick={handleSubmit}
+                className="w-full py-2 px-4 bg-blue-700 hover:bg-blue-600 text-white font-semibold rounded-lg transition duration-200"
+              >
+                Đăng nhập
+              </button>
+            </form>
+            <div className="flex justify-between items-center mt-6 text-sm">
+              <span className="text-gray-600">
+                Chưa có tài khoản?
+              </span>
+              <a
+                onClick={handleSignUp}
+                className="text-blue-600 font-medium hover:text-blue-500 hover:underline transition duration-200 cursor-pointer"
+              >
+                Đăng ký
+              </a>
             </div>
           </div>
         </div>
@@ -257,11 +248,12 @@ function Login() {
 
       {/* Footer */}
       <footer className="bg-blue-700 text-white py-4">
-        <div className="container mx-auto px-4 text-center">
+        <div className="container mx-auto text-center">
           <p>&copy; 2024 Hệ Thống Quản Lý Ký Túc Xá</p>
         </div>
       </footer>
     </div>
+
   );
 }
 
