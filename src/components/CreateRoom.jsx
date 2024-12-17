@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import * as UserServices from "../services/UserServices";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { clearUser } from '../redux/slice/userSlice';
-import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faClipboardList,
@@ -15,8 +14,6 @@ function CreateRoom() {
     room_number: '',
     capacity: '',
   });
-
-  const user = useSelector((state) => state.user.user);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();

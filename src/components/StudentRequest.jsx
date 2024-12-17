@@ -9,7 +9,6 @@ import {
     faCompass,
     faUser,
     faSignOutAlt,
-    faSave,
     faPaperPlane,
 } from '@fortawesome/free-solid-svg-icons';
 function StudentRequest() {

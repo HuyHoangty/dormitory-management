@@ -7,8 +7,6 @@ import {
   faHome,
   faCompass,
   faUser,
-  faSignOutAlt,
-  faCaretLeft,
 } from '@fortawesome/free-solid-svg-icons';
 
 function Register() {
