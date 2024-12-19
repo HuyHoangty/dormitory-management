@@ -264,3 +264,14 @@ export const updateFees = async (id, data) => {
         throw error; // Ném lỗi để React Query xử lý
     }
 };
+
+// router.post("/create-staff", staffController.createStaff);
+export const createStaff = async (data) => {
+    try {
+        const res = await axios.post(`http://localhost:3001/api/staff/create-staff`, data);
+        return res.data;
+    } catch (error) {
+        console.error('Error signing in user:', error.response?.data || error.message);
+        throw error; // Ném lỗi để React Query xử lý
+    }
+};

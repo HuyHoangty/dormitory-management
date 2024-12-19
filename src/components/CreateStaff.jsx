@@ -46,9 +46,6 @@ function CreateStaff() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Hóa đơn được tạo:', formData);
-    // // Xử lý logic gửi dữ liệu lên server
-
     const res = await UserServices.signUpUser(formData);
     if (res?.status === "OK") {
       alert('Staff được tạo thành công!');
@@ -58,8 +55,16 @@ function CreateStaff() {
         confirmPassword: '',
         role: 'staff',
       });
+      console.log('res', res.data.insertId);
+      const createStaff = await UserServices.createStaff({
+        user_id: res.data.insertId,
+        full_name: " ",
+        phone: " ",
+      })
+      if (createStaff?.status === "OK") {
+        alert('Thông tin nhân viên đã được tạo!');
+      }
     }
-
   };
 
   return (
