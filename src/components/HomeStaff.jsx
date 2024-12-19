@@ -174,7 +174,7 @@ function HomeStaff() {
                                     </thead>
                                     <tbody>
                                         {requests && requests.length > 0 ? (
-                                            requests.map((item, index) => (
+                                            requests.slice().reverse().map((item, index) => (
                                                 <tr key={index} className="border-t">
                                                     <td className="py-8 px-4">
                                                         <button onClick={() => handleStudentClick(item)} className="text-blue-500 hover:underline">
