@@ -65,7 +65,35 @@ function InvoiceManagement() {
     fetchData();
   }, []);
 
-  // const handleUpdateFee = () => { };
+  console.log('Fetching data12', invoices)
+
+  const [selectedInvoice, setSelectedInvoice] = useState(null); // Lưu hóa đơn được chọn
+  const [showNavbar, setShowNavbar] = useState(false); // Trạng thái hiển thị navbar
+
+  const handleUpdateFee = (item) => {
+    setSelectedInvoice(item); // Lưu hóa đơn được chọn
+    setShowNavbar(true); // Hiển thị navbar
+  };
+
+  console.log('selectedInvoice', selectedInvoice)
+
+  const handleStatusChange = async (status) => {
+    if (selectedInvoice) {
+      console.log(`Hóa đơn ${selectedInvoice.room_number} đổi trạng thái thành: ${status}`);
+      // Thêm logic cập nhật trạng thái, ví dụ gọi API
+      const res = await UserServices.updateFees(selectedInvoice?.fee_id, {
+        status: status,
+      })
+
+      if (res?.status === "OK") {
+        fetchData();
+        alert("Cập nhật thành công")
+      } else {
+        alert("Cập nhật thất bại")
+      }
+    }
+    setShowNavbar(false); // Ẩn navbar sau khi chọn
+  };
 
   return (
     <div>
@@ -153,6 +181,31 @@ function InvoiceManagement() {
 
               {/* Bảng hiển thị */}
               <div className="bg-white rounded-lg shadow p-4">
+                {showNavbar && (
+                  <div className="fixed top-0 left-0 right-0 bg-white shadow-md p-4 z-10">
+                    <p className="text-center font-bold">Chọn trạng thái cho hóa đơn phòng {selectedInvoice?.room_number}, tòa nhà {selectedInvoice?.room_number.slice(-1)}, tháng {selectedInvoice?.created_at?.slice(5, 7)}</p>
+                    <div className="flex justify-center gap-4 mt-2">
+                      <button
+                        className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+                        onClick={() => handleStatusChange('Đã đóng')}
+                      >
+                        Đã đóng
+                      </button>
+                      <button
+                        className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                        onClick={() => handleStatusChange('Chưa đóng')}
+                      >
+                        Chưa đóng
+                      </button>
+                      <button
+                        className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
+                        onClick={() => handleStatusChange('Quá hạn')}
+                      >
+                        Quá hạn
+                      </button>
+                    </div>
+                  </div>
+                )}
                 <table className="w-full border-collapse">
                   <thead>
                     <tr className="text-left text-gray-500">
@@ -168,7 +221,14 @@ function InvoiceManagement() {
                   </thead>
                   <tbody>
                     {invoices && invoices.length > 0 ? (
-                      invoices.map((item, index) => (
+                      invoices.sort((a, b) => {
+                        // Lấy tháng từ `created_at` và chuyển sang số
+                        const monthA = parseInt(a.created_at?.slice(5, 7), 10) || 0;
+                        const monthB = parseInt(b.created_at?.slice(5, 7), 10) || 0;
+
+                        // Sắp xếp tăng dần theo tháng
+                        return monthB - monthA;
+                      }).map((item, index) => (
                         <tr key={index} className="border-t">
                           <td className="py-4 px-4">Tòa nhà {item?.room_number.slice(-1)}</td>
                           <td className="py-4 px-4">{item?.room_number}</td>
@@ -179,14 +239,35 @@ function InvoiceManagement() {
                           <td className="py-4 px-4">{item?.total_fee}</td>
                           <td className="py-4 px-4">
                             <button
-                              className={`px-2 py-1 rounded ${item?.status === 'Đã thanh toán'
-                                ? 'bg-green-100 text-green-700'
-                                : item?.status === 'Chưa thanh toán'
-                                  ? 'bg-red-100 text-red-700'
-                                  : 'bg-yellow-100 text-yellow-700'
+                              className={`px-2 py-1 rounded ${item?.status === 'Đã đóng'
+                                ? 'bg-green-200 text-green-800'
+                                : item?.status === 'Chưa đóng'
+                                  ? 'bg-red-200 text-red-800'
+                                  : 'bg-yellow-200 text-yellow-800'
                                 }`}
                             >
                               {item?.status}
+                            </button>
+
+                          </td>
+                          <td className="py-4 px-4 text-center">
+                            <button
+                              onClick={() => handleUpdateFee(item)}
+                              className="text-blue-500 hover:text-blue-700">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth="2"
+                                stroke="currentColor"
+                                className="w-5 h-5 inline-block"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  d="M16.862 3.487a2.25 2.25 0 013.182 3.182L8.679 18.034a4.5 4.5 0 01-1.695 1.072l-3.129 1.043a.75.75 0 01-.949-.949l1.043-3.129a4.5 4.5 0 011.072-1.695L16.862 3.487z"
+                                />
+                              </svg>
                             </button>
                           </td>
                         </tr>
@@ -209,7 +290,6 @@ function InvoiceManagement() {
                 </button>
               </div>
             </main>
-
           </div>
         </div>
       </div>
