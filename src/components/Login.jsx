@@ -142,7 +142,7 @@ function Login() {
       <header className="bg-white shadow-md">
         <div className="container mx-auto flex items-center justify-between px-6 py-4">
           <div className="w-1/3">
-            <a href="#">
+            <a>
               <img
                 src="/src/assets/img/icon_logo/VNU_LOGO.png"
                 alt="VNU Logo"
@@ -180,7 +180,6 @@ function Login() {
             </button>
             <div className="hidden absolute mt-2 w-40 bg-white shadow-lg rounded-lg">
               <a
-                href="#"
                 className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-t-lg"
               >
                 <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" /> Đăng xuất

@@ -70,6 +70,10 @@ function Homepage() {
     navigate('/sign-in');
   };
 
+  const handleHome = () => {
+    navigate("/");
+  }
+
   return (
     <div className="bg-gray-100 flex flex-col">
       {/* Header */}
@@ -103,7 +107,7 @@ function Homepage() {
       <nav className="bg-gradient-to-r from-blue-700 via-blue-800 to-blue-900 shadow-md">
         <div className="container mx-auto px-4 py-3 flex justify-end items-center text-white">
           <div className="flex space-x-8 items-center">
-            <a className="hover:text-blue-300 transition duration-300">
+            <a onClick={handleHome} className="hover:text-blue-300 transition duration-300">
               <FontAwesomeIcon icon={faHome} className="mr-1" /> Trang chủ
             </a>
             <a className="hover:text-blue-300 transition duration-300">

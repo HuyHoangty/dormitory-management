@@ -3,17 +3,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from "react-router-dom";
 import * as UserServices from "../services/UserServices";
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { clearUser } from '../redux/slice/userSlice';
 
 import {
-    faHome,
     faCompass,
     faUser,
     faSignOutAlt,
     faPaperPlane,
+    faKey,
 } from '@fortawesome/free-solid-svg-icons';
 function StudentRequest() {
     const user = useSelector((state) => state.user.user);
+
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [formData, setFormData] = useState({
         request_type: '',
@@ -48,13 +52,34 @@ function StudentRequest() {
             });
         }
     };
+
+    const handleChangePassword = () => {
+        navigate("/change-password")
+    };
+
+
+    const handleSignOut = () => {
+        // Xoá token khỏi localStorage hoặc sessionStorage
+        localStorage.removeItem('access_token');  // Hoặc sessionStorage.removeItem('access_token') nếu bạn dùng sessionStorage
+        // localStorage.removeItem('persist:root')
+        // Đặt lại trạng thái người dùng (nếu bạn sử dụng state quản lý người dùng)
+        dispatch(clearUser());
+
+        // Điều hướng về trang chủ
+        navigate('/sign-in');
+    };
+
+    const handleHome = () => {
+        navigate("/");
+    }
+
     return (
         <div className="bg-gray-100 flex flex-col">
             {/* Header */}
             <header className="bg-white py-4">
                 <div className="container mx-auto flex items-center justify-between px-4">
                     <div className="w-1/3">
-                        <a href="#">
+                        <a>
                             <img
                                 src="/src/assets/img/icon_logo/VNU_LOGO.png"
                                 alt="VNU Logo"
@@ -77,27 +102,35 @@ function StudentRequest() {
                 </div>
             </header>
             {/* Navigation */}
-            <nav className="bg-blue-700">
-                <div className="container mx-auto px-4 py-2 flex justify-end items-center text-white">
-                    <a href="#" className="mx-2 hover:underline">
-                        <FontAwesomeIcon icon={faHome} /> Trang chủ
-                    </a>
-                    <a href="#" className="mx-2 hover:underline">
-                        <FontAwesomeIcon icon={faCompass} /> Trang điều khiển
-                    </a>
-                    <div className="relative inline-block text-left">
-                        <button className="inline-flex items-center hover:underline focus:outline-none">
-                            <FontAwesomeIcon icon={faUser} /> <span>Tài khoản</span>
-                        </button>
-                        {/* Dropdown menu */}
-                        <div className="hidden origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-                            <div className="py-1">
-                                <a
-                                    href="#"
-                                    className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                                >
-                                    <FontAwesomeIcon icon={faSignOutAlt} /> Đăng xuất
-                                </a>
+            <nav className="bg-gradient-to-r from-blue-700 via-blue-800 to-blue-900 shadow-md">
+                <div className="container mx-auto px-4 py-3 flex justify-end items-center text-white">
+                    <div className="flex space-x-8 items-center">
+                        <a onClick={handleHome} className="hover:text-blue-300 transition duration-300">
+                            <FontAwesomeIcon icon={faCompass} className="mr-1" /> Trang chủ
+                        </a>
+                        <a className="hover:text-blue-300 transition duration-300">
+                            <FontAwesomeIcon icon={faCompass} className="mr-1" /> Trang điều khiển
+                        </a>
+                        <div className="relative group">
+                            <button className="inline-flex items-center hover:text-blue-300 transition duration-300 focus:outline-none">
+                                <FontAwesomeIcon icon={faUser} className="mr-1" /> <span>Tài khoản</span>
+                            </button>
+                            {/* Dropdown menu */}
+                            <div className="hidden group-hover:block group-focus-within:block absolute right-0 mt-1 w-40 rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 pointer-events-auto z-50">
+                                <div className="py-2">
+                                    <a
+                                        onClick={handleSignOut}
+                                        className="block px-4 py-2 text-gray-700 hover:bg-blue-100 hover:text-blue-800 transition duration-300"
+                                    >
+                                        <FontAwesomeIcon icon={faSignOutAlt} className="mr-1" /> Đăng xuất
+                                    </a>
+                                    <a
+                                        onClick={handleChangePassword}
+                                        className="block px-4 py-2 text-gray-700 hover:bg-blue-100 hover:text-blue-800 transition duration-300"
+                                    >
+                                        <FontAwesomeIcon icon={faKey} className="mr-1" /> Đổi mật khẩu
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
